@@ -102,22 +102,25 @@ export async function predictAddress(input: AddressInput): Promise<PredictionRes
 
   const scored = postOffices
     .map((office) => {
-      let score = 0.05;
+      let score = 0.04;
       const localityKey = office.name.replace(/ (S\.O|H\.O|B\.O)$/, "").toLowerCase();
-      if (lower.includes(localityKey.slice(0, 5))) score += 0.7;
-      if (lower.includes(office.district.toLowerCase())) score += 0.18;
-      if (input.district && input.district === office.district) score += 0.12;
+      if (lower.includes(localityKey)) score += 0.9;
+      else if (lower.includes(localityKey.slice(0, 5))) score += 0.25;
+      if (lower.includes(office.district.toLowerCase())) score += 0.2;
+      if (input.district && input.district === office.district) score += 0.14;
       if (input.state && input.state === office.state) score += 0.08;
-      if (pinToken === office.pincode) score += 0.45;
+      if (pinToken === office.pincode) score += 0.55;
       if (office.status === "historical") score -= 0.25;
       return { office, score };
     })
     .sort((a, b) => b.score - a.score);
 
-  const total = scored.slice(0, 3).reduce((sum, item) => sum + Math.max(item.score, 0.01), 0);
+  // Sharpen the distribution so a clear locality match dominates its neighbours.
+  const weight = (value: number) => Math.pow(Math.max(value, 0.01), 3);
+  const total = scored.slice(0, 3).reduce((sum, item) => sum + weight(item.score), 0);
   const top = scored[0]!;
-  const noisePenalty = raw.split(/[ ,]+/).length < 4 ? 0.28 : 0;
-  const rawConfidence = Math.max(top.score, 0.01) / total - noisePenalty;
+  const noisePenalty = raw.split(/[ ,]+/).filter(Boolean).length < 4 ? 0.25 : 0;
+  const rawConfidence = weight(top.score) / total - noisePenalty;
   const confidence = Math.min(0.985, Math.max(0.31, rawConfidence));
 
   const candidates = scored.slice(0, 3).map((item, index) => ({
