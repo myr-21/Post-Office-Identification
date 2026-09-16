@@ -100,7 +100,7 @@ function AnalyticsPage() {
                 <XAxis dataKey="label" {...axisProps} />
                 <YAxis domain={[85, 100]} {...axisProps} />
                 <Tooltip {...tooltipStyle} />
-                <Line
+                <Line isAnimationActive={false}
                   type="monotone"
                   dataKey="value"
                   name="Top-1 accuracy"
@@ -121,7 +121,7 @@ function AnalyticsPage() {
                 <XAxis dataKey="label" {...axisProps} interval={0} angle={-18} height={54} dy={10} />
                 <YAxis domain={[70, 100]} {...axisProps} />
                 <Tooltip {...tooltipStyle} />
-                <Bar dataKey="value" name="Accuracy" fill="var(--color-chart-1)" radius={[6, 6, 0, 0]} />
+                <Bar isAnimationActive={false} dataKey="value" name="Accuracy" fill="var(--color-chart-1)" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -135,7 +135,7 @@ function AnalyticsPage() {
                 <XAxis dataKey="label" {...axisProps} />
                 <YAxis {...axisProps} />
                 <Tooltip {...tooltipStyle} />
-                <Bar dataKey="value" name="Predictions" fill="var(--color-chart-2)" radius={[6, 6, 0, 0]} />
+                <Bar isAnimationActive={false} dataKey="value" name="Predictions" fill="var(--color-chart-2)" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -145,7 +145,7 @@ function AnalyticsPage() {
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
-                <Pie
+                <Pie isAnimationActive={false}
                   data={data.reviewReasons}
                   dataKey="value"
                   nameKey="label"
@@ -177,8 +177,8 @@ function AnalyticsPage() {
               <YAxis domain={[75, 100]} {...axisProps} />
               <Tooltip {...tooltipStyle} />
               <Legend wrapperStyle={{ fontSize: 12 }} />
-              <Bar dataKey="top1" name="Top-1" fill="var(--color-chart-1)" radius={[6, 6, 0, 0]} />
-              <Bar dataKey="top3" name="Top-3" fill="var(--color-chart-2)" radius={[6, 6, 0, 0]} />
+              <Bar isAnimationActive={false} dataKey="top1" name="Top-1" fill="var(--color-chart-1)" radius={[6, 6, 0, 0]} />
+              <Bar isAnimationActive={false} dataKey="top3" name="Top-3" fill="var(--color-chart-2)" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

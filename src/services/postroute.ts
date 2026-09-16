@@ -102,22 +102,35 @@ export async function predictAddress(input: AddressInput): Promise<PredictionRes
 
   const scored = postOffices
     .map((office) => {
-      let score = 0.05;
+      let score = 0.04;
       const localityKey = office.name.replace(/ (S\.O|H\.O|B\.O)$/, "").toLowerCase();
-      if (lower.includes(localityKey.slice(0, 5))) score += 0.7;
-      if (lower.includes(office.district.toLowerCase())) score += 0.18;
-      if (input.district && input.district === office.district) score += 0.12;
+      const at = lower.indexOf(localityKey);
+      if (at >= 0) {
+        // A locality mentioned right after "near"/"opp"/"nr" is a landmark, not the
+        // delivery locality, so it carries much less weight.
+        const prefix = lower.slice(Math.max(0, at - 14), at);
+        const isLandmark = /\b(near|nr|opp|opposite|behind|beside)\b[\s.,-]*$/.test(prefix);
+        score += isLandmark ? 0.3 : 0.9;
+        // Earlier mentions are more likely to be the delivery locality.
+        score += Math.max(0, 0.08 - at / 400);
+      } else if (lower.includes(localityKey.slice(0, 5))) {
+        score += 0.25;
+      }
+      if (lower.includes(office.district.toLowerCase())) score += 0.2;
+      if (input.district && input.district === office.district) score += 0.14;
       if (input.state && input.state === office.state) score += 0.08;
-      if (pinToken === office.pincode) score += 0.45;
+      if (pinToken === office.pincode) score += 0.55;
       if (office.status === "historical") score -= 0.25;
       return { office, score };
     })
     .sort((a, b) => b.score - a.score);
 
-  const total = scored.slice(0, 3).reduce((sum, item) => sum + Math.max(item.score, 0.01), 0);
+  // Sharpen the distribution so a clear locality match dominates its neighbours.
+  const weight = (value: number) => Math.pow(Math.max(value, 0.01), 3);
+  const total = scored.slice(0, 3).reduce((sum, item) => sum + weight(item.score), 0);
   const top = scored[0]!;
-  const noisePenalty = raw.split(/[ ,]+/).length < 4 ? 0.28 : 0;
-  const rawConfidence = Math.max(top.score, 0.01) / total - noisePenalty;
+  const noisePenalty = raw.split(/[ ,]+/).filter(Boolean).length < 4 ? 0.25 : 0;
+  const rawConfidence = weight(top.score) / total - noisePenalty;
   const confidence = Math.min(0.985, Math.max(0.31, rawConfidence));
 
   const candidates = scored.slice(0, 3).map((item, index) => ({
@@ -134,15 +147,7 @@ export async function predictAddress(input: AddressInput): Promise<PredictionRes
 
   const localityGuess = top.office.name.replace(/ (S\.O|H\.O|B\.O)$/, "");
   const normalized = normalizeAddress(raw);
-
-  const result: PredictionResult = {
-    id: `PR-${Math.floor(24900 + Math.random() * 90)}`,
-    createdAt: new Date().toISOString(),
-    rawAddress: raw,
-    normalization: {
-      raw,
-      normalized,
-      components: [
+  const components: PredictionResult["normalization"]["components"] = [
         ...(raw.match(/\b(flat|hse|house|plot|shop|room|rm)\s*\.?\s*(no\.?)?\s*\d+/i)
           ? [
               {
@@ -162,8 +167,13 @@ export async function predictAddress(input: AddressInput): Promise<PredictionRes
         { label: "District", value: top.office.district, type: "district" as const },
         { label: "State", value: top.office.state, type: "state" as const },
         ...(pinToken ? [{ label: "PIN", value: pinToken, type: "pincode" as const }] : []),
-      ],
-    },
+  ];
+
+  const result: PredictionResult = {
+    id: `PR-${Math.floor(24900 + Math.random() * 90)}`,
+    createdAt: new Date().toISOString(),
+    rawAddress: raw,
+    normalization: { raw, normalized, components },
     pincode: top.office.pincode,
     postOffice: top.office.name,
     district: top.office.district,
@@ -176,7 +186,7 @@ export async function predictAddress(input: AddressInput): Promise<PredictionRes
       { label: "Locality detected", detail: localityGuess, matched: true },
       { label: "District detected", detail: top.office.district, matched: Boolean(top.office.district) },
       { label: "PIN token matched", detail: pinToken ?? "No PIN token in input", matched: Boolean(pinToken) },
-      { label: "Address normalized", detail: `${normalized.split(",").length} components resolved`, matched: true },
+      { label: "Address normalized", detail: `${components.length} components resolved`, matched: true },
       {
         label: "Mapping validated",
         detail: `Mapping ${top.office.mappingVersion} ${top.office.status === "active" ? "active" : top.office.status}`,
