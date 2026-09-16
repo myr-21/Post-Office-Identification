@@ -104,8 +104,18 @@ export async function predictAddress(input: AddressInput): Promise<PredictionRes
     .map((office) => {
       let score = 0.04;
       const localityKey = office.name.replace(/ (S\.O|H\.O|B\.O)$/, "").toLowerCase();
-      if (lower.includes(localityKey)) score += 0.9;
-      else if (lower.includes(localityKey.slice(0, 5))) score += 0.25;
+      const at = lower.indexOf(localityKey);
+      if (at >= 0) {
+        // A locality mentioned right after "near"/"opp"/"nr" is a landmark, not the
+        // delivery locality, so it carries much less weight.
+        const prefix = lower.slice(Math.max(0, at - 14), at);
+        const isLandmark = /\b(near|nr|opp|opposite|behind|beside)\b[\s.,-]*$/.test(prefix);
+        score += isLandmark ? 0.3 : 0.9;
+        // Earlier mentions are more likely to be the delivery locality.
+        score += Math.max(0, 0.08 - at / 400);
+      } else if (lower.includes(localityKey.slice(0, 5))) {
+        score += 0.25;
+      }
       if (lower.includes(office.district.toLowerCase())) score += 0.2;
       if (input.district && input.district === office.district) score += 0.14;
       if (input.state && input.state === office.state) score += 0.08;
