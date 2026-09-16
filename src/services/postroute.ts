@@ -176,7 +176,7 @@ export async function predictAddress(input: AddressInput): Promise<PredictionRes
       { label: "Locality detected", detail: localityGuess, matched: true },
       { label: "District detected", detail: top.office.district, matched: Boolean(top.office.district) },
       { label: "PIN token matched", detail: pinToken ?? "No PIN token in input", matched: Boolean(pinToken) },
-      { label: "Address normalized", detail: `${result0Components} components resolved`, matched: true },
+      { label: "Address normalized", detail: `${components.length} components resolved`, matched: true },
       {
         label: "Mapping validated",
         detail: `Mapping ${top.office.mappingVersion} ${top.office.status === "active" ? "active" : top.office.status}`,
