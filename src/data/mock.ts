@@ -272,8 +272,8 @@ export const predictions: PredictionResult[] = [
     operator: "Mayur Patil",
   },
   ...Array.from({ length: 19 }).map((_, index): PredictionResult => {
-    const office = postOffices[(index + 1) % postOffices.length];
-    const confidence = [0.97, 0.91, 0.88, 0.74, 0.62, 0.95, 0.83, 0.68][index % 8];
+    const office = postOffices[(index + 1) % postOffices.length]!;
+    const confidence = [0.97, 0.91, 0.88, 0.74, 0.62, 0.95, 0.83, 0.68][index % 8]!;
     const status: PredictionResult["status"] =
       confidence >= 0.9
         ? "auto_approved"
@@ -293,7 +293,7 @@ export const predictions: PredictionResult[] = [
       "near katraj dairy, ambegaon bk, pune",
       "23/4 fc road shivaji ngr, pune mh",
       "flat 9 sai residency, aundh gaon",
-    ][index % 8];
+    ][index % 8]!;
     return {
       id: `PR-${24880 - index}`,
       createdAt: new Date(Date.parse("2026-09-16T17:50:00Z") - index * 7 * 60000).toISOString(),
@@ -318,14 +318,14 @@ export const predictions: PredictionResult[] = [
         candidate(1, office.name, office.pincode, confidence, office.district, office.state),
         candidate(
           2,
-          postOffices[(index + 2) % postOffices.length].name,
-          postOffices[(index + 2) % postOffices.length].pincode,
+          postOffices[(index + 2) % postOffices.length]!.name,
+          postOffices[(index + 2) % postOffices.length]!.pincode,
           Math.round((1 - confidence) * 0.7 * 1000) / 1000,
         ),
         candidate(
           3,
-          postOffices[(index + 3) % postOffices.length].name,
-          postOffices[(index + 3) % postOffices.length].pincode,
+          postOffices[(index + 3) % postOffices.length]!.name,
+          postOffices[(index + 3) % postOffices.length]!.pincode,
           Math.round((1 - confidence) * 0.3 * 1000) / 1000,
         ),
       ],
@@ -350,9 +350,9 @@ const reviewReasons = [
 ] as const;
 
 export const reviewQueue: ReviewItem[] = Array.from({ length: 10 }).map((_, i) => {
-  const office = postOffices[i % postOffices.length];
-  const reason = reviewReasons[i % reviewReasons.length];
-  const confidence = [0.58, 0.64, 0.71, 0.49, 0.77, 0.66, 0.52, 0.81, 0.6, 0.45][i];
+  const office = postOffices[i % postOffices.length]!;
+  const reason = reviewReasons[i % reviewReasons.length]!;
+  const confidence = [0.58, 0.64, 0.71, 0.49, 0.77, 0.66, 0.52, 0.81, 0.6, 0.45][i]!;
   const raw = [
     "rm 5 sant ngr rd, nr baner, pune",
     "c-12, oppst pmc school, blwadi",
@@ -364,7 +364,7 @@ export const reviewQueue: ReviewItem[] = Array.from({ length: 10 }).map((_, i) =
     "3rd flr, koramangla 5th blk",
     "navrangpura, a'bad",
     "kothrud dpt, pn",
-  ][i];
+  ][i]!;
   return {
     id: `RV-${5120 + i}`,
     parcelId: `PA-2026-00${4810 + i}`,
@@ -382,12 +382,12 @@ export const reviewQueue: ReviewItem[] = Array.from({ length: 10 }).map((_, i) =
     operator: i % 2 === 0 ? "Mayur Patil" : "S. Kulkarni",
     candidates: [
       candidate(1, office.name, office.pincode, confidence, office.district, office.state),
-      candidate(2, postOffices[(i + 1) % postOffices.length].name, postOffices[(i + 1) % postOffices.length].pincode, Math.round((1 - confidence) * 0.6 * 1000) / 1000),
-      candidate(3, postOffices[(i + 2) % postOffices.length].name, postOffices[(i + 2) % postOffices.length].pincode, Math.round((1 - confidence) * 0.4 * 1000) / 1000),
+      candidate(2, postOffices[(i + 1) % postOffices.length]!.name, postOffices[(i + 1) % postOffices.length]!.pincode, Math.round((1 - confidence) * 0.6 * 1000) / 1000),
+      candidate(3, postOffices[(i + 2) % postOffices.length]!.name, postOffices[(i + 2) % postOffices.length]!.pincode, Math.round((1 - confidence) * 0.4 * 1000) / 1000),
     ],
     mapping: {
       current: `${office.pincode} → ${office.name} (V3)`,
-      historical: `${office.pincode} → ${postOffices[(i + 1) % postOffices.length].name} (V1)`,
+      historical: `${office.pincode} → ${postOffices[(i + 1) % postOffices.length]!.name} (V1)`,
       conflict:
         reason === "mapping_conflict"
           ? `PIN ${office.pincode} is served by two offices after the V3 merge.`
@@ -406,9 +406,9 @@ const parcelStages: Array<{ status: Parcel["status"]; label: string }> = [
 ];
 
 export const parcels: Parcel[] = Array.from({ length: 15 }).map((_, i) => {
-  const office = postOffices[i % postOffices.length];
+  const office = postOffices[i % postOffices.length]!;
   const stageIndex = i % parcelStages.length;
-  const confidence = [0.96, 0.88, 0.93, 0.67, 0.91, 0.72, 0.98, 0.84][i % 8];
+  const confidence = [0.96, 0.88, 0.93, 0.67, 0.91, 0.72, 0.98, 0.84][i % 8]!;
   const raw = [
     "flat 302, baner rd, near balewadi, pune",
     "b-14, magarpatta city, hadapsar, pune",
@@ -418,7 +418,7 @@ export const parcels: Parcel[] = Array.from({ length: 15 }).map((_, i) => {
     "nr katraj dairy, ambegaon bk",
     "23/4 fc road, shivajinagar",
     "flat 9, sai residency, aundh",
-  ][i % 8];
+  ][i % 8]!;
   return {
     id: `PA-2026-00${4821 - i}`,
     rawAddress: raw,
@@ -426,13 +426,13 @@ export const parcels: Parcel[] = Array.from({ length: 15 }).map((_, i) => {
     pincode: office.pincode,
     postOffice: office.name,
     confidence,
-    status: parcelStages[stageIndex].status,
+    status: parcelStages[stageIndex]!.status,
     updatedAt: new Date(Date.parse("2026-09-16T17:20:00Z") - i * 41 * 60000).toISOString(),
     operator: i % 2 === 0 ? "Mayur Patil" : "S. Kulkarni",
     candidates: [
       candidate(1, office.name, office.pincode, confidence, office.district, office.state),
-      candidate(2, postOffices[(i + 1) % postOffices.length].name, postOffices[(i + 1) % postOffices.length].pincode, Math.round((1 - confidence) * 0.65 * 1000) / 1000),
-      candidate(3, postOffices[(i + 2) % postOffices.length].name, postOffices[(i + 2) % postOffices.length].pincode, Math.round((1 - confidence) * 0.35 * 1000) / 1000),
+      candidate(2, postOffices[(i + 1) % postOffices.length]!.name, postOffices[(i + 1) % postOffices.length]!.pincode, Math.round((1 - confidence) * 0.65 * 1000) / 1000),
+      candidate(3, postOffices[(i + 2) % postOffices.length]!.name, postOffices[(i + 2) % postOffices.length]!.pincode, Math.round((1 - confidence) * 0.35 * 1000) / 1000),
     ],
     timeline: parcelStages.map((stage, si) => ({
       status: stage.status,
@@ -663,7 +663,7 @@ export const activityLog: ActivityEvent[] = Array.from({ length: 24 }).map((_, i
     { action: "Review approved", entity: `RV-${5120 + (i % 10)}`, details: "Prediction confirmed by operator", status: "success" as const },
     { action: "Prediction failed", entity: `PR-${24840 - i}`, details: "Address too short to analyze", status: "error" as const },
   ];
-  const t = templates[i % templates.length];
+  const t = templates[i % templates.length]!;
   return {
     id: `AC-${9000 + i}`,
     timestamp: new Date(Date.parse("2026-09-16T18:00:00Z") - i * 17 * 60000).toISOString(),
