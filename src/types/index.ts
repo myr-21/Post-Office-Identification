@@ -39,9 +39,9 @@ export type ProcessingMode = "automatic" | "assisted";
 
 export interface AddressInput {
   rawAddress: string;
-  state?: string;
-  district?: string;
-  pincode?: string;
+  state?: string | undefined;
+  district?: string | undefined;
+  pincode?: string | undefined;
   mode: ProcessingMode;
 }
 
@@ -93,7 +93,7 @@ export interface PredictionResult {
   status: PredictionStatus;
   candidates: CandidatePrediction[];
   explanation: ExplanationFactor[];
-  operator?: string;
+  operator?: string | undefined;
 }
 
 export interface PostOffice {
@@ -114,7 +114,7 @@ export interface ParcelEvent {
   status: ParcelStatus;
   label: string;
   timestamp: string | null;
-  note?: string;
+  note?: string | undefined;
 }
 
 export interface Parcel {
@@ -173,15 +173,15 @@ export interface MappingChange {
 export interface AnalyticsPoint {
   label: string;
   value: number;
-  secondary?: number;
+  secondary?: number | undefined;
 }
 
 export interface AnalyticsMetric {
   key: string;
   label: string;
   value: string;
-  delta?: string;
-  hint?: string;
+  delta?: string | undefined;
+  hint?: string | undefined;
 }
 
 export interface ModelComparison {
@@ -224,7 +224,7 @@ export interface DashboardKpi {
   label: string;
   value: string;
   support: string;
-  tone?: "default" | "warning" | "success" | "info";
+  tone?: "default" | "warning" | "success" | "info" | undefined;
 }
 
 export interface SystemHealthItem {
