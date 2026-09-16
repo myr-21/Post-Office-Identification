@@ -157,8 +157,13 @@ export async function predictAddress(input: AddressInput): Promise<PredictionRes
         { label: "District", value: top.office.district, type: "district" as const },
         { label: "State", value: top.office.state, type: "state" as const },
         ...(pinToken ? [{ label: "PIN", value: pinToken, type: "pincode" as const }] : []),
-      ],
-    },
+  ];
+
+  const result: PredictionResult = {
+    id: `PR-${Math.floor(24900 + Math.random() * 90)}`,
+    createdAt: new Date().toISOString(),
+    rawAddress: raw,
+    normalization: { raw, normalized, components },
     pincode: top.office.pincode,
     postOffice: top.office.name,
     district: top.office.district,
