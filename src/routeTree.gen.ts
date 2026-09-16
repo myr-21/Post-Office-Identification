@@ -10,33 +10,180 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ActivityRouteImport } from './routes/activity'
+import { Route as AnalyticsRouteImport } from './routes/analytics'
+import { Route as MappingRouteImport } from './routes/mapping'
+import { Route as ParcelsRouteImport } from './routes/parcels'
+import { Route as PostOfficesRouteImport } from './routes/post-offices'
+import { Route as PredictionRouteImport } from './routes/prediction'
+import { Route as ReviewRouteImport } from './routes/review'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as ParcelsParcelIdRouteImport } from './routes/parcels_.$parcelId'
+import { Route as PostOfficesOfficeIdRouteImport } from './routes/post-offices_.$officeId'
+import { Route as ReviewReviewIdRouteImport } from './routes/review_.$reviewId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ActivityRoute = ActivityRouteImport.update({
+  id: '/activity',
+  path: '/activity',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnalyticsRoute = AnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MappingRoute = MappingRouteImport.update({
+  id: '/mapping',
+  path: '/mapping',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParcelsRoute = ParcelsRouteImport.update({
+  id: '/parcels',
+  path: '/parcels',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PostOfficesRoute = PostOfficesRouteImport.update({
+  id: '/post-offices',
+  path: '/post-offices',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PredictionRoute = PredictionRouteImport.update({
+  id: '/prediction',
+  path: '/prediction',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReviewRoute = ReviewRouteImport.update({
+  id: '/review',
+  path: '/review',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParcelsParcelIdRoute = ParcelsParcelIdRouteImport.update({
+  id: '/parcels_/$parcelId',
+  path: '/parcels/$parcelId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PostOfficesOfficeIdRoute = PostOfficesOfficeIdRouteImport.update({
+  id: '/post-offices_/$officeId',
+  path: '/post-offices/$officeId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReviewReviewIdRoute = ReviewReviewIdRouteImport.update({
+  id: '/review_/$reviewId',
+  path: '/review/$reviewId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/activity': typeof ActivityRoute
+  '/analytics': typeof AnalyticsRoute
+  '/mapping': typeof MappingRoute
+  '/parcels': typeof ParcelsRoute
+  '/post-offices': typeof PostOfficesRoute
+  '/prediction': typeof PredictionRoute
+  '/review': typeof ReviewRoute
+  '/settings': typeof SettingsRoute
+  '/parcels/$parcelId': typeof ParcelsParcelIdRoute
+  '/post-offices/$officeId': typeof PostOfficesOfficeIdRoute
+  '/review/$reviewId': typeof ReviewReviewIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/activity': typeof ActivityRoute
+  '/analytics': typeof AnalyticsRoute
+  '/mapping': typeof MappingRoute
+  '/parcels': typeof ParcelsRoute
+  '/post-offices': typeof PostOfficesRoute
+  '/prediction': typeof PredictionRoute
+  '/review': typeof ReviewRoute
+  '/settings': typeof SettingsRoute
+  '/parcels/$parcelId': typeof ParcelsParcelIdRoute
+  '/post-offices/$officeId': typeof PostOfficesOfficeIdRoute
+  '/review/$reviewId': typeof ReviewReviewIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/activity': typeof ActivityRoute
+  '/analytics': typeof AnalyticsRoute
+  '/mapping': typeof MappingRoute
+  '/parcels': typeof ParcelsRoute
+  '/post-offices': typeof PostOfficesRoute
+  '/prediction': typeof PredictionRoute
+  '/review': typeof ReviewRoute
+  '/settings': typeof SettingsRoute
+  '/parcels_/$parcelId': typeof ParcelsParcelIdRoute
+  '/post-offices_/$officeId': typeof PostOfficesOfficeIdRoute
+  '/review_/$reviewId': typeof ReviewReviewIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/activity'
+    | '/analytics'
+    | '/mapping'
+    | '/parcels'
+    | '/post-offices'
+    | '/prediction'
+    | '/review'
+    | '/settings'
+    | '/parcels/$parcelId'
+    | '/post-offices/$officeId'
+    | '/review/$reviewId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/activity'
+    | '/analytics'
+    | '/mapping'
+    | '/parcels'
+    | '/post-offices'
+    | '/prediction'
+    | '/review'
+    | '/settings'
+    | '/parcels/$parcelId'
+    | '/post-offices/$officeId'
+    | '/review/$reviewId'
+  id:
+    | '__root__'
+    | '/'
+    | '/activity'
+    | '/analytics'
+    | '/mapping'
+    | '/parcels'
+    | '/post-offices'
+    | '/prediction'
+    | '/review'
+    | '/settings'
+    | '/parcels_/$parcelId'
+    | '/post-offices_/$officeId'
+    | '/review_/$reviewId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ActivityRoute: typeof ActivityRoute
+  AnalyticsRoute: typeof AnalyticsRoute
+  MappingRoute: typeof MappingRoute
+  ParcelsRoute: typeof ParcelsRoute
+  PostOfficesRoute: typeof PostOfficesRoute
+  PredictionRoute: typeof PredictionRoute
+  ReviewRoute: typeof ReviewRoute
+  SettingsRoute: typeof SettingsRoute
+  ParcelsParcelIdRoute: typeof ParcelsParcelIdRoute
+  PostOfficesOfficeIdRoute: typeof PostOfficesOfficeIdRoute
+  ReviewReviewIdRoute: typeof ReviewReviewIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +195,99 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/activity': {
+      id: '/activity'
+      path: '/activity'
+      fullPath: '/activity'
+      preLoaderRoute: typeof ActivityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/analytics': {
+      id: '/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof AnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mapping': {
+      id: '/mapping'
+      path: '/mapping'
+      fullPath: '/mapping'
+      preLoaderRoute: typeof MappingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/parcels': {
+      id: '/parcels'
+      path: '/parcels'
+      fullPath: '/parcels'
+      preLoaderRoute: typeof ParcelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/post-offices': {
+      id: '/post-offices'
+      path: '/post-offices'
+      fullPath: '/post-offices'
+      preLoaderRoute: typeof PostOfficesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prediction': {
+      id: '/prediction'
+      path: '/prediction'
+      fullPath: '/prediction'
+      preLoaderRoute: typeof PredictionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/review': {
+      id: '/review'
+      path: '/review'
+      fullPath: '/review'
+      preLoaderRoute: typeof ReviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/parcels_/$parcelId': {
+      id: '/parcels_/$parcelId'
+      path: '/parcels/$parcelId'
+      fullPath: '/parcels/$parcelId'
+      preLoaderRoute: typeof ParcelsParcelIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/post-offices_/$officeId': {
+      id: '/post-offices_/$officeId'
+      path: '/post-offices/$officeId'
+      fullPath: '/post-offices/$officeId'
+      preLoaderRoute: typeof PostOfficesOfficeIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/review_/$reviewId': {
+      id: '/review_/$reviewId'
+      path: '/review/$reviewId'
+      fullPath: '/review/$reviewId'
+      preLoaderRoute: typeof ReviewReviewIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ActivityRoute: ActivityRoute,
+  AnalyticsRoute: AnalyticsRoute,
+  MappingRoute: MappingRoute,
+  ParcelsRoute: ParcelsRoute,
+  PostOfficesRoute: PostOfficesRoute,
+  PredictionRoute: PredictionRoute,
+  ReviewRoute: ReviewRoute,
+  SettingsRoute: SettingsRoute,
+  ParcelsParcelIdRoute: ParcelsParcelIdRoute,
+  PostOfficesOfficeIdRoute: PostOfficesOfficeIdRoute,
+  ReviewReviewIdRoute: ReviewReviewIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
