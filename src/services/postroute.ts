@@ -137,15 +137,7 @@ export async function predictAddress(input: AddressInput): Promise<PredictionRes
 
   const localityGuess = top.office.name.replace(/ (S\.O|H\.O|B\.O)$/, "");
   const normalized = normalizeAddress(raw);
-
-  const result: PredictionResult = {
-    id: `PR-${Math.floor(24900 + Math.random() * 90)}`,
-    createdAt: new Date().toISOString(),
-    rawAddress: raw,
-    normalization: {
-      raw,
-      normalized,
-      components: [
+  const components: PredictionResult["normalization"]["components"] = [
         ...(raw.match(/\b(flat|hse|house|plot|shop|room|rm)\s*\.?\s*(no\.?)?\s*\d+/i)
           ? [
               {
