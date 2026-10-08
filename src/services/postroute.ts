@@ -94,10 +94,10 @@ export function normalizeAddress(raw: string) {
 export async function predictAddress(input: AddressInput): Promise<PredictionResult> {
   const isMock = import.meta.env.VITE_USE_MOCK !== "false";
   if (!isMock) {
-    const res = await fetch(`${import.meta.env['VITE_API_URL']}/api/predict`, {
+    const res = await fetch(`${import.meta.env["VITE_API_URL"]}/api/predict`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(input)
+      body: JSON.stringify(input),
     });
     if (!res.ok) throw new Error("Failed to predict address");
     return res.json();
@@ -229,7 +229,7 @@ export async function getPredictions(): Promise<PredictionResult[]> {
 export async function getReviewQueue(): Promise<ReviewItem[]> {
   const isMock = import.meta.env.VITE_USE_MOCK !== "false";
   if (!isMock) {
-    const res = await fetch(`${import.meta.env['VITE_API_URL']}/api/review-queue`);
+    const res = await fetch(`${import.meta.env["VITE_API_URL"]}/api/review-queue`);
     if (!res.ok) throw new Error("Failed to fetch review queue");
     return res.json();
   }
@@ -314,7 +314,7 @@ export async function getConfig(): Promise<SystemConfig> {
   if (isMock) {
     return delay({ autoRouteThreshold: 0.85, reviewFloor: 0.55 }, 100);
   }
-  const res = await fetch(`${import.meta.env['VITE_API_URL']}/api/config`);
+  const res = await fetch(`${import.meta.env["VITE_API_URL"]}/api/config`);
   if (!res.ok) throw new Error("Failed to fetch config");
   return res.json();
 }

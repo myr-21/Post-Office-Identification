@@ -336,8 +336,8 @@ function ResultView({
           >
             <CircleCheck className="size-4" aria-hidden /> Confirm Routing
           </Button>
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             onClick={() => {
               toast.info("Added to review queue", {
                 description: "This prediction has been flagged for manual operator review.",

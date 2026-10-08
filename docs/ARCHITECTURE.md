@@ -1,6 +1,7 @@
 # PostRoute AI Architecture
 
 ## Overview
+
 PostRoute AI is an AI-powered Delivery Post Office Identification System. It predicts the correct PIN code and delivery post office from incomplete or noisy Indian address text. It features a React-based frontend and a Python/FastAPI backend with a machine learning model.
 
 ---
@@ -60,7 +61,7 @@ erDiagram
         float auto_route_threshold
         float review_floor
     }
-    
+
     PREDICTIONS {
         string id PK
         datetime created_at
@@ -74,7 +75,7 @@ erDiagram
         string status
         string operator
     }
-    
+
     REVIEW_ITEMS {
         string id PK
         string prediction_id FK

@@ -45,29 +45,31 @@ function ReviewQueuePage() {
   const rows = useMemo(() => {
     const items = query.data ?? [];
     const config = configQuery.data ?? { autoRouteThreshold: 0.85, reviewFloor: 0.55 };
-    return items.filter((item) => {
-      const term = search.trim().toLowerCase();
-      const matchesSearch =
-        !term ||
-        item.rawAddress.toLowerCase().includes(term) ||
-        item.pincode.includes(term) ||
-        item.parcelId.toLowerCase().includes(term);
-      const matchesConfidence =
-        confidence === "all" ||
-        (confidence === "high" && item.confidence >= config.autoRouteThreshold) ||
-        (confidence === "medium" &&
-          item.confidence >= config.reviewFloor &&
-          item.confidence < config.autoRouteThreshold) ||
-        (confidence === "low" && item.confidence < config.reviewFloor);
-      return (
-        matchesSearch &&
-        matchesConfidence &&
-        (reason === "all" || item.reason === reason) &&
-        (status === "all" || item.status === status) &&
-        (region === "all" || item.state === region) &&
-        (operator === "all" || item.operator === operator)
-      );
-    }).sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    return items
+      .filter((item) => {
+        const term = search.trim().toLowerCase();
+        const matchesSearch =
+          !term ||
+          item.rawAddress.toLowerCase().includes(term) ||
+          item.pincode.includes(term) ||
+          item.parcelId.toLowerCase().includes(term);
+        const matchesConfidence =
+          confidence === "all" ||
+          (confidence === "high" && item.confidence >= config.autoRouteThreshold) ||
+          (confidence === "medium" &&
+            item.confidence >= config.reviewFloor &&
+            item.confidence < config.autoRouteThreshold) ||
+          (confidence === "low" && item.confidence < config.reviewFloor);
+        return (
+          matchesSearch &&
+          matchesConfidence &&
+          (reason === "all" || item.reason === reason) &&
+          (status === "all" || item.status === status) &&
+          (region === "all" || item.state === region) &&
+          (operator === "all" || item.operator === operator)
+        );
+      })
+      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   }, [query.data, configQuery.data, search, confidence, reason, status, region, operator]);
 
   const all = query.data ?? [];

@@ -13,16 +13,24 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
     <div className="flex h-full flex-col bg-sidebar">
       <div className="flex flex-col border-b border-sidebar-border">
         <div className="flex items-center gap-3 px-5 py-5">
-          <img src="/logo.png" alt="PostRoute AI Logo" className="size-12 object-contain drop-shadow-sm" />
+          <img
+            src="/logo.png"
+            alt="PostRoute AI Logo"
+            className="size-12 object-contain drop-shadow-sm"
+          />
           <div className="leading-tight">
             <p className="text-base font-bold text-foreground tracking-tight">PostRoute AI</p>
-            <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider mt-0.5">Delivery PO ID</p>
+            <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider mt-0.5">
+              Delivery PO ID
+            </p>
           </div>
         </div>
         {import.meta.env.VITE_USE_MOCK !== "false" && (
           <div className="bg-amber-100 dark:bg-amber-900/30 px-3 py-2 text-center text-xs font-semibold text-amber-800 dark:text-amber-200 border-t border-amber-200 dark:border-amber-800/50">
             DEMO MODE
-            <div className="text-[10px] font-normal opacity-80 mt-0.5">Using static prototype data</div>
+            <div className="text-[10px] font-normal opacity-80 mt-0.5">
+              Using static prototype data
+            </div>
           </div>
         )}
       </div>
