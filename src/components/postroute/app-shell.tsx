@@ -25,7 +25,6 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
             </p>
           </div>
         </div>
-
       </div>
 
       <nav className="flex-1 overflow-y-auto px-3 py-4" aria-label="Main">
