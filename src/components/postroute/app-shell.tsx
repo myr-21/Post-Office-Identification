@@ -12,9 +12,7 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <div className="flex h-full flex-col bg-sidebar">
       <div className="flex items-center gap-2.5 border-b border-sidebar-border px-5 py-4">
-        <span className="flex size-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-          <Mail className="size-5" aria-hidden />
-        </span>
+        <img src="/logo.png" alt="PostRoute AI Logo" className="size-9 object-contain" />
         <div className="leading-tight">
           <p className="text-sm font-semibold text-foreground">PostRoute AI</p>
           <p className="text-[11px] text-muted-foreground">Delivery PO Identification</p>

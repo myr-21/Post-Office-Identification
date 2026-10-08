@@ -1,4 +1,9 @@
-# PostRoute AI (AI-Powered Delivery Post Office Identification System)
+<div align="center">
+  <img src="public/logo.png" height="150" alt="PostRoute AI Logo" />
+  <h1>PostRoute AI</h1>
+</div>
+
+**AI-Powered Delivery Post Office Identification System**
 
 ## Overview
 
