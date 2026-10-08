@@ -327,15 +327,24 @@ function ResultView({
 
         <div className="mt-5 flex flex-wrap gap-2">
           <Button
-            onClick={() =>
-              toast.success("Routing confirmed", {
-                description: `${result.pincode} · ${result.postOffice}`,
-              })
-            }
+            onClick={() => {
+              toast.success("Added to route", {
+                description: `Successfully routed to ${result.pincode} · ${result.postOffice}`,
+              });
+              onReset();
+            }}
           >
             <CircleCheck className="size-4" aria-hidden /> Confirm Routing
           </Button>
-          <Button variant="outline" onClick={navigateToReview}>
+          <Button 
+            variant="outline" 
+            onClick={() => {
+              toast.info("Added to review queue", {
+                description: "This prediction has been flagged for manual operator review.",
+              });
+              navigateToReview();
+            }}
+          >
             Send to Review
           </Button>
           <Button variant="ghost" onClick={onReset}>

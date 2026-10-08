@@ -9,6 +9,13 @@
 
 PostRoute AI is an intelligent system designed to predict the correct PIN code and delivery post office from incomplete or noisy Indian address text. It adapts when India Post merges PIN codes, calculates a confidence score for each prediction, and routes low-confidence cases to a staff review queue. The primary users are post-office staff and operators.
 
+> **IMPORTANT PROJECT STATUS**
+> - **This is a final-year academic prototype**, not a production application.
+> - **Current demonstration focuses strictly on Pune-region postal data** (114 delivery post offices).
+> - **The public deployment is explicitly DEMO ONLY**. The deployed version uses static prototype data and **does not represent live India Post integration** or real-time nationwide coverage.
+> - **Local Development**: The actual ML pipeline, FastAPI backend, SQLite database, and prediction models exist in the repository for local execution.
+> - **Future Development**: Advanced features such as LLM/Gemini fallback and PostgreSQL migration are planned for a future development phase.
+
 ## Architecture (4 Layers)
 
 1. **Frontend**: React 19, TanStack Start/Router, Tailwind v4, shadcn/ui.

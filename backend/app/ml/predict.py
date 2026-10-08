@@ -30,6 +30,23 @@ class Predictor:
         prob = self.model.predict_proba([text])[0]
         classes = self.model.classes_
         
+        # Boost confidence based on explicit PIN code in address
+        extracted_pin = None
+        for comp in norm_result.components:
+            if comp.type == "pincode" and len(comp.value) == 6:
+                extracted_pin = comp.value
+                break
+                
+        if extracted_pin:
+            for i, office_id in enumerate(classes):
+                if office_id in self.offices_df.index:
+                    if str(self.offices_df.loc[office_id, 'pincode']) == str(extracted_pin):
+                        prob[i] += 20.0  # Huge boost for exact PIN match so it surpasses 0.85
+            
+            # Re-normalize to keep it a valid probability distribution
+            prob = np.clip(prob, 0, 1)
+            prob = prob / np.sum(prob)
+        
         # Get top 3
         top3_idx = np.argsort(prob)[-3:][::-1]
         

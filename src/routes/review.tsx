@@ -67,7 +67,7 @@ function ReviewQueuePage() {
         (region === "all" || item.state === region) &&
         (operator === "all" || item.operator === operator)
       );
-    });
+    }).sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   }, [query.data, configQuery.data, search, confidence, reason, status, region, operator]);
 
   const all = query.data ?? [];

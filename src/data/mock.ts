@@ -19,7 +19,7 @@ import type {
 export const DEMO_NOTICE = "Demonstration data — not live postal records.";
 
 export const currentOperator: Operator = {
-  name: "Mayur Patil",
+  name: "Test Operator",
   role: "Postal Operations Operator",
   postOffice: "Pune Central Operations",
   employeeId: "EMP-PUN-10482",

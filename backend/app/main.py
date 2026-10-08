@@ -140,6 +140,36 @@ def predict_address(input_data: AddressInput, db: Session = Depends(get_db)):
 
 @app.get("/api/review-queue")
 def get_review_queue(db: Session = Depends(get_db)):
-    items = db.query(models.ReviewItem).filter(models.ReviewItem.status == "pending").all()
-    # Mock return, normally we would join with Predictions
-    return []
+    items = db.query(models.ReviewItem).filter(models.ReviewItem.status == "pending").order_by(models.ReviewItem.created_at.desc()).all()
+    results = []
+    for item in items:
+        pred = item.prediction
+        results.append({
+            "id": item.id,
+            "parcelId": "PRC-NEW",
+            "createdAt": item.created_at.isoformat() + "Z",
+            "priority": item.priority,
+            "reason": item.reason,
+            "rawAddress": pred.raw_address,
+            "normalizedAddress": pred.normalized_address,
+            "district": pred.district,
+            "state": pred.state,
+            "pincode": pred.pincode,
+            "postOffice": pred.post_office,
+            "confidence": pred.confidence,
+            "operator": pred.operator or "Test Operator",
+            "mapping": {
+                "current": "V3",
+                "historical": "V2",
+                "conflict": None
+            },
+            "candidates": [
+                {
+                    "rank": 1,
+                    "postOffice": pred.post_office,
+                    "pincode": pred.pincode,
+                    "confidence": pred.confidence
+                }
+            ]
+        })
+    return results
