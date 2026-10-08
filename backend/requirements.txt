@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pydantic
+sqlalchemy
+alembic
+rapidfuzz
+scikit-learn
+pandas
+pytest
