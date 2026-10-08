@@ -11,4 +11,10 @@ class NormalizationResult(BaseModel):
     normalized: str
     components: List[AddressComponent]
 
-# Future types will be added here
+class AddressInput(BaseModel):
+    rawAddress: str
+    state: Optional[str] = None
+    district: Optional[str] = None
+    pincode: Optional[str] = None
+    mode: Literal["automatic", "assisted"] = "automatic"
+
