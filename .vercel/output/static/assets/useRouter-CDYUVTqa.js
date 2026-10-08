@@ -1,7 +1,0 @@
-import { dt as e, mt as t } from "./primitives-BCHLNZiF.js";
-var n = t(e(), 1),
-  r = n.createContext(null);
-function i(e) {
-  return n.useContext(r);
-}
-export { r as n, i as t };
