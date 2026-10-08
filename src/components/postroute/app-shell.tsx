@@ -25,7 +25,7 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
             </p>
           </div>
         </div>
-        {import.meta.env['VITE_USE_MOCK'] !== "false" && (
+        {import.meta.env.VITE_USE_MOCK !== "false" && (
           <div className="bg-amber-100 dark:bg-amber-900/30 px-3 py-2 text-center text-xs font-semibold text-amber-800 dark:text-amber-200 border-t border-amber-200 dark:border-amber-800/50">
             DEMO MODE
             <div className="text-[10px] font-normal opacity-80 mt-0.5">
