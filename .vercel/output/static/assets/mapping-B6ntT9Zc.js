@@ -1,0 +1,602 @@
+import {
+  F as e,
+  G as t,
+  I as n,
+  J as r,
+  K as i,
+  L as a,
+  M as o,
+  N as s,
+  Q as c,
+  R as l,
+  W as u,
+  a as d,
+  at as f,
+  c as p,
+  ct as m,
+  dt as h,
+  et as ee,
+  i as g,
+  it as _,
+  j as te,
+  l as ne,
+  lt as re,
+  mt as ie,
+  nt as v,
+  o as y,
+  q as ae,
+  r as b,
+  rt as x,
+  s as oe,
+  tt as S,
+} from "./primitives-BCHLNZiF.js";
+import { a as se } from "./postroute-C-bfl2si.js";
+import { t as ce } from "./useQuery-kLumsi1Z.js";
+import { t as le } from "./arrow-right-DRbeHAtE.js";
+import { t as C } from "./x-DvoBqKB2.js";
+import { t as w } from "./data-table-CdyL5UA9.js";
+import { a as T, d as E, r as D, s as O } from "./badges-BR-XpxyQ.js";
+var ue = m(`history`, [
+    [`path`, { d: `M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8`, key: `1357e3` }],
+    [`path`, { d: `M3 3v5h5`, key: `1xhq8a` }],
+    [`path`, { d: `M12 7v5l4 2`, key: `1fdv2h` }],
+  ]),
+  k = ie(h(), 1),
+  A = re(),
+  de = Object.defineProperty,
+  j = (e, t) => de(e, `name`, { value: t, configurable: !0 }),
+  M = `Dialog`,
+  [N, fe] = x(M),
+  [P, F] = N(M),
+  I = j((e) => {
+    let {
+        __scopeDialog: t,
+        children: n,
+        open: r,
+        defaultOpen: i,
+        onOpenChange: a,
+        modal: o = !0,
+      } = e,
+      s = k.useRef(null),
+      c = k.useRef(null),
+      [l, d] = S({ prop: r, defaultProp: i ?? !1, onChange: a, caller: M }),
+      [f, p] = k.useState(0),
+      [m, h] = k.useState(0);
+    return (0, A.jsx)(P, {
+      scope: t,
+      triggerRef: s,
+      contentRef: c,
+      contentId: u(),
+      titleId: u(),
+      descriptionId: u(),
+      titlePresent: f > 0,
+      descriptionPresent: m > 0,
+      setTitleCount: p,
+      setDescriptionCount: h,
+      open: l,
+      onOpenChange: d,
+      onOpenToggle: k.useCallback(() => d((e) => !e), [d]),
+      modal: o,
+      children: n,
+    });
+  }, `Dialog`),
+  L = `DialogPortal`,
+  [R, z] = N(L, { forceMount: void 0 }),
+  B = j((e) => {
+    let { __scopeDialog: t, forceMount: n, children: r, container: i } = e,
+      o = F(L, t);
+    return (0, A.jsx)(R, {
+      scope: t,
+      forceMount: n,
+      children: k.Children.map(r, (e) =>
+        (0, A.jsx)(a, {
+          present: n || o.open,
+          children: (0, A.jsx)(l, { asChild: !0, container: i, children: e }),
+        }),
+      ),
+    });
+  }, `DialogPortal`),
+  V = `DialogOverlay`,
+  H = k.forwardRef(
+    j(function (e, t) {
+      let n = z(V, e.__scopeDialog),
+        { forceMount: r = n.forceMount, ...i } = e,
+        o = F(V, e.__scopeDialog);
+      return o.modal
+        ? (0, A.jsx)(a, { present: r || o.open, children: (0, A.jsx)(me, { ...i, ref: t }) })
+        : null;
+    }, `DialogOverlay`),
+  ),
+  pe = ee(`DialogOverlay.RemoveScroll`),
+  me = k.forwardRef(
+    j(function (t, n) {
+      let { __scopeDialog: i, ...a } = t,
+        o = F(V, i),
+        s = r(),
+        l = _(n, s);
+      return (0, A.jsx)(e, {
+        as: pe,
+        allowPinchZoom: !0,
+        shards: [o.contentRef],
+        children: (0, A.jsx)(c.div, {
+          "data-state": J(o.open),
+          ...a,
+          ref: l,
+          style: { pointerEvents: `auto`, ...a.style },
+        }),
+      });
+    }, `DialogOverlayImpl`),
+  ),
+  U = `DialogContent`,
+  W = k.forwardRef(
+    j(function (e, t) {
+      let n = z(U, e.__scopeDialog),
+        { forceMount: r = n.forceMount, ...i } = e,
+        o = F(U, e.__scopeDialog);
+      return (0, A.jsx)(a, {
+        present: r || o.open,
+        children: o.modal ? (0, A.jsx)(he, { ...i, ref: t }) : (0, A.jsx)(ge, { ...i, ref: t }),
+      });
+    }, `DialogContent`),
+  ),
+  he = k.forwardRef(
+    j(function (e, t) {
+      let r = F(U, e.__scopeDialog),
+        i = k.useRef(null),
+        a = _(t, r.contentRef, i);
+      return (
+        k.useEffect(() => {
+          let e = i.current;
+          if (e) return n(e);
+        }, []),
+        (0, A.jsx)(G, {
+          ...e,
+          ref: a,
+          trapFocus: r.open,
+          disableOutsidePointerEvents: r.open,
+          onCloseAutoFocus: f(e.onCloseAutoFocus, (e) => {
+            (e.preventDefault(), r.triggerRef.current?.focus());
+          }),
+          onPointerDownOutside: f(e.onPointerDownOutside, (e) => {
+            let t = e.detail.originalEvent,
+              n = t.button === 0 && t.ctrlKey === !0;
+            (t.button === 2 || n) && e.preventDefault();
+          }),
+          onFocusOutside: f(e.onFocusOutside, (e) => e.preventDefault()),
+        })
+      );
+    }, `DialogContentModal`),
+  ),
+  ge = k.forwardRef(
+    j(function (e, t) {
+      let n = F(U, e.__scopeDialog),
+        r = k.useRef(!1),
+        i = k.useRef(!1);
+      return (0, A.jsx)(G, {
+        ...e,
+        ref: t,
+        trapFocus: !1,
+        disableOutsidePointerEvents: !1,
+        onCloseAutoFocus: (t) => {
+          (e.onCloseAutoFocus?.(t),
+            t.defaultPrevented || (r.current || n.triggerRef.current?.focus(), t.preventDefault()),
+            (r.current = !1),
+            (i.current = !1));
+        },
+        onInteractOutside: (t) => {
+          (e.onInteractOutside?.(t),
+            t.defaultPrevented ||
+              ((r.current = !0),
+              t.detail.originalEvent.type === `pointerdown` && (i.current = !0)));
+          let a = t.target;
+          (n.triggerRef.current?.contains(a) && t.preventDefault(),
+            t.detail.originalEvent.type === `focusin` && i.current && t.preventDefault());
+        },
+      });
+    }, `DialogContentNonModal`),
+  ),
+  G = k.forwardRef(
+    j(function (e, n) {
+      let { __scopeDialog: r, trapFocus: a, onOpenAutoFocus: o, onCloseAutoFocus: s, ...c } = e,
+        l = F(U, r);
+      return (
+        i(),
+        (0, A.jsx)(A.Fragment, {
+          children: (0, A.jsx)(t, {
+            asChild: !0,
+            loop: !0,
+            trapped: a,
+            onMountAutoFocus: o,
+            onUnmountAutoFocus: s,
+            children: (0, A.jsx)(ae, {
+              role: `dialog`,
+              id: l.contentId,
+              "aria-describedby": l.descriptionPresent ? l.descriptionId : void 0,
+              "aria-labelledby": l.titlePresent ? l.titleId : void 0,
+              "data-state": J(l.open),
+              ...c,
+              ref: n,
+              deferPointerDownOutside: !0,
+              onDismiss: () => l.onOpenChange(!1),
+            }),
+          }),
+        })
+      );
+    }, `DialogContentImpl`),
+  ),
+  _e = `DialogTitle`,
+  K = k.forwardRef(
+    j(function (e, t) {
+      let { __scopeDialog: n, ...r } = e,
+        i = F(_e, n),
+        { setTitleCount: a } = i;
+      return (
+        v(() => (a((e) => e + 1), () => a((e) => e - 1)), [a]),
+        (0, A.jsx)(c.h2, { id: i.titleId, ...r, ref: t })
+      );
+    }, `DialogTitle`),
+  ),
+  ve = `DialogDescription`,
+  q = k.forwardRef(
+    j(function (e, t) {
+      let { __scopeDialog: n, ...r } = e,
+        i = F(ve, n),
+        { setDescriptionCount: a } = i;
+      return (
+        v(() => (a((e) => e + 1), () => a((e) => e - 1)), [a]),
+        (0, A.jsx)(c.p, { id: i.descriptionId, ...r, ref: t })
+      );
+    }, `DialogDescription`),
+  ),
+  ye = `DialogClose`,
+  be = k.forwardRef(
+    j(function (e, t) {
+      let { __scopeDialog: n, ...r } = e,
+        i = F(ye, n);
+      return (0, A.jsx)(c.button, {
+        type: `button`,
+        ...r,
+        ref: t,
+        onClick: f(e.onClick, () => i.onOpenChange(!1)),
+      });
+    }, `DialogClose`),
+  );
+function J(e) {
+  return e ? `open` : `closed`;
+}
+j(J, `getState`);
+var xe = I,
+  Se = B,
+  Y = k.forwardRef(({ className: e, ...t }, n) =>
+    (0, A.jsx)(H, {
+      className: s(
+        `fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0`,
+        e,
+      ),
+      ...t,
+      ref: n,
+    }),
+  );
+Y.displayName = H.displayName;
+var Ce = o(
+    `fixed z-50 gap-4 bg-background p-6 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out`,
+    {
+      variants: {
+        side: {
+          top: `inset-x-0 top-0 border-b data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top`,
+          bottom: `inset-x-0 bottom-0 border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom`,
+          left: `inset-y-0 left-0 h-full w-3/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm`,
+          right: `inset-y-0 right-0 h-full w-3/4 border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm`,
+        },
+      },
+      defaultVariants: { side: `right` },
+    },
+  ),
+  X = k.forwardRef(({ side: e = `right`, className: t, children: n, ...r }, i) =>
+    (0, A.jsxs)(Se, {
+      children: [
+        (0, A.jsx)(Y, {}),
+        (0, A.jsxs)(W, {
+          ref: i,
+          className: s(Ce({ side: e }), t),
+          ...r,
+          children: [
+            (0, A.jsxs)(be, {
+              className: `absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background cursor-pointer transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary`,
+              children: [
+                (0, A.jsx)(C, { className: `h-4 w-4` }),
+                (0, A.jsx)(`span`, { className: `sr-only`, children: `Close` }),
+              ],
+            }),
+            n,
+          ],
+        }),
+      ],
+    }),
+  );
+X.displayName = W.displayName;
+var Z = ({ className: e, ...t }) =>
+  (0, A.jsx)(`div`, { className: s(`flex flex-col space-y-2 text-center sm:text-left`, e), ...t });
+Z.displayName = `SheetHeader`;
+var Q = k.forwardRef(({ className: e, ...t }, n) =>
+  (0, A.jsx)(K, { ref: n, className: s(`text-lg font-semibold text-foreground`, e), ...t }),
+);
+Q.displayName = K.displayName;
+var $ = k.forwardRef(({ className: e, ...t }, n) =>
+  (0, A.jsx)(q, { ref: n, className: s(`text-sm text-muted-foreground`, e), ...t }),
+);
+$.displayName = q.displayName;
+function we() {
+  let e = ce({ queryKey: [`mapping`], queryFn: se }),
+    [t, n] = (0, k.useState)(``),
+    [r, i] = (0, k.useState)(`all`),
+    [a, o] = (0, k.useState)(`current`),
+    [s, c] = (0, k.useState)(null),
+    l = e.data ?? [],
+    u = (0, k.useMemo)(() => {
+      let e = t.trim().toLowerCase();
+      return l.filter(
+        (t) =>
+          (a === `current` ? t.status === `active` : t.status === `superseded`) &&
+          (!e || t.pincode.includes(e) || t.postOffice.toLowerCase().includes(e)) &&
+          (r === `all` || t.changeType === r),
+      );
+    }, [l, t, r, a]),
+    f = [
+      {
+        key: `pin`,
+        header: `PIN`,
+        render: (e) =>
+          (0, A.jsx)(`span`, { className: `tabular font-medium`, children: e.pincode }),
+      },
+      { key: `po`, header: `Post Office`, render: (e) => e.postOffice },
+      { key: `region`, header: `Region`, render: (e) => e.region },
+      {
+        key: `version`,
+        header: `Mapping Version`,
+        render: (e) => (0, A.jsx)(D, { tone: `primary`, children: e.version }),
+      },
+      { key: `from`, header: `Effective From`, render: (e) => O(e.effectiveFrom) },
+      { key: `status`, header: `Status`, render: (e) => (0, A.jsx)(T, { status: e.status }) },
+      {
+        key: `type`,
+        header: `Change Type`,
+        render: (e) => (0, A.jsx)(T, { status: e.changeType }),
+      },
+      {
+        key: `actions`,
+        header: `Actions`,
+        align: `right`,
+        render: (e) =>
+          (0, A.jsx)(te, {
+            size: `sm`,
+            variant: `outline`,
+            onClick: (t) => {
+              (t.stopPropagation(), c(e));
+            },
+            children: `Details`,
+          }),
+      },
+    ],
+    m = [
+      { version: `V1`, title: `Original Mapping`, date: `10 Apr 2024` },
+      { version: `V2`, title: `Regional Update`, date: `21 May 2025` },
+      { version: `V3`, title: `Post Office Merge`, date: `01 Aug 2026` },
+    ];
+  return (0, A.jsxs)(`div`, {
+    className: `space-y-6`,
+    children: [
+      (0, A.jsx)(oe, {
+        title: `Pincode Mapping`,
+        subtitle: `Manage current and historical postal mappings`,
+        actions: (0, A.jsx)(D, { tone: `primary`, children: `Mapping Version: V3` }),
+      }),
+      (0, A.jsxs)(`div`, {
+        className: `grid gap-4 sm:grid-cols-2 xl:grid-cols-4`,
+        children: [
+          (0, A.jsx)(y, {
+            label: `Active PIN Codes`,
+            value: String(l.filter((e) => e.status === `active`).length),
+            support: `Currently in service`,
+          }),
+          (0, A.jsx)(y, {
+            label: `Recent Mapping Changes`,
+            value: `3`,
+            support: `Last 30 days`,
+            tone: `warning`,
+          }),
+          (0, A.jsx)(y, {
+            label: `Merged Codes`,
+            value: String(l.filter((e) => e.changeType === `merged`).length),
+            support: `Beats consolidated`,
+            tone: `info`,
+          }),
+          (0, A.jsx)(y, {
+            label: `Conflicts Detected`,
+            value: `2`,
+            support: `Requires operator review`,
+            tone: `warning`,
+          }),
+        ],
+      }),
+      (0, A.jsx)(`div`, {
+        className: `inline-flex rounded-lg border border-border bg-surface p-1`,
+        children: [`current`, `historical`].map((e) =>
+          (0, A.jsx)(
+            `button`,
+            {
+              type: `button`,
+              "aria-pressed": a === e,
+              onClick: () => o(e),
+              className: `rounded-md px-4 py-1.5 text-sm font-medium transition-colors ${a === e ? `bg-primary text-primary-foreground` : `text-muted-foreground hover:text-foreground`}`,
+              children: e === `current` ? `Current Mapping` : `Historical Mapping`,
+            },
+            e,
+          ),
+        ),
+      }),
+      (0, A.jsxs)(g, {
+        children: [
+          (0, A.jsx)(ne, {
+            label: `Search mappings by PIN or post office`,
+            placeholder: `Search PIN or post office…`,
+            value: t,
+            onChange: n,
+          }),
+          (0, A.jsx)(d, {
+            label: `Change Type`,
+            value: r,
+            onChange: i,
+            options: Object.entries(E.changeType).map(([e, t]) => ({ value: e, label: t })),
+          }),
+        ],
+      }),
+      (0, A.jsx)(w, {
+        columns: f,
+        rows: u,
+        rowKey: (e) => e.id,
+        loading: e.isLoading,
+        error: e.error ? e.error.message : null,
+        onRetry: () => e.refetch(),
+        onRowClick: (e) => c(e),
+        emptyTitle: `No mapping records in this view`,
+        caption: `Pincode mapping table`,
+      }),
+      (0, A.jsx)(p, {
+        title: `Mapping History`,
+        description: `How the PIN to post office mapping evolved`,
+        accent: !0,
+        children: (0, A.jsx)(`ol`, {
+          className: `grid gap-4 md:grid-cols-3`,
+          children: m.map((e, t) =>
+            (0, A.jsxs)(
+              `li`,
+              {
+                className: `relative rounded-lg border border-border bg-surface p-4`,
+                children: [
+                  (0, A.jsxs)(`div`, {
+                    className: `flex items-center gap-2`,
+                    children: [
+                      (0, A.jsx)(`span`, {
+                        className: `flex size-8 items-center justify-center rounded-md bg-primary text-sm font-semibold text-primary-foreground`,
+                        children: e.version,
+                      }),
+                      (0, A.jsxs)(`div`, {
+                        children: [
+                          (0, A.jsx)(`p`, {
+                            className: `text-sm font-semibold`,
+                            children: e.title,
+                          }),
+                          (0, A.jsx)(`p`, {
+                            className: `text-xs text-muted-foreground`,
+                            children: e.date,
+                          }),
+                        ],
+                      }),
+                    ],
+                  }),
+                  (0, A.jsx)(`ul`, {
+                    className: `mt-3 space-y-1 text-xs text-muted-foreground`,
+                    children: l
+                      .filter((t) => t.version === e.version)
+                      .slice(0, 3)
+                      .map((e) =>
+                        (0, A.jsxs)(
+                          `li`,
+                          {
+                            className: `flex items-center gap-1.5`,
+                            children: [
+                              (0, A.jsx)(ue, { className: `size-3.5 shrink-0`, "aria-hidden": !0 }),
+                              (0, A.jsx)(`span`, { className: `tabular`, children: e.pincode }),
+                              ` · `,
+                              e.postOffice,
+                              ` ·`,
+                              ` `,
+                              E.changeType[e.changeType],
+                            ],
+                          },
+                          e.id,
+                        ),
+                      ),
+                  }),
+                  t < m.length - 1 &&
+                    (0, A.jsx)(le, {
+                      className: `absolute top-1/2 -right-3 hidden size-4 text-muted-foreground md:block`,
+                      "aria-hidden": !0,
+                    }),
+                ],
+              },
+              e.version,
+            ),
+          ),
+        }),
+      }),
+      (0, A.jsx)(xe, {
+        open: !!s,
+        onOpenChange: (e) => !e && c(null),
+        children: (0, A.jsxs)(X, {
+          className: `w-full overflow-y-auto sm:max-w-lg`,
+          children: [
+            (0, A.jsxs)(Z, {
+              children: [
+                (0, A.jsx)(Q, { children: `Mapping Change Details` }),
+                (0, A.jsx)($, { children: s ? `${s.pincode} · ${s.version}` : `` }),
+              ],
+            }),
+            s &&
+              (0, A.jsxs)(`div`, {
+                className: `space-y-4 px-4 pb-6`,
+                children: [
+                  (0, A.jsx)(b, { label: `Previous mapping`, value: s.previousMapping }),
+                  (0, A.jsx)(b, { label: `New mapping`, value: s.newMapping }),
+                  (0, A.jsx)(b, { label: `Effective date`, value: O(s.effectiveFrom) }),
+                  (0, A.jsx)(b, {
+                    label: `Change type`,
+                    value: (0, A.jsx)(T, { status: s.changeType }),
+                  }),
+                  (0, A.jsxs)(`div`, {
+                    children: [
+                      (0, A.jsx)(`p`, {
+                        className: `text-xs tracking-wide text-muted-foreground uppercase`,
+                        children: `Change reason`,
+                      }),
+                      (0, A.jsx)(`p`, { className: `mt-1 text-sm`, children: s.reason }),
+                    ],
+                  }),
+                  (0, A.jsxs)(`div`, {
+                    children: [
+                      (0, A.jsx)(`p`, {
+                        className: `text-xs tracking-wide text-muted-foreground uppercase`,
+                        children: `Affected post offices`,
+                      }),
+                      (0, A.jsx)(`div`, {
+                        className: `mt-2 flex flex-wrap gap-2`,
+                        children: s.affectedPostOffices.map((e) =>
+                          (0, A.jsx)(D, { children: e }, e),
+                        ),
+                      }),
+                    ],
+                  }),
+                  (0, A.jsxs)(`div`, {
+                    children: [
+                      (0, A.jsx)(`p`, {
+                        className: `text-xs tracking-wide text-muted-foreground uppercase`,
+                        children: `Affected PIN codes`,
+                      }),
+                      (0, A.jsx)(`div`, {
+                        className: `mt-2 flex flex-wrap gap-2`,
+                        children: s.affectedPincodes.map((e) =>
+                          (0, A.jsx)(D, { tone: `primary`, children: e }, e),
+                        ),
+                      }),
+                    ],
+                  }),
+                ],
+              }),
+          ],
+        }),
+      }),
+    ],
+  });
+}
+export { we as component };

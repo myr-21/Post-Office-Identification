@@ -1,0 +1,179 @@
+import { c as e, j as t, lt as n, r, s as i } from "./primitives-BCHLNZiF.js";
+import { t as a } from "./link-BI1tahbv.js";
+import { a as o, d as s, l as c } from "./postroute-C-bfl2si.js";
+import { t as l } from "./useQuery-kLumsi1Z.js";
+import { t as u } from "./arrow-left-BNSLnK9L.js";
+import { n as d, r as f, t as p } from "./states-CAGmlWJM.js";
+import { t as m } from "./map-pin-CEoWcCSG.js";
+import { t as h } from "./post-offices_._officeId-BcHyPUMo.js";
+import { t as g } from "./data-table-CdyL5UA9.js";
+import { a as _, c as v, s as y, t as b } from "./badges-BR-XpxyQ.js";
+var x = n();
+function S() {
+  let { officeId: n } = h.useParams(),
+    S = l({ queryKey: [`post-office`, n], queryFn: () => c(n) }),
+    C = l({ queryKey: [`mapping`], queryFn: o }),
+    w = l({ queryKey: [`predictions`], queryFn: s });
+  if (S.isLoading) return (0, x.jsx)(f, { label: `Loading post office…`, rows: 5 });
+  if (S.error || !S.data)
+    return (0, x.jsx)(d, {
+      title: `Post office not found`,
+      description: S.error?.message ?? `No such office.`,
+      onRetry: () => S.refetch(),
+    });
+  let T = S.data,
+    E = (C.data ?? []).filter(
+      (e) => e.pincode === T.pincode || e.affectedPostOffices.includes(T.name),
+    ),
+    D = (w.data ?? []).filter((e) => e.postOffice === T.name).slice(0, 6);
+  return (0, x.jsxs)(`div`, {
+    className: `space-y-6`,
+    children: [
+      (0, x.jsx)(t, {
+        variant: `ghost`,
+        size: `sm`,
+        asChild: !0,
+        className: `-ml-2`,
+        children: (0, x.jsxs)(a, {
+          to: `/post-offices`,
+          children: [
+            (0, x.jsx)(u, { className: `size-4`, "aria-hidden": !0 }),
+            ` Back to post offices`,
+          ],
+        }),
+      }),
+      (0, x.jsx)(i, {
+        title: T.name,
+        subtitle: `${T.district}, ${T.state} · PIN ${T.pincode}`,
+        actions: (0, x.jsx)(_, { status: T.status }),
+      }),
+      (0, x.jsxs)(`div`, {
+        className: `grid gap-6 xl:grid-cols-3`,
+        children: [
+          (0, x.jsx)(e, {
+            title: `Office Information`,
+            className: `xl:col-span-2`,
+            children: (0, x.jsxs)(`div`, {
+              className: `grid gap-x-8 sm:grid-cols-2`,
+              children: [
+                (0, x.jsxs)(`div`, {
+                  children: [
+                    (0, x.jsx)(r, { label: `Post Office`, value: T.name }),
+                    (0, x.jsx)(r, {
+                      label: `PIN`,
+                      value: (0, x.jsx)(`span`, { className: `tabular`, children: T.pincode }),
+                    }),
+                    (0, x.jsx)(r, { label: `District`, value: T.district }),
+                    (0, x.jsx)(r, { label: `State`, value: T.state }),
+                  ],
+                }),
+                (0, x.jsxs)(`div`, {
+                  children: [
+                    (0, x.jsx)(r, { label: `Region`, value: T.region }),
+                    (0, x.jsx)(r, { label: `Division`, value: T.division }),
+                    (0, x.jsx)(r, { label: `Mapping Version`, value: T.mappingVersion }),
+                    (0, x.jsx)(r, {
+                      label: `Coordinates`,
+                      value: (0, x.jsxs)(`span`, {
+                        className: `tabular`,
+                        children: [T.latitude.toFixed(4), `, `, T.longitude.toFixed(4)],
+                      }),
+                    }),
+                  ],
+                }),
+              ],
+            }),
+          }),
+          (0, x.jsx)(e, {
+            title: `Location`,
+            children: (0, x.jsxs)(`div`, {
+              className: `flex h-48 flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-border bg-surface text-center`,
+              children: [
+                (0, x.jsx)(m, { className: `size-6 text-primary`, "aria-hidden": !0 }),
+                (0, x.jsx)(`p`, {
+                  className: `text-sm font-medium`,
+                  children: `Map preview unavailable`,
+                }),
+                (0, x.jsxs)(`p`, {
+                  className: `tabular text-xs text-muted-foreground`,
+                  children: [T.latitude.toFixed(4), `, `, T.longitude.toFixed(4)],
+                }),
+              ],
+            }),
+          }),
+        ],
+      }),
+      (0, x.jsx)(e, {
+        title: `Mapping History`,
+        bodyClassName: `p-4`,
+        children:
+          E.length === 0
+            ? (0, x.jsx)(p, {
+                title: `No mapping changes recorded`,
+                description: `This office uses the baseline mapping.`,
+              })
+            : (0, x.jsx)(g, {
+                columns: [
+                  { key: `version`, header: `Version`, render: (e) => e.version },
+                  {
+                    key: `type`,
+                    header: `Change Type`,
+                    render: (e) => (0, x.jsx)(_, { status: e.changeType }),
+                  },
+                  { key: `from`, header: `Effective From`, render: (e) => y(e.effectiveFrom) },
+                  { key: `mapping`, header: `New Mapping`, render: (e) => e.newMapping },
+                ],
+                rows: E,
+                rowKey: (e) => e.id,
+                dense: !0,
+                caption: `Mapping history`,
+              }),
+      }),
+      (0, x.jsx)(e, {
+        title: `Recent Predictions`,
+        bodyClassName: `p-4`,
+        children:
+          D.length === 0
+            ? (0, x.jsx)(p, {
+                title: `No recent predictions`,
+                description: `No addresses have been routed to this office in the current window.`,
+              })
+            : (0, x.jsx)(g, {
+                columns: [
+                  {
+                    key: `time`,
+                    header: `Time`,
+                    render: (e) =>
+                      (0, x.jsx)(`span`, {
+                        className: `tabular text-xs`,
+                        children: v(e.createdAt),
+                      }),
+                  },
+                  {
+                    key: `address`,
+                    header: `Address`,
+                    render: (e) =>
+                      (0, x.jsx)(`span`, { className: `line-clamp-1`, children: e.rawAddress }),
+                  },
+                  {
+                    key: `pin`,
+                    header: `PIN`,
+                    render: (e) =>
+                      (0, x.jsx)(`span`, { className: `tabular`, children: e.pincode }),
+                  },
+                  {
+                    key: `conf`,
+                    header: `Confidence`,
+                    render: (e) => (0, x.jsx)(b, { value: e.confidence, showLabel: !1 }),
+                  },
+                ],
+                rows: D,
+                rowKey: (e) => e.id,
+                dense: !0,
+                caption: `Recent predictions`,
+              }),
+      }),
+    ],
+  });
+}
+export { S as component };

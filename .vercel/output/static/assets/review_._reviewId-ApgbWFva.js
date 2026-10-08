@@ -1,0 +1,45 @@
+const __vite__mapDeps = (
+  i,
+  m = __vite__mapDeps,
+  d = m.f ||
+    (m.f = [
+      "assets/review_._reviewId-RETHqoD6.js",
+      "assets/primitives-BCHLNZiF.js",
+      "assets/link-BI1tahbv.js",
+      "assets/useRouter-CDYUVTqa.js",
+      "assets/useNavigate-C3-W0q7R.js",
+      "assets/postroute-C-bfl2si.js",
+      "assets/useQuery-kLumsi1Z.js",
+      "assets/useMutation-B-ySW0uT.js",
+      "assets/mutation-1MmOTjY0.js",
+      "assets/arrow-left-BNSLnK9L.js",
+      "assets/circle-check-BKl7BPHP.js",
+      "assets/textarea-JM3xxskW.js",
+      "assets/states-CAGmlWJM.js",
+      "assets/dist-BWeSYI3B.js",
+      "assets/badges-BR-XpxyQ.js",
+    ]),
+) => i.map((i) => d[i]);
+import { n as e, r as t, t as n } from "./preload-helper-DCw9-y5V.js";
+var r = t(`/review_/$reviewId`)({
+  head: () => ({
+    meta: [
+      { title: `Review Detail — PostRoute AI` },
+      {
+        name: `description`,
+        content: `Verify, correct, reject or escalate a single address prediction.`,
+      },
+      { property: `og:title`, content: `Review Detail — PostRoute AI` },
+      { property: `og:description`, content: `Operator verification for a single prediction.` },
+    ],
+  }),
+  component: e(
+    () =>
+      n(
+        () => import(`./review_._reviewId-RETHqoD6.js`),
+        __vite__mapDeps([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]),
+      ),
+    `component`,
+  ),
+});
+export { r as t };

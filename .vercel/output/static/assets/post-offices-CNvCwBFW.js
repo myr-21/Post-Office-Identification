@@ -1,0 +1,131 @@
+import {
+  a as e,
+  dt as t,
+  i as n,
+  l as r,
+  lt as i,
+  mt as a,
+  s as o,
+} from "./primitives-BCHLNZiF.js";
+import { t as s } from "./useNavigate-C3-W0q7R.js";
+import { u as c } from "./postroute-C-bfl2si.js";
+import { t as l } from "./useQuery-kLumsi1Z.js";
+import { t as u } from "./data-table-CdyL5UA9.js";
+import { a as d, d as f } from "./badges-BR-XpxyQ.js";
+var p = a(t()),
+  m = i();
+function h() {
+  let t = s(),
+    i = l({ queryKey: [`post-offices`], queryFn: c }),
+    [a, h] = (0, p.useState)(``),
+    [g, _] = (0, p.useState)(`all`),
+    [v, y] = (0, p.useState)(`all`),
+    [b, x] = (0, p.useState)(`all`),
+    [S, C] = (0, p.useState)(`all`),
+    w = i.data ?? [],
+    T = (0, p.useMemo)(() => {
+      let e = a.trim().toLowerCase();
+      return w.filter(
+        (t) =>
+          (!e ||
+            t.name.toLowerCase().includes(e) ||
+            t.pincode.includes(e) ||
+            t.district.toLowerCase().includes(e) ||
+            t.state.toLowerCase().includes(e)) &&
+          (g === `all` || t.state === g) &&
+          (v === `all` || t.district === v) &&
+          (b === `all` || t.status === b) &&
+          (S === `all` || t.mappingVersion === S),
+      );
+    }, [w, a, g, v, b, S]),
+    E = [
+      {
+        key: `name`,
+        header: `Post Office`,
+        render: (e) => (0, m.jsx)(`span`, { className: `font-medium`, children: e.name }),
+      },
+      {
+        key: `pin`,
+        header: `PIN`,
+        render: (e) => (0, m.jsx)(`span`, { className: `tabular`, children: e.pincode }),
+      },
+      { key: `district`, header: `District`, render: (e) => e.district },
+      { key: `state`, header: `State`, render: (e) => e.state },
+      {
+        key: `lat`,
+        header: `Latitude`,
+        render: (e) =>
+          (0, m.jsx)(`span`, { className: `tabular text-xs`, children: e.latitude.toFixed(4) }),
+      },
+      {
+        key: `lng`,
+        header: `Longitude`,
+        render: (e) =>
+          (0, m.jsx)(`span`, { className: `tabular text-xs`, children: e.longitude.toFixed(4) }),
+      },
+      { key: `status`, header: `Status`, render: (e) => (0, m.jsx)(d, { status: e.status }) },
+      { key: `version`, header: `Mapping Version`, render: (e) => e.mappingVersion },
+    ];
+  return (0, m.jsxs)(`div`, {
+    className: `space-y-6`,
+    children: [
+      (0, m.jsx)(o, {
+        title: `Post Offices`,
+        subtitle: `Browse postal offices and their associated PIN mappings`,
+      }),
+      (0, m.jsxs)(n, {
+        children: [
+          (0, m.jsx)(r, {
+            label: `Search post offices by name, PIN, district or state`,
+            placeholder: `Search post office, PIN, district, state…`,
+            value: a,
+            onChange: h,
+          }),
+          (0, m.jsx)(e, {
+            label: `State`,
+            value: g,
+            onChange: (e) => {
+              (_(e), y(`all`));
+            },
+            options: [...new Set(w.map((e) => e.state))].map((e) => ({ value: e, label: e })),
+          }),
+          (0, m.jsx)(e, {
+            label: `District`,
+            value: v,
+            onChange: y,
+            options: [
+              ...new Set(w.filter((e) => g === `all` || e.state === g).map((e) => e.district)),
+            ].map((e) => ({ value: e, label: e })),
+          }),
+          (0, m.jsx)(e, {
+            label: `Status`,
+            value: b,
+            onChange: x,
+            options: Object.entries(f.postOfficeStatus).map(([e, t]) => ({ value: e, label: t })),
+          }),
+          (0, m.jsx)(e, {
+            label: `Mapping Version`,
+            value: S,
+            onChange: C,
+            options: [...new Set(w.map((e) => e.mappingVersion))].map((e) => ({
+              value: e,
+              label: e,
+            })),
+          }),
+        ],
+      }),
+      (0, m.jsx)(u, {
+        columns: E,
+        rows: T,
+        rowKey: (e) => e.id,
+        loading: i.isLoading,
+        error: i.error ? i.error.message : null,
+        onRetry: () => i.refetch(),
+        onRowClick: (e) => t({ to: `/post-offices/$officeId`, params: { officeId: e.id } }),
+        emptyTitle: `No post offices match these filters`,
+        caption: `Post office directory`,
+      }),
+    ],
+  });
+}
+export { h as component };
