@@ -1,1 +1,3 @@
-import{ct as e}from"./primitives-BCHLNZiF.js";var t=e(`circle`,[[`circle`,{cx:`12`,cy:`12`,r:`10`,key:`1mglay`}]]);export{t};
+import { ct as e } from "./primitives-BCHLNZiF.js";
+var t = e(`circle`, [[`circle`, { cx: `12`, cy: `12`, r: `10`, key: `1mglay` }]]);
+export { t };

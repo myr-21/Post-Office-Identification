@@ -1,1 +1,751 @@
-import{L as e,Q as t,W as n,at as r,c as i,ct as a,d as o,dt as s,f as c,g as l,h as u,it as d,j as f,k as p,lt as m,m as h,mt as g,n as _,nt as v,ot as y,p as b,rt as x,s as S,tt as C,u as w,x as T}from"./primitives-BCHLNZiF.js";import{t as E}from"./useNavigate-C3-W0q7R.js";import{g as D}from"./postroute-C-bfl2si.js";import{t as O}from"./useMutation-B-ySW0uT.js";import{t as k}from"./circle-check-BKl7BPHP.js";import{n as A,t as j}from"./textarea-JM3xxskW.js";import{a as M,n as ee,t as te}from"./states-CAGmlWJM.js";import{t as N}from"./map-pin-CEoWcCSG.js";import{n as P}from"./dist-BWeSYI3B.js";import{l as F,n as I,o as L,r as R}from"./badges-BR-XpxyQ.js";var z=a(`sparkles`,[[`path`,{d:`M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z`,key:`1s2grr`}],[`path`,{d:`M20 2v4`,key:`1rf3ol`}],[`path`,{d:`M22 4h-4`,key:`gwowj6`}],[`circle`,{cx:`4`,cy:`20`,r:`2`,key:`6kqj1y`}]]),B=a(`trash-2`,[[`path`,{d:`M10 11v6`,key:`nco0om`}],[`path`,{d:`M14 11v6`,key:`outv1u`}],[`path`,{d:`M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6`,key:`miytrc`}],[`path`,{d:`M3 6h18`,key:`d0wm0j`}],[`path`,{d:`M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2`,key:`e791ji`}]]),V=g(s(),1),H=m(),U=Object.defineProperty,W=(e,t)=>U(e,`name`,{value:t,configurable:!0}),G=`Collapsible`,[K,ne]=x(G),[q,J]=K(G),Y=V.forwardRef(W(function(e,r){let{__scopeCollapsible:i,open:a,defaultOpen:o,disabled:s,onOpenChange:c,...l}=e,[u,d]=C({prop:a,defaultProp:o??!1,onChange:c,caller:G});return(0,H.jsx)(q,{scope:i,disabled:s,contentId:n(),open:u,onOpenToggle:V.useCallback(()=>d(e=>!e),[d]),children:(0,H.jsx)(t.div,{"data-state":$(u),"data-disabled":s?``:void 0,...l,ref:r})})},`Collapsible`)),X=`CollapsibleTrigger`,Z=V.forwardRef(W(function(e,n){let{__scopeCollapsible:i,...a}=e,o=J(X,i);return(0,H.jsx)(t.button,{type:`button`,"aria-controls":o.open?o.contentId:void 0,"aria-expanded":o.open||!1,"data-state":$(o.open),"data-disabled":o.disabled?``:void 0,disabled:o.disabled,...a,ref:n,onClick:r(e.onClick,o.onOpenToggle)})},`CollapsibleTrigger`)),Q=`CollapsibleContent`,re=V.forwardRef(W(function(t,n){let{forceMount:r,...i}=t,a=J(Q,t.__scopeCollapsible);return(0,H.jsx)(e,{present:r||a.open,children:({present:e})=>(0,H.jsx)(ie,{...i,ref:n,present:e})})},`CollapsibleContent`)),ie=V.forwardRef(W(function(e,n){let{__scopeCollapsible:r,present:i,children:a,...o}=e,s=J(Q,r),[c,l]=V.useState(i),u=V.useRef(null),f=d(n,u),p=V.useRef(0),m=p.current,h=V.useRef(0),g=h.current,_=s.open||c,y=V.useRef(_),b=V.useRef(void 0);return V.useEffect(()=>{let e=requestAnimationFrame(()=>y.current=!1);return()=>cancelAnimationFrame(e)},[]),v(()=>{let e=u.current;if(e){b.current=b.current||{transitionDuration:e.style.transitionDuration,animationName:e.style.animationName},e.style.transitionDuration=`0s`,e.style.animationName=`none`;let t=e.getBoundingClientRect();p.current=t.height,h.current=t.width,y.current||(e.style.transitionDuration=b.current.transitionDuration,e.style.animationName=b.current.animationName),l(i)}},[s.open,i]),(0,H.jsx)(t.div,{"data-state":$(s.open),"data-disabled":s.disabled?``:void 0,id:s.contentId,hidden:!_,...o,ref:f,style:{"--radix-collapsible-content-height":m?`${m}px`:void 0,"--radix-collapsible-content-width":g?`${g}px`:void 0,...e.style},children:_&&a})},`CollapsibleContentImpl`));function $(e){return e?`open`:`closed`}W($,`getState`);var ae=Y,oe=Z,se=re;function ce(){let e=E(),[t,n]=(0,V.useState)(``),[r,a]=(0,V.useState)(``),[s,d]=(0,V.useState)(``),[m,g]=(0,V.useState)(``),[_,v]=(0,V.useState)(`automatic`),y=O({mutationFn:e=>D(e)}),x=()=>{let e={rawAddress:t,mode:_,...r?{state:r}:{},...s?{district:s}:{},...m?{pincode:m}:{}};y.mutate(e)},C=()=>{n(``),a(``),d(``),g(``),y.reset()},k=y.data;return(0,H.jsxs)(`div`,{className:`space-y-6`,children:[(0,H.jsx)(S,{title:`Address Prediction`,subtitle:`Identify the most probable delivery post office and PIN code`}),(0,H.jsxs)(`div`,{className:`grid gap-6 xl:grid-cols-[minmax(0,420px)_minmax(0,1fr)]`,children:[(0,H.jsxs)(`div`,{className:`space-y-6`,children:[(0,H.jsx)(i,{title:`Address Input`,accent:!0,children:(0,H.jsxs)(`form`,{onSubmit:e=>{e.preventDefault(),x()},className:`space-y-4`,children:[(0,H.jsxs)(`div`,{className:`space-y-1.5`,children:[(0,H.jsx)(u,{htmlFor:`address`,children:`Postal Address`}),(0,H.jsx)(j,{id:`address`,value:t,onChange:e=>n(e.target.value),onKeyDown:e=>{e.key===`Enter`&&(e.ctrlKey||e.metaKey)&&(e.preventDefault(),x())},rows:5,placeholder:`Enter or paste a postal address...`,className:`resize-y bg-card text-base`,"aria-describedby":`address-help`}),(0,H.jsxs)(`p`,{id:`address-help`,className:`text-xs text-muted-foreground`,children:[`Example: Flat 302, Baner Road, near Balewadi, Pune ·`,` `,(0,H.jsx)(`kbd`,{className:`rounded border border-border bg-muted px-1 py-0.5 text-[10px]`,children:`Ctrl`}),` `,`+`,` `,(0,H.jsx)(`kbd`,{className:`rounded border border-border bg-muted px-1 py-0.5 text-[10px]`,children:`Enter`}),` `,`to predict`]})]}),(0,H.jsxs)(`div`,{className:`grid gap-3 sm:grid-cols-2`,children:[(0,H.jsxs)(`div`,{className:`space-y-1.5`,children:[(0,H.jsx)(u,{htmlFor:`state`,children:`Region (optional)`}),(0,H.jsxs)(w,{value:r,onValueChange:e=>{a(e),d(``)},children:[(0,H.jsx)(b,{id:`state`,className:`bg-card`,children:(0,H.jsx)(h,{placeholder:`Select state`})}),(0,H.jsx)(o,{children:p.map(e=>(0,H.jsx)(c,{value:e,children:e},e))})]})]}),(0,H.jsxs)(`div`,{className:`space-y-1.5`,children:[(0,H.jsx)(u,{htmlFor:`district`,children:`District (optional)`}),(0,H.jsxs)(w,{value:s,onValueChange:d,disabled:!r,children:[(0,H.jsx)(b,{id:`district`,className:`bg-card`,children:(0,H.jsx)(h,{placeholder:r?`Select district`:`Select state first`})}),(0,H.jsx)(o,{children:(T[r]??[]).map(e=>(0,H.jsx)(c,{value:e,children:e},e))})]})]})]}),(0,H.jsxs)(`div`,{className:`space-y-1.5`,children:[(0,H.jsx)(u,{htmlFor:`pincode`,children:`PIN (optional)`}),(0,H.jsx)(l,{id:`pincode`,inputMode:`numeric`,maxLength:6,value:m,onChange:e=>g(e.target.value.replace(/\D/g,``)),placeholder:`411045`,className:`tabular bg-card`})]}),(0,H.jsxs)(`fieldset`,{className:`space-y-1.5`,children:[(0,H.jsx)(`legend`,{className:`text-sm font-medium`,children:`Processing Mode`}),(0,H.jsx)(`div`,{className:`inline-flex rounded-lg border border-border bg-surface p-1`,children:[`automatic`,`assisted`].map(e=>(0,H.jsx)(`button`,{type:`button`,"aria-pressed":_===e,onClick:()=>v(e),className:`rounded-md px-4 py-1.5 text-sm font-medium capitalize transition-colors ${_===e?`bg-primary text-primary-foreground`:`text-muted-foreground hover:text-foreground`}`,children:e},e))}),(0,H.jsx)(`p`,{className:`text-xs text-muted-foreground`,children:_===`automatic`?`High-confidence results are routed without operator input.`:`Every result is presented for operator confirmation.`})]}),(0,H.jsxs)(`div`,{className:`flex flex-wrap gap-2 pt-1`,children:[(0,H.jsx)(f,{type:`submit`,disabled:!t.trim()||y.isPending,children:y.isPending?(0,H.jsxs)(H.Fragment,{children:[(0,H.jsx)(M,{className:`size-4 animate-spin`,"aria-hidden":!0}),` Predicting…`]}):(0,H.jsxs)(H.Fragment,{children:[(0,H.jsx)(z,{className:`size-4`,"aria-hidden":!0}),` Predict Address`]})}),(0,H.jsxs)(f,{type:`button`,variant:`outline`,onClick:C,children:[(0,H.jsx)(B,{className:`size-4`,"aria-hidden":!0}),` Clear`]})]})]})}),k&&(0,H.jsx)(ue,{result:k})]}),(0,H.jsxs)(`div`,{className:`space-y-6`,children:[y.isPending&&(0,H.jsx)(i,{title:`Prediction Result`,children:(0,H.jsxs)(`div`,{className:`flex flex-col items-center gap-3 py-16 text-center`,children:[(0,H.jsx)(M,{className:`size-7 animate-spin text-primary`,"aria-hidden":!0}),(0,H.jsx)(`p`,{className:`text-sm font-medium`,children:`Analyzing address…`}),(0,H.jsx)(`p`,{className:`text-sm text-muted-foreground`,children:`Normalizing tokens, matching localities and validating mapping V3.`})]})}),y.isError&&!y.isPending&&(0,H.jsx)(i,{title:`Prediction Result`,children:(0,H.jsx)(ee,{title:`Prediction failed`,description:y.error.message,onRetry:x})}),!y.isPending&&!y.isError&&!k&&(0,H.jsx)(i,{title:`Prediction Result`,children:(0,H.jsx)(te,{title:`Prediction results will appear here`,description:`Enter a postal address on the left and run a prediction to see the delivery post office, confidence and alternative matches.`,icon:(0,H.jsx)(N,{className:`size-5`,"aria-hidden":!0})})}),k&&!y.isPending&&(0,H.jsx)(le,{result:k,onReset:C,navigateToReview:()=>e({to:`/review`})})]})]})]})}function le({result:e,onReset:t,navigateToReview:n}){let r=L(e.confidence),a=r===`high`?`High Confidence`:r===`medium`?`Medium Confidence`:`Low Confidence`;return(0,H.jsxs)(`div`,{className:`space-y-6`,children:[(0,H.jsxs)(i,{title:`Prediction Result`,accent:!0,actions:(0,H.jsx)(R,{tone:r===`high`?`success`:r===`medium`?`warning`:`error`,children:a}),children:[r===`low`&&(0,H.jsx)(`p`,{className:`mb-4 rounded-md border border-warning/30 bg-warning-soft px-3 py-2 text-sm text-warning`,children:`Manual review required — confidence is below the auto-routing threshold of 70%.`}),(0,H.jsxs)(`div`,{className:`grid gap-4 sm:grid-cols-2 lg:grid-cols-4`,children:[(0,H.jsxs)(`div`,{className:`rounded-lg border border-border bg-surface p-4 sm:col-span-2`,children:[(0,H.jsx)(`p`,{className:`text-xs tracking-wide text-muted-foreground uppercase`,children:`Predicted PIN`}),(0,H.jsx)(`p`,{className:`tabular mt-1 text-4xl font-semibold text-primary-dark`,children:e.pincode}),(0,H.jsx)(`p`,{className:`mt-2 text-sm font-medium text-foreground`,children:e.postOffice})]}),(0,H.jsxs)(`div`,{className:`rounded-lg border border-border bg-surface p-4`,children:[(0,H.jsx)(`p`,{className:`text-xs tracking-wide text-muted-foreground uppercase`,children:`District`}),(0,H.jsx)(`p`,{className:`mt-1 text-lg font-semibold`,children:e.district}),(0,H.jsx)(`p`,{className:`mt-3 text-xs tracking-wide text-muted-foreground uppercase`,children:`State`}),(0,H.jsx)(`p`,{className:`mt-1 text-lg font-semibold`,children:e.state})]}),(0,H.jsxs)(`div`,{className:`rounded-lg border border-border bg-surface p-4`,children:[(0,H.jsx)(`p`,{className:`text-xs tracking-wide text-muted-foreground uppercase`,children:`Confidence`}),(0,H.jsx)(`p`,{className:`tabular mt-1 text-3xl font-semibold`,children:F(e.confidence)}),(0,H.jsx)(I,{value:e.confidence,className:`mt-3`}),(0,H.jsx)(`p`,{className:`mt-2 text-xs text-muted-foreground`,children:a})]})]}),(0,H.jsxs)(`div`,{className:`mt-5 flex flex-wrap gap-2`,children:[(0,H.jsxs)(f,{onClick:()=>{P.success(`Added to route`,{description:`Successfully routed to ${e.pincode} · ${e.postOffice}`}),t()},children:[(0,H.jsx)(k,{className:`size-4`,"aria-hidden":!0}),` Confirm Routing`]}),(0,H.jsx)(f,{variant:`outline`,onClick:()=>{P.info(`Added to review queue`,{description:`This prediction has been flagged for manual operator review.`}),n()},children:`Send to Review`}),(0,H.jsxs)(f,{variant:`ghost`,onClick:t,children:[(0,H.jsx)(A,{className:`size-4`,"aria-hidden":!0}),` Try Another Address`]})]})]}),(0,H.jsx)(i,{title:`Alternative Matches`,bodyClassName:`p-0`,children:(0,H.jsxs)(`table`,{className:`w-full text-sm`,children:[(0,H.jsx)(`thead`,{children:(0,H.jsxs)(`tr`,{className:`border-b border-border bg-surface text-xs tracking-wide text-muted-foreground uppercase`,children:[(0,H.jsx)(`th`,{scope:`col`,className:`px-5 py-2.5 text-left`,children:`Rank`}),(0,H.jsx)(`th`,{scope:`col`,className:`px-5 py-2.5 text-left`,children:`Post Office`}),(0,H.jsx)(`th`,{scope:`col`,className:`px-5 py-2.5 text-left`,children:`PIN`}),(0,H.jsx)(`th`,{scope:`col`,className:`px-5 py-2.5 text-right`,children:`Confidence`})]})}),(0,H.jsx)(`tbody`,{children:e.candidates.map(e=>(0,H.jsxs)(`tr`,{className:`border-b border-border/70 last:border-0`,children:[(0,H.jsx)(`td`,{className:`tabular px-5 py-3`,children:e.rank}),(0,H.jsx)(`td`,{className:`px-5 py-3 font-medium`,children:e.postOffice}),(0,H.jsx)(`td`,{className:`tabular px-5 py-3`,children:e.pincode}),(0,H.jsx)(`td`,{className:`tabular px-5 py-3 text-right`,children:F(e.confidence)})]},`${e.rank}-${e.postOffice}`))})]})}),(0,H.jsx)(i,{title:`Prediction Explanation`,description:`Interpretable factors — full model reasoning will come from the backend.`,children:(0,H.jsx)(`ul`,{className:`space-y-2`,children:e.explanation.map(e=>(0,H.jsxs)(`li`,{className:`flex items-start gap-2.5 text-sm`,children:[e.matched?(0,H.jsx)(k,{className:`mt-0.5 size-4 shrink-0 text-success`,"aria-hidden":!0}):(0,H.jsx)(A,{className:`mt-0.5 size-4 shrink-0 text-muted-foreground`,"aria-hidden":!0}),(0,H.jsxs)(`span`,{children:[(0,H.jsx)(`span`,{className:`font-medium text-foreground`,children:e.label}),(0,H.jsxs)(`span`,{className:`text-muted-foreground`,children:[` — `,e.detail]}),(0,H.jsx)(`span`,{className:`sr-only`,children:e.matched?` (matched)`:` (not matched)`})]})]},e.label))})})]})}function ue({result:e}){let[t,n]=(0,V.useState)(!0);return(0,H.jsx)(ae,{open:t,onOpenChange:n,children:(0,H.jsxs)(`div`,{className:`rounded-xl border border-border bg-card shadow-card`,children:[(0,H.jsxs)(oe,{className:`flex w-full items-center justify-between px-5 py-4 text-left`,children:[(0,H.jsx)(`span`,{className:`text-base font-semibold`,children:`Address Processing`}),(0,H.jsx)(y,{className:`size-4 transition-transform ${t?`rotate-180`:``}`,"aria-hidden":!0})]}),(0,H.jsx)(se,{children:(0,H.jsxs)(`div`,{className:`space-y-4 border-t border-border px-5 py-4`,children:[(0,H.jsxs)(`div`,{children:[(0,H.jsx)(`p`,{className:`text-xs tracking-wide text-muted-foreground uppercase`,children:`Raw input`}),(0,H.jsx)(`p`,{className:`mt-1 rounded-md bg-muted px-3 py-2 font-mono text-xs break-words`,children:e.normalization.raw})]}),(0,H.jsxs)(`div`,{children:[(0,H.jsx)(`p`,{className:`text-xs tracking-wide text-muted-foreground uppercase`,children:`Normalized`}),(0,H.jsx)(`p`,{className:`mt-1 rounded-md bg-primary-soft px-3 py-2 text-sm text-primary-dark`,children:e.normalization.normalized})]}),(0,H.jsxs)(`div`,{children:[(0,H.jsx)(`p`,{className:`text-xs tracking-wide text-muted-foreground uppercase`,children:`Detected components`}),(0,H.jsx)(`div`,{className:`mt-2 flex flex-wrap gap-2`,children:e.normalization.components.map(e=>(0,H.jsx)(_,{label:e.label,value:e.value},`${e.type}-${e.value}`))})]})]})})]})})}export{ce as component};
+import {
+  L as e,
+  Q as t,
+  W as n,
+  at as r,
+  c as i,
+  ct as a,
+  d as o,
+  dt as s,
+  f as c,
+  g as l,
+  h as u,
+  it as d,
+  j as f,
+  k as p,
+  lt as m,
+  m as h,
+  mt as g,
+  n as _,
+  nt as v,
+  ot as y,
+  p as b,
+  rt as x,
+  s as S,
+  tt as C,
+  u as w,
+  x as T,
+} from "./primitives-BCHLNZiF.js";
+import { t as E } from "./useNavigate-C3-W0q7R.js";
+import { g as D } from "./postroute-C-bfl2si.js";
+import { t as O } from "./useMutation-B-ySW0uT.js";
+import { t as k } from "./circle-check-BKl7BPHP.js";
+import { n as A, t as j } from "./textarea-JM3xxskW.js";
+import { a as M, n as ee, t as te } from "./states-CAGmlWJM.js";
+import { t as N } from "./map-pin-CEoWcCSG.js";
+import { n as P } from "./dist-BWeSYI3B.js";
+import { l as F, n as I, o as L, r as R } from "./badges-BR-XpxyQ.js";
+var z = a(`sparkles`, [
+    [
+      `path`,
+      {
+        d: `M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z`,
+        key: `1s2grr`,
+      },
+    ],
+    [`path`, { d: `M20 2v4`, key: `1rf3ol` }],
+    [`path`, { d: `M22 4h-4`, key: `gwowj6` }],
+    [`circle`, { cx: `4`, cy: `20`, r: `2`, key: `6kqj1y` }],
+  ]),
+  B = a(`trash-2`, [
+    [`path`, { d: `M10 11v6`, key: `nco0om` }],
+    [`path`, { d: `M14 11v6`, key: `outv1u` }],
+    [`path`, { d: `M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6`, key: `miytrc` }],
+    [`path`, { d: `M3 6h18`, key: `d0wm0j` }],
+    [`path`, { d: `M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2`, key: `e791ji` }],
+  ]),
+  V = g(s(), 1),
+  H = m(),
+  U = Object.defineProperty,
+  W = (e, t) => U(e, `name`, { value: t, configurable: !0 }),
+  G = `Collapsible`,
+  [K, ne] = x(G),
+  [q, J] = K(G),
+  Y = V.forwardRef(
+    W(function (e, r) {
+      let {
+          __scopeCollapsible: i,
+          open: a,
+          defaultOpen: o,
+          disabled: s,
+          onOpenChange: c,
+          ...l
+        } = e,
+        [u, d] = C({ prop: a, defaultProp: o ?? !1, onChange: c, caller: G });
+      return (0, H.jsx)(q, {
+        scope: i,
+        disabled: s,
+        contentId: n(),
+        open: u,
+        onOpenToggle: V.useCallback(() => d((e) => !e), [d]),
+        children: (0, H.jsx)(t.div, {
+          "data-state": $(u),
+          "data-disabled": s ? `` : void 0,
+          ...l,
+          ref: r,
+        }),
+      });
+    }, `Collapsible`),
+  ),
+  X = `CollapsibleTrigger`,
+  Z = V.forwardRef(
+    W(function (e, n) {
+      let { __scopeCollapsible: i, ...a } = e,
+        o = J(X, i);
+      return (0, H.jsx)(t.button, {
+        type: `button`,
+        "aria-controls": o.open ? o.contentId : void 0,
+        "aria-expanded": o.open || !1,
+        "data-state": $(o.open),
+        "data-disabled": o.disabled ? `` : void 0,
+        disabled: o.disabled,
+        ...a,
+        ref: n,
+        onClick: r(e.onClick, o.onOpenToggle),
+      });
+    }, `CollapsibleTrigger`),
+  ),
+  Q = `CollapsibleContent`,
+  re = V.forwardRef(
+    W(function (t, n) {
+      let { forceMount: r, ...i } = t,
+        a = J(Q, t.__scopeCollapsible);
+      return (0, H.jsx)(e, {
+        present: r || a.open,
+        children: ({ present: e }) => (0, H.jsx)(ie, { ...i, ref: n, present: e }),
+      });
+    }, `CollapsibleContent`),
+  ),
+  ie = V.forwardRef(
+    W(function (e, n) {
+      let { __scopeCollapsible: r, present: i, children: a, ...o } = e,
+        s = J(Q, r),
+        [c, l] = V.useState(i),
+        u = V.useRef(null),
+        f = d(n, u),
+        p = V.useRef(0),
+        m = p.current,
+        h = V.useRef(0),
+        g = h.current,
+        _ = s.open || c,
+        y = V.useRef(_),
+        b = V.useRef(void 0);
+      return (
+        V.useEffect(() => {
+          let e = requestAnimationFrame(() => (y.current = !1));
+          return () => cancelAnimationFrame(e);
+        }, []),
+        v(() => {
+          let e = u.current;
+          if (e) {
+            ((b.current = b.current || {
+              transitionDuration: e.style.transitionDuration,
+              animationName: e.style.animationName,
+            }),
+              (e.style.transitionDuration = `0s`),
+              (e.style.animationName = `none`));
+            let t = e.getBoundingClientRect();
+            ((p.current = t.height),
+              (h.current = t.width),
+              y.current ||
+                ((e.style.transitionDuration = b.current.transitionDuration),
+                (e.style.animationName = b.current.animationName)),
+              l(i));
+          }
+        }, [s.open, i]),
+        (0, H.jsx)(t.div, {
+          "data-state": $(s.open),
+          "data-disabled": s.disabled ? `` : void 0,
+          id: s.contentId,
+          hidden: !_,
+          ...o,
+          ref: f,
+          style: {
+            "--radix-collapsible-content-height": m ? `${m}px` : void 0,
+            "--radix-collapsible-content-width": g ? `${g}px` : void 0,
+            ...e.style,
+          },
+          children: _ && a,
+        })
+      );
+    }, `CollapsibleContentImpl`),
+  );
+function $(e) {
+  return e ? `open` : `closed`;
+}
+W($, `getState`);
+var ae = Y,
+  oe = Z,
+  se = re;
+function ce() {
+  let e = E(),
+    [t, n] = (0, V.useState)(``),
+    [r, a] = (0, V.useState)(``),
+    [s, d] = (0, V.useState)(``),
+    [m, g] = (0, V.useState)(``),
+    [_, v] = (0, V.useState)(`automatic`),
+    y = O({ mutationFn: (e) => D(e) }),
+    x = () => {
+      let e = {
+        rawAddress: t,
+        mode: _,
+        ...(r ? { state: r } : {}),
+        ...(s ? { district: s } : {}),
+        ...(m ? { pincode: m } : {}),
+      };
+      y.mutate(e);
+    },
+    C = () => {
+      (n(``), a(``), d(``), g(``), y.reset());
+    },
+    k = y.data;
+  return (0, H.jsxs)(`div`, {
+    className: `space-y-6`,
+    children: [
+      (0, H.jsx)(S, {
+        title: `Address Prediction`,
+        subtitle: `Identify the most probable delivery post office and PIN code`,
+      }),
+      (0, H.jsxs)(`div`, {
+        className: `grid gap-6 xl:grid-cols-[minmax(0,420px)_minmax(0,1fr)]`,
+        children: [
+          (0, H.jsxs)(`div`, {
+            className: `space-y-6`,
+            children: [
+              (0, H.jsx)(i, {
+                title: `Address Input`,
+                accent: !0,
+                children: (0, H.jsxs)(`form`, {
+                  onSubmit: (e) => {
+                    (e.preventDefault(), x());
+                  },
+                  className: `space-y-4`,
+                  children: [
+                    (0, H.jsxs)(`div`, {
+                      className: `space-y-1.5`,
+                      children: [
+                        (0, H.jsx)(u, { htmlFor: `address`, children: `Postal Address` }),
+                        (0, H.jsx)(j, {
+                          id: `address`,
+                          value: t,
+                          onChange: (e) => n(e.target.value),
+                          onKeyDown: (e) => {
+                            e.key === `Enter` &&
+                              (e.ctrlKey || e.metaKey) &&
+                              (e.preventDefault(), x());
+                          },
+                          rows: 5,
+                          placeholder: `Enter or paste a postal address...`,
+                          className: `resize-y bg-card text-base`,
+                          "aria-describedby": `address-help`,
+                        }),
+                        (0, H.jsxs)(`p`, {
+                          id: `address-help`,
+                          className: `text-xs text-muted-foreground`,
+                          children: [
+                            `Example: Flat 302, Baner Road, near Balewadi, Pune ·`,
+                            ` `,
+                            (0, H.jsx)(`kbd`, {
+                              className: `rounded border border-border bg-muted px-1 py-0.5 text-[10px]`,
+                              children: `Ctrl`,
+                            }),
+                            ` `,
+                            `+`,
+                            ` `,
+                            (0, H.jsx)(`kbd`, {
+                              className: `rounded border border-border bg-muted px-1 py-0.5 text-[10px]`,
+                              children: `Enter`,
+                            }),
+                            ` `,
+                            `to predict`,
+                          ],
+                        }),
+                      ],
+                    }),
+                    (0, H.jsxs)(`div`, {
+                      className: `grid gap-3 sm:grid-cols-2`,
+                      children: [
+                        (0, H.jsxs)(`div`, {
+                          className: `space-y-1.5`,
+                          children: [
+                            (0, H.jsx)(u, { htmlFor: `state`, children: `Region (optional)` }),
+                            (0, H.jsxs)(w, {
+                              value: r,
+                              onValueChange: (e) => {
+                                (a(e), d(``));
+                              },
+                              children: [
+                                (0, H.jsx)(b, {
+                                  id: `state`,
+                                  className: `bg-card`,
+                                  children: (0, H.jsx)(h, { placeholder: `Select state` }),
+                                }),
+                                (0, H.jsx)(o, {
+                                  children: p.map((e) =>
+                                    (0, H.jsx)(c, { value: e, children: e }, e),
+                                  ),
+                                }),
+                              ],
+                            }),
+                          ],
+                        }),
+                        (0, H.jsxs)(`div`, {
+                          className: `space-y-1.5`,
+                          children: [
+                            (0, H.jsx)(u, { htmlFor: `district`, children: `District (optional)` }),
+                            (0, H.jsxs)(w, {
+                              value: s,
+                              onValueChange: d,
+                              disabled: !r,
+                              children: [
+                                (0, H.jsx)(b, {
+                                  id: `district`,
+                                  className: `bg-card`,
+                                  children: (0, H.jsx)(h, {
+                                    placeholder: r ? `Select district` : `Select state first`,
+                                  }),
+                                }),
+                                (0, H.jsx)(o, {
+                                  children: (T[r] ?? []).map((e) =>
+                                    (0, H.jsx)(c, { value: e, children: e }, e),
+                                  ),
+                                }),
+                              ],
+                            }),
+                          ],
+                        }),
+                      ],
+                    }),
+                    (0, H.jsxs)(`div`, {
+                      className: `space-y-1.5`,
+                      children: [
+                        (0, H.jsx)(u, { htmlFor: `pincode`, children: `PIN (optional)` }),
+                        (0, H.jsx)(l, {
+                          id: `pincode`,
+                          inputMode: `numeric`,
+                          maxLength: 6,
+                          value: m,
+                          onChange: (e) => g(e.target.value.replace(/\D/g, ``)),
+                          placeholder: `411045`,
+                          className: `tabular bg-card`,
+                        }),
+                      ],
+                    }),
+                    (0, H.jsxs)(`fieldset`, {
+                      className: `space-y-1.5`,
+                      children: [
+                        (0, H.jsx)(`legend`, {
+                          className: `text-sm font-medium`,
+                          children: `Processing Mode`,
+                        }),
+                        (0, H.jsx)(`div`, {
+                          className: `inline-flex rounded-lg border border-border bg-surface p-1`,
+                          children: [`automatic`, `assisted`].map((e) =>
+                            (0, H.jsx)(
+                              `button`,
+                              {
+                                type: `button`,
+                                "aria-pressed": _ === e,
+                                onClick: () => v(e),
+                                className: `rounded-md px-4 py-1.5 text-sm font-medium capitalize transition-colors ${_ === e ? `bg-primary text-primary-foreground` : `text-muted-foreground hover:text-foreground`}`,
+                                children: e,
+                              },
+                              e,
+                            ),
+                          ),
+                        }),
+                        (0, H.jsx)(`p`, {
+                          className: `text-xs text-muted-foreground`,
+                          children:
+                            _ === `automatic`
+                              ? `High-confidence results are routed without operator input.`
+                              : `Every result is presented for operator confirmation.`,
+                        }),
+                      ],
+                    }),
+                    (0, H.jsxs)(`div`, {
+                      className: `flex flex-wrap gap-2 pt-1`,
+                      children: [
+                        (0, H.jsx)(f, {
+                          type: `submit`,
+                          disabled: !t.trim() || y.isPending,
+                          children: y.isPending
+                            ? (0, H.jsxs)(H.Fragment, {
+                                children: [
+                                  (0, H.jsx)(M, {
+                                    className: `size-4 animate-spin`,
+                                    "aria-hidden": !0,
+                                  }),
+                                  ` Predicting…`,
+                                ],
+                              })
+                            : (0, H.jsxs)(H.Fragment, {
+                                children: [
+                                  (0, H.jsx)(z, { className: `size-4`, "aria-hidden": !0 }),
+                                  ` Predict Address`,
+                                ],
+                              }),
+                        }),
+                        (0, H.jsxs)(f, {
+                          type: `button`,
+                          variant: `outline`,
+                          onClick: C,
+                          children: [
+                            (0, H.jsx)(B, { className: `size-4`, "aria-hidden": !0 }),
+                            ` Clear`,
+                          ],
+                        }),
+                      ],
+                    }),
+                  ],
+                }),
+              }),
+              k && (0, H.jsx)(ue, { result: k }),
+            ],
+          }),
+          (0, H.jsxs)(`div`, {
+            className: `space-y-6`,
+            children: [
+              y.isPending &&
+                (0, H.jsx)(i, {
+                  title: `Prediction Result`,
+                  children: (0, H.jsxs)(`div`, {
+                    className: `flex flex-col items-center gap-3 py-16 text-center`,
+                    children: [
+                      (0, H.jsx)(M, {
+                        className: `size-7 animate-spin text-primary`,
+                        "aria-hidden": !0,
+                      }),
+                      (0, H.jsx)(`p`, {
+                        className: `text-sm font-medium`,
+                        children: `Analyzing address…`,
+                      }),
+                      (0, H.jsx)(`p`, {
+                        className: `text-sm text-muted-foreground`,
+                        children: `Normalizing tokens, matching localities and validating mapping V3.`,
+                      }),
+                    ],
+                  }),
+                }),
+              y.isError &&
+                !y.isPending &&
+                (0, H.jsx)(i, {
+                  title: `Prediction Result`,
+                  children: (0, H.jsx)(ee, {
+                    title: `Prediction failed`,
+                    description: y.error.message,
+                    onRetry: x,
+                  }),
+                }),
+              !y.isPending &&
+                !y.isError &&
+                !k &&
+                (0, H.jsx)(i, {
+                  title: `Prediction Result`,
+                  children: (0, H.jsx)(te, {
+                    title: `Prediction results will appear here`,
+                    description: `Enter a postal address on the left and run a prediction to see the delivery post office, confidence and alternative matches.`,
+                    icon: (0, H.jsx)(N, { className: `size-5`, "aria-hidden": !0 }),
+                  }),
+                }),
+              k &&
+                !y.isPending &&
+                (0, H.jsx)(le, {
+                  result: k,
+                  onReset: C,
+                  navigateToReview: () => e({ to: `/review` }),
+                }),
+            ],
+          }),
+        ],
+      }),
+    ],
+  });
+}
+function le({ result: e, onReset: t, navigateToReview: n }) {
+  let r = L(e.confidence),
+    a = r === `high` ? `High Confidence` : r === `medium` ? `Medium Confidence` : `Low Confidence`;
+  return (0, H.jsxs)(`div`, {
+    className: `space-y-6`,
+    children: [
+      (0, H.jsxs)(i, {
+        title: `Prediction Result`,
+        accent: !0,
+        actions: (0, H.jsx)(R, {
+          tone: r === `high` ? `success` : r === `medium` ? `warning` : `error`,
+          children: a,
+        }),
+        children: [
+          r === `low` &&
+            (0, H.jsx)(`p`, {
+              className: `mb-4 rounded-md border border-warning/30 bg-warning-soft px-3 py-2 text-sm text-warning`,
+              children: `Manual review required — confidence is below the auto-routing threshold of 70%.`,
+            }),
+          (0, H.jsxs)(`div`, {
+            className: `grid gap-4 sm:grid-cols-2 lg:grid-cols-4`,
+            children: [
+              (0, H.jsxs)(`div`, {
+                className: `rounded-lg border border-border bg-surface p-4 sm:col-span-2`,
+                children: [
+                  (0, H.jsx)(`p`, {
+                    className: `text-xs tracking-wide text-muted-foreground uppercase`,
+                    children: `Predicted PIN`,
+                  }),
+                  (0, H.jsx)(`p`, {
+                    className: `tabular mt-1 text-4xl font-semibold text-primary-dark`,
+                    children: e.pincode,
+                  }),
+                  (0, H.jsx)(`p`, {
+                    className: `mt-2 text-sm font-medium text-foreground`,
+                    children: e.postOffice,
+                  }),
+                ],
+              }),
+              (0, H.jsxs)(`div`, {
+                className: `rounded-lg border border-border bg-surface p-4`,
+                children: [
+                  (0, H.jsx)(`p`, {
+                    className: `text-xs tracking-wide text-muted-foreground uppercase`,
+                    children: `District`,
+                  }),
+                  (0, H.jsx)(`p`, {
+                    className: `mt-1 text-lg font-semibold`,
+                    children: e.district,
+                  }),
+                  (0, H.jsx)(`p`, {
+                    className: `mt-3 text-xs tracking-wide text-muted-foreground uppercase`,
+                    children: `State`,
+                  }),
+                  (0, H.jsx)(`p`, { className: `mt-1 text-lg font-semibold`, children: e.state }),
+                ],
+              }),
+              (0, H.jsxs)(`div`, {
+                className: `rounded-lg border border-border bg-surface p-4`,
+                children: [
+                  (0, H.jsx)(`p`, {
+                    className: `text-xs tracking-wide text-muted-foreground uppercase`,
+                    children: `Confidence`,
+                  }),
+                  (0, H.jsx)(`p`, {
+                    className: `tabular mt-1 text-3xl font-semibold`,
+                    children: F(e.confidence),
+                  }),
+                  (0, H.jsx)(I, { value: e.confidence, className: `mt-3` }),
+                  (0, H.jsx)(`p`, { className: `mt-2 text-xs text-muted-foreground`, children: a }),
+                ],
+              }),
+            ],
+          }),
+          (0, H.jsxs)(`div`, {
+            className: `mt-5 flex flex-wrap gap-2`,
+            children: [
+              (0, H.jsxs)(f, {
+                onClick: () => {
+                  (P.success(`Added to route`, {
+                    description: `Successfully routed to ${e.pincode} · ${e.postOffice}`,
+                  }),
+                    t());
+                },
+                children: [
+                  (0, H.jsx)(k, { className: `size-4`, "aria-hidden": !0 }),
+                  ` Confirm Routing`,
+                ],
+              }),
+              (0, H.jsx)(f, {
+                variant: `outline`,
+                onClick: () => {
+                  (P.info(`Added to review queue`, {
+                    description: `This prediction has been flagged for manual operator review.`,
+                  }),
+                    n());
+                },
+                children: `Send to Review`,
+              }),
+              (0, H.jsxs)(f, {
+                variant: `ghost`,
+                onClick: t,
+                children: [
+                  (0, H.jsx)(A, { className: `size-4`, "aria-hidden": !0 }),
+                  ` Try Another Address`,
+                ],
+              }),
+            ],
+          }),
+        ],
+      }),
+      (0, H.jsx)(i, {
+        title: `Alternative Matches`,
+        bodyClassName: `p-0`,
+        children: (0, H.jsxs)(`table`, {
+          className: `w-full text-sm`,
+          children: [
+            (0, H.jsx)(`thead`, {
+              children: (0, H.jsxs)(`tr`, {
+                className: `border-b border-border bg-surface text-xs tracking-wide text-muted-foreground uppercase`,
+                children: [
+                  (0, H.jsx)(`th`, {
+                    scope: `col`,
+                    className: `px-5 py-2.5 text-left`,
+                    children: `Rank`,
+                  }),
+                  (0, H.jsx)(`th`, {
+                    scope: `col`,
+                    className: `px-5 py-2.5 text-left`,
+                    children: `Post Office`,
+                  }),
+                  (0, H.jsx)(`th`, {
+                    scope: `col`,
+                    className: `px-5 py-2.5 text-left`,
+                    children: `PIN`,
+                  }),
+                  (0, H.jsx)(`th`, {
+                    scope: `col`,
+                    className: `px-5 py-2.5 text-right`,
+                    children: `Confidence`,
+                  }),
+                ],
+              }),
+            }),
+            (0, H.jsx)(`tbody`, {
+              children: e.candidates.map((e) =>
+                (0, H.jsxs)(
+                  `tr`,
+                  {
+                    className: `border-b border-border/70 last:border-0`,
+                    children: [
+                      (0, H.jsx)(`td`, { className: `tabular px-5 py-3`, children: e.rank }),
+                      (0, H.jsx)(`td`, {
+                        className: `px-5 py-3 font-medium`,
+                        children: e.postOffice,
+                      }),
+                      (0, H.jsx)(`td`, { className: `tabular px-5 py-3`, children: e.pincode }),
+                      (0, H.jsx)(`td`, {
+                        className: `tabular px-5 py-3 text-right`,
+                        children: F(e.confidence),
+                      }),
+                    ],
+                  },
+                  `${e.rank}-${e.postOffice}`,
+                ),
+              ),
+            }),
+          ],
+        }),
+      }),
+      (0, H.jsx)(i, {
+        title: `Prediction Explanation`,
+        description: `Interpretable factors — full model reasoning will come from the backend.`,
+        children: (0, H.jsx)(`ul`, {
+          className: `space-y-2`,
+          children: e.explanation.map((e) =>
+            (0, H.jsxs)(
+              `li`,
+              {
+                className: `flex items-start gap-2.5 text-sm`,
+                children: [
+                  e.matched
+                    ? (0, H.jsx)(k, {
+                        className: `mt-0.5 size-4 shrink-0 text-success`,
+                        "aria-hidden": !0,
+                      })
+                    : (0, H.jsx)(A, {
+                        className: `mt-0.5 size-4 shrink-0 text-muted-foreground`,
+                        "aria-hidden": !0,
+                      }),
+                  (0, H.jsxs)(`span`, {
+                    children: [
+                      (0, H.jsx)(`span`, {
+                        className: `font-medium text-foreground`,
+                        children: e.label,
+                      }),
+                      (0, H.jsxs)(`span`, {
+                        className: `text-muted-foreground`,
+                        children: [` — `, e.detail],
+                      }),
+                      (0, H.jsx)(`span`, {
+                        className: `sr-only`,
+                        children: e.matched ? ` (matched)` : ` (not matched)`,
+                      }),
+                    ],
+                  }),
+                ],
+              },
+              e.label,
+            ),
+          ),
+        }),
+      }),
+    ],
+  });
+}
+function ue({ result: e }) {
+  let [t, n] = (0, V.useState)(!0);
+  return (0, H.jsx)(ae, {
+    open: t,
+    onOpenChange: n,
+    children: (0, H.jsxs)(`div`, {
+      className: `rounded-xl border border-border bg-card shadow-card`,
+      children: [
+        (0, H.jsxs)(oe, {
+          className: `flex w-full items-center justify-between px-5 py-4 text-left`,
+          children: [
+            (0, H.jsx)(`span`, {
+              className: `text-base font-semibold`,
+              children: `Address Processing`,
+            }),
+            (0, H.jsx)(y, {
+              className: `size-4 transition-transform ${t ? `rotate-180` : ``}`,
+              "aria-hidden": !0,
+            }),
+          ],
+        }),
+        (0, H.jsx)(se, {
+          children: (0, H.jsxs)(`div`, {
+            className: `space-y-4 border-t border-border px-5 py-4`,
+            children: [
+              (0, H.jsxs)(`div`, {
+                children: [
+                  (0, H.jsx)(`p`, {
+                    className: `text-xs tracking-wide text-muted-foreground uppercase`,
+                    children: `Raw input`,
+                  }),
+                  (0, H.jsx)(`p`, {
+                    className: `mt-1 rounded-md bg-muted px-3 py-2 font-mono text-xs break-words`,
+                    children: e.normalization.raw,
+                  }),
+                ],
+              }),
+              (0, H.jsxs)(`div`, {
+                children: [
+                  (0, H.jsx)(`p`, {
+                    className: `text-xs tracking-wide text-muted-foreground uppercase`,
+                    children: `Normalized`,
+                  }),
+                  (0, H.jsx)(`p`, {
+                    className: `mt-1 rounded-md bg-primary-soft px-3 py-2 text-sm text-primary-dark`,
+                    children: e.normalization.normalized,
+                  }),
+                ],
+              }),
+              (0, H.jsxs)(`div`, {
+                children: [
+                  (0, H.jsx)(`p`, {
+                    className: `text-xs tracking-wide text-muted-foreground uppercase`,
+                    children: `Detected components`,
+                  }),
+                  (0, H.jsx)(`div`, {
+                    className: `mt-2 flex flex-wrap gap-2`,
+                    children: e.normalization.components.map((e) =>
+                      (0, H.jsx)(_, { label: e.label, value: e.value }, `${e.type}-${e.value}`),
+                    ),
+                  }),
+                ],
+              }),
+            ],
+          }),
+        }),
+      ],
+    }),
+  });
+}
+export { ce as component };

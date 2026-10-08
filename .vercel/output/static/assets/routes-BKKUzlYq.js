@@ -1,1 +1,296 @@
-import{N as e,c as t,ct as n,j as r,lt as i,o as a,s as o}from"./primitives-BCHLNZiF.js";import{t as s}from"./link-BI1tahbv.js";import{d as c,h as l,i as u,m as d,y as f}from"./postroute-C-bfl2si.js";import{t as p}from"./useQuery-kLumsi1Z.js";import{t as m}from"./arrow-right-DRbeHAtE.js";import{t as h}from"./map-pin-CEoWcCSG.js";import{t as g}from"./package-1x7Ujfu1.js";import{t as _}from"./data-table-CdyL5UA9.js";import{a as v,d as y,t as b,u as x}from"./badges-BR-XpxyQ.js";import{t as S}from"./timeline-DFn3XumQ.js";var C=n(`badge-check`,[[`path`,{d:`M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z`,key:`3c2336`}],[`path`,{d:`m9 12 2 2 4-4`,key:`dzmm74`}]]),w=n(`clock`,[[`circle`,{cx:`12`,cy:`12`,r:`10`,key:`1mglay`}],[`path`,{d:`M12 6v6l4 2`,key:`mmk7yg`}]]),T=n(`database`,[[`ellipse`,{cx:`12`,cy:`5`,rx:`9`,ry:`3`,key:`msslwz`}],[`path`,{d:`M3 5V19A9 3 0 0 0 21 19V5`,key:`1wlel7`}],[`path`,{d:`M3 12A9 3 0 0 0 21 12`,key:`mv7ke4`}]]),E=n(`gauge`,[[`path`,{d:`m12 14 4-4`,key:`9kzdfg`}],[`path`,{d:`M3.34 19a10 10 0 1 1 17.32 0`,key:`19p75a`}]]),D=n(`shield-check`,[[`path`,{d:`M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z`,key:`oel41y`}],[`path`,{d:`m9 12 2 2 4-4`,key:`dzmm74`}]]),O=i(),k={predictions:(0,O.jsx)(E,{className:`size-4`,"aria-hidden":!0}),auto:(0,O.jsx)(C,{className:`size-4`,"aria-hidden":!0}),manual:(0,O.jsx)(f,{className:`size-4`,"aria-hidden":!0}),accuracy:(0,O.jsx)(D,{className:`size-4`,"aria-hidden":!0}),parcels:(0,O.jsx)(g,{className:`size-4`,"aria-hidden":!0}),mapping:(0,O.jsx)(h,{className:`size-4`,"aria-hidden":!0})};function A(){let n=p({queryKey:[`dashboard-kpis`],queryFn:u}),i=p({queryKey:[`predictions`],queryFn:c}),f=p({queryKey:[`review-summary`],queryFn:d}),h=p({queryKey:[`system-health`],queryFn:l}),g=[{key:`time`,header:`Time`,render:e=>(0,O.jsx)(`span`,{className:`tabular`,children:x(e.createdAt)})},{key:`address`,header:`Address`,className:`max-w-[280px]`,render:e=>(0,O.jsx)(`span`,{className:`line-clamp-1 text-foreground`,children:e.rawAddress})},{key:`pin`,header:`Predicted PIN`,render:e=>(0,O.jsx)(`span`,{className:`tabular font-medium`,children:e.pincode})},{key:`po`,header:`Delivery Post Office`,render:e=>e.postOffice},{key:`conf`,header:`Confidence`,render:e=>(0,O.jsx)(b,{value:e.confidence,showLabel:!1})},{key:`status`,header:`Status`,render:e=>(0,O.jsx)(v,{status:e.status})},{key:`action`,header:`Operator Action`,render:e=>(0,O.jsx)(`span`,{className:`text-xs text-muted-foreground`,children:e.status===`needs_review`?`Awaiting review`:`Handled by ${e.operator??`System`}`})}],C=(f.data??[]).reduce((e,t)=>e+t.count,0);return(0,O.jsxs)(`div`,{className:`space-y-6`,children:[(0,O.jsx)(o,{title:`Operations Dashboard`,subtitle:`Postal address prediction and routing overview`,actions:(0,O.jsx)(r,{asChild:!0,children:(0,O.jsxs)(s,{to:`/prediction`,children:[`New Prediction `,(0,O.jsx)(m,{className:`size-4`,"aria-hidden":!0})]})})}),(0,O.jsxs)(`div`,{className:`grid gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6`,children:[(n.data??[]).map(e=>(0,O.jsx)(a,{label:e.label,value:e.value,support:e.support,tone:e.tone??`default`,icon:k[e.key]},e.key)),n.isLoading&&Array.from({length:6}).map((e,t)=>(0,O.jsx)(`div`,{className:`h-28 animate-pulse rounded-xl border border-border bg-muted/60`},t))]}),(0,O.jsxs)(`div`,{className:`grid gap-6 xl:grid-cols-3`,children:[(0,O.jsx)(t,{className:`xl:col-span-2`,title:`Recent Predictions`,description:`Latest addresses processed by the model`,bodyClassName:`p-0`,actions:(0,O.jsx)(r,{variant:`ghost`,size:`sm`,asChild:!0,children:(0,O.jsx)(s,{to:`/activity`,children:`View activity`})}),children:(0,O.jsx)(`div`,{className:`p-4`,children:(0,O.jsx)(_,{columns:g,rows:(i.data??[]).slice(0,8),rowKey:e=>e.id,loading:i.isLoading,error:i.error?i.error.message:null,onRetry:()=>i.refetch(),dense:!0,caption:`Recent address predictions`})})}),(0,O.jsxs)(`div`,{className:`space-y-6`,children:[(0,O.jsxs)(t,{title:`Review Queue Summary`,description:`${C} predictions waiting`,accent:!0,children:[(0,O.jsxs)(`ul`,{className:`space-y-2.5`,children:[(f.data??[]).map(e=>(0,O.jsxs)(`li`,{className:`flex items-center justify-between gap-3`,children:[(0,O.jsx)(`span`,{className:`text-sm text-foreground`,children:e.label}),(0,O.jsx)(`span`,{className:`tabular rounded-md bg-muted px-2 py-0.5 text-sm font-semibold`,children:e.count})]},e.reason)),f.isLoading&&(0,O.jsx)(`li`,{className:`h-24 animate-pulse rounded-md bg-muted/60`})]}),(0,O.jsx)(r,{className:`mt-4 w-full`,asChild:!0,children:(0,O.jsxs)(s,{to:`/review`,children:[`Review Queue `,(0,O.jsx)(m,{className:`size-4`,"aria-hidden":!0})]})})]}),(0,O.jsx)(t,{title:`System Health`,children:(0,O.jsx)(`ul`,{className:`space-y-2.5`,children:(h.data??[]).map(t=>(0,O.jsxs)(`li`,{className:`flex items-center justify-between gap-3 text-sm`,children:[(0,O.jsxs)(`span`,{className:`flex items-center gap-2 text-muted-foreground`,children:[t.label===`Database`?(0,O.jsx)(T,{className:`size-4`,"aria-hidden":!0}):t.label===`Last synchronization`?(0,O.jsx)(w,{className:`size-4`,"aria-hidden":!0}):(0,O.jsx)(D,{className:`size-4`,"aria-hidden":!0}),t.label]}),(0,O.jsx)(`span`,{className:e(`font-medium`,t.state===`ok`?`text-success`:t.state===`warn`?`text-warning`:`text-error`),children:t.value})]},t.label))})})]})]}),(0,O.jsx)(t,{title:`Routing Activity`,description:`Standard parcel journey through the system`,children:(0,O.jsx)(S,{steps:[{label:`Parcel received`,timestamp:`Today 09:12`,state:`done`},{label:`Address analyzed`,timestamp:`Today 09:13`,note:`Model v3.2`,state:`done`},{label:`PIN predicted`,timestamp:`Today 09:13`,note:`411045 — Baner S.O`,state:`done`},{label:`Operator verified`,timestamp:`Today 10:05`,state:`done`},{label:`Sorting`,timestamp:`Today 11:40`,state:`current`},{label:`Dispatched`,timestamp:null,state:`pending`},{label:`Delivered`,timestamp:null,state:`pending`}]})}),(0,O.jsxs)(`p`,{className:`text-xs text-muted-foreground`,children:[y.predictionStatus.auto_approved,` entries are routed without operator input. Demonstration data — not live postal records.`]})]})}export{A as component};
+import { N as e, c as t, ct as n, j as r, lt as i, o as a, s as o } from "./primitives-BCHLNZiF.js";
+import { t as s } from "./link-BI1tahbv.js";
+import { d as c, h as l, i as u, m as d, y as f } from "./postroute-C-bfl2si.js";
+import { t as p } from "./useQuery-kLumsi1Z.js";
+import { t as m } from "./arrow-right-DRbeHAtE.js";
+import { t as h } from "./map-pin-CEoWcCSG.js";
+import { t as g } from "./package-1x7Ujfu1.js";
+import { t as _ } from "./data-table-CdyL5UA9.js";
+import { a as v, d as y, t as b, u as x } from "./badges-BR-XpxyQ.js";
+import { t as S } from "./timeline-DFn3XumQ.js";
+var C = n(`badge-check`, [
+    [
+      `path`,
+      {
+        d: `M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z`,
+        key: `3c2336`,
+      },
+    ],
+    [`path`, { d: `m9 12 2 2 4-4`, key: `dzmm74` }],
+  ]),
+  w = n(`clock`, [
+    [`circle`, { cx: `12`, cy: `12`, r: `10`, key: `1mglay` }],
+    [`path`, { d: `M12 6v6l4 2`, key: `mmk7yg` }],
+  ]),
+  T = n(`database`, [
+    [`ellipse`, { cx: `12`, cy: `5`, rx: `9`, ry: `3`, key: `msslwz` }],
+    [`path`, { d: `M3 5V19A9 3 0 0 0 21 19V5`, key: `1wlel7` }],
+    [`path`, { d: `M3 12A9 3 0 0 0 21 12`, key: `mv7ke4` }],
+  ]),
+  E = n(`gauge`, [
+    [`path`, { d: `m12 14 4-4`, key: `9kzdfg` }],
+    [`path`, { d: `M3.34 19a10 10 0 1 1 17.32 0`, key: `19p75a` }],
+  ]),
+  D = n(`shield-check`, [
+    [
+      `path`,
+      {
+        d: `M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z`,
+        key: `oel41y`,
+      },
+    ],
+    [`path`, { d: `m9 12 2 2 4-4`, key: `dzmm74` }],
+  ]),
+  O = i(),
+  k = {
+    predictions: (0, O.jsx)(E, { className: `size-4`, "aria-hidden": !0 }),
+    auto: (0, O.jsx)(C, { className: `size-4`, "aria-hidden": !0 }),
+    manual: (0, O.jsx)(f, { className: `size-4`, "aria-hidden": !0 }),
+    accuracy: (0, O.jsx)(D, { className: `size-4`, "aria-hidden": !0 }),
+    parcels: (0, O.jsx)(g, { className: `size-4`, "aria-hidden": !0 }),
+    mapping: (0, O.jsx)(h, { className: `size-4`, "aria-hidden": !0 }),
+  };
+function A() {
+  let n = p({ queryKey: [`dashboard-kpis`], queryFn: u }),
+    i = p({ queryKey: [`predictions`], queryFn: c }),
+    f = p({ queryKey: [`review-summary`], queryFn: d }),
+    h = p({ queryKey: [`system-health`], queryFn: l }),
+    g = [
+      {
+        key: `time`,
+        header: `Time`,
+        render: (e) => (0, O.jsx)(`span`, { className: `tabular`, children: x(e.createdAt) }),
+      },
+      {
+        key: `address`,
+        header: `Address`,
+        className: `max-w-[280px]`,
+        render: (e) =>
+          (0, O.jsx)(`span`, { className: `line-clamp-1 text-foreground`, children: e.rawAddress }),
+      },
+      {
+        key: `pin`,
+        header: `Predicted PIN`,
+        render: (e) =>
+          (0, O.jsx)(`span`, { className: `tabular font-medium`, children: e.pincode }),
+      },
+      { key: `po`, header: `Delivery Post Office`, render: (e) => e.postOffice },
+      {
+        key: `conf`,
+        header: `Confidence`,
+        render: (e) => (0, O.jsx)(b, { value: e.confidence, showLabel: !1 }),
+      },
+      { key: `status`, header: `Status`, render: (e) => (0, O.jsx)(v, { status: e.status }) },
+      {
+        key: `action`,
+        header: `Operator Action`,
+        render: (e) =>
+          (0, O.jsx)(`span`, {
+            className: `text-xs text-muted-foreground`,
+            children:
+              e.status === `needs_review`
+                ? `Awaiting review`
+                : `Handled by ${e.operator ?? `System`}`,
+          }),
+      },
+    ],
+    C = (f.data ?? []).reduce((e, t) => e + t.count, 0);
+  return (0, O.jsxs)(`div`, {
+    className: `space-y-6`,
+    children: [
+      (0, O.jsx)(o, {
+        title: `Operations Dashboard`,
+        subtitle: `Postal address prediction and routing overview`,
+        actions: (0, O.jsx)(r, {
+          asChild: !0,
+          children: (0, O.jsxs)(s, {
+            to: `/prediction`,
+            children: [
+              `New Prediction `,
+              (0, O.jsx)(m, { className: `size-4`, "aria-hidden": !0 }),
+            ],
+          }),
+        }),
+      }),
+      (0, O.jsxs)(`div`, {
+        className: `grid gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6`,
+        children: [
+          (n.data ?? []).map((e) =>
+            (0, O.jsx)(
+              a,
+              {
+                label: e.label,
+                value: e.value,
+                support: e.support,
+                tone: e.tone ?? `default`,
+                icon: k[e.key],
+              },
+              e.key,
+            ),
+          ),
+          n.isLoading &&
+            Array.from({ length: 6 }).map((e, t) =>
+              (0, O.jsx)(
+                `div`,
+                { className: `h-28 animate-pulse rounded-xl border border-border bg-muted/60` },
+                t,
+              ),
+            ),
+        ],
+      }),
+      (0, O.jsxs)(`div`, {
+        className: `grid gap-6 xl:grid-cols-3`,
+        children: [
+          (0, O.jsx)(t, {
+            className: `xl:col-span-2`,
+            title: `Recent Predictions`,
+            description: `Latest addresses processed by the model`,
+            bodyClassName: `p-0`,
+            actions: (0, O.jsx)(r, {
+              variant: `ghost`,
+              size: `sm`,
+              asChild: !0,
+              children: (0, O.jsx)(s, { to: `/activity`, children: `View activity` }),
+            }),
+            children: (0, O.jsx)(`div`, {
+              className: `p-4`,
+              children: (0, O.jsx)(_, {
+                columns: g,
+                rows: (i.data ?? []).slice(0, 8),
+                rowKey: (e) => e.id,
+                loading: i.isLoading,
+                error: i.error ? i.error.message : null,
+                onRetry: () => i.refetch(),
+                dense: !0,
+                caption: `Recent address predictions`,
+              }),
+            }),
+          }),
+          (0, O.jsxs)(`div`, {
+            className: `space-y-6`,
+            children: [
+              (0, O.jsxs)(t, {
+                title: `Review Queue Summary`,
+                description: `${C} predictions waiting`,
+                accent: !0,
+                children: [
+                  (0, O.jsxs)(`ul`, {
+                    className: `space-y-2.5`,
+                    children: [
+                      (f.data ?? []).map((e) =>
+                        (0, O.jsxs)(
+                          `li`,
+                          {
+                            className: `flex items-center justify-between gap-3`,
+                            children: [
+                              (0, O.jsx)(`span`, {
+                                className: `text-sm text-foreground`,
+                                children: e.label,
+                              }),
+                              (0, O.jsx)(`span`, {
+                                className: `tabular rounded-md bg-muted px-2 py-0.5 text-sm font-semibold`,
+                                children: e.count,
+                              }),
+                            ],
+                          },
+                          e.reason,
+                        ),
+                      ),
+                      f.isLoading &&
+                        (0, O.jsx)(`li`, {
+                          className: `h-24 animate-pulse rounded-md bg-muted/60`,
+                        }),
+                    ],
+                  }),
+                  (0, O.jsx)(r, {
+                    className: `mt-4 w-full`,
+                    asChild: !0,
+                    children: (0, O.jsxs)(s, {
+                      to: `/review`,
+                      children: [
+                        `Review Queue `,
+                        (0, O.jsx)(m, { className: `size-4`, "aria-hidden": !0 }),
+                      ],
+                    }),
+                  }),
+                ],
+              }),
+              (0, O.jsx)(t, {
+                title: `System Health`,
+                children: (0, O.jsx)(`ul`, {
+                  className: `space-y-2.5`,
+                  children: (h.data ?? []).map((t) =>
+                    (0, O.jsxs)(
+                      `li`,
+                      {
+                        className: `flex items-center justify-between gap-3 text-sm`,
+                        children: [
+                          (0, O.jsxs)(`span`, {
+                            className: `flex items-center gap-2 text-muted-foreground`,
+                            children: [
+                              t.label === `Database`
+                                ? (0, O.jsx)(T, { className: `size-4`, "aria-hidden": !0 })
+                                : t.label === `Last synchronization`
+                                  ? (0, O.jsx)(w, { className: `size-4`, "aria-hidden": !0 })
+                                  : (0, O.jsx)(D, { className: `size-4`, "aria-hidden": !0 }),
+                              t.label,
+                            ],
+                          }),
+                          (0, O.jsx)(`span`, {
+                            className: e(
+                              `font-medium`,
+                              t.state === `ok`
+                                ? `text-success`
+                                : t.state === `warn`
+                                  ? `text-warning`
+                                  : `text-error`,
+                            ),
+                            children: t.value,
+                          }),
+                        ],
+                      },
+                      t.label,
+                    ),
+                  ),
+                }),
+              }),
+            ],
+          }),
+        ],
+      }),
+      (0, O.jsx)(t, {
+        title: `Routing Activity`,
+        description: `Standard parcel journey through the system`,
+        children: (0, O.jsx)(S, {
+          steps: [
+            { label: `Parcel received`, timestamp: `Today 09:12`, state: `done` },
+            {
+              label: `Address analyzed`,
+              timestamp: `Today 09:13`,
+              note: `Model v3.2`,
+              state: `done`,
+            },
+            {
+              label: `PIN predicted`,
+              timestamp: `Today 09:13`,
+              note: `411045 — Baner S.O`,
+              state: `done`,
+            },
+            { label: `Operator verified`, timestamp: `Today 10:05`, state: `done` },
+            { label: `Sorting`, timestamp: `Today 11:40`, state: `current` },
+            { label: `Dispatched`, timestamp: null, state: `pending` },
+            { label: `Delivered`, timestamp: null, state: `pending` },
+          ],
+        }),
+      }),
+      (0, O.jsxs)(`p`, {
+        className: `text-xs text-muted-foreground`,
+        children: [
+          y.predictionStatus.auto_approved,
+          ` entries are routed without operator input. Demonstration data — not live postal records.`,
+        ],
+      }),
+    ],
+  });
+}
+export { A as component };

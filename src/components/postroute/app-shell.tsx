@@ -25,14 +25,12 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
             </p>
           </div>
         </div>
-        {true && (
-          <div className="bg-amber-100 dark:bg-amber-900/30 px-3 py-2 text-center text-xs font-semibold text-amber-800 dark:text-amber-200 border-t border-amber-200 dark:border-amber-800/50">
-            DEMO MODE
-            <div className="text-[10px] font-normal opacity-80 mt-0.5">
-              Using static prototype data
-            </div>
+        <div className="bg-amber-100 dark:bg-amber-900/30 px-3 py-2 text-center text-xs font-semibold text-amber-800 dark:text-amber-200 border-t border-amber-200 dark:border-amber-800/50">
+          DEMO MODE
+          <div className="text-[10px] font-normal opacity-80 mt-0.5">
+            Using static prototype data
           </div>
-        )}
+        </div>
       </div>
 
       <nav className="flex-1 overflow-y-auto px-3 py-4" aria-label="Main">

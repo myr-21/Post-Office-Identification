@@ -1,1 +1,267 @@
-import{c as e,d as t,dt as n,f as r,j as i,lt as a,m as o,mt as s,p as c,r as l,s as u,u as d}from"./primitives-BCHLNZiF.js";import{t as f}from"./link-BI1tahbv.js";import{s as p,v as m}from"./postroute-C-bfl2si.js";import{t as h}from"./useQuery-kLumsi1Z.js";import{t as g}from"./useMutation-B-ySW0uT.js";import{t as _}from"./arrow-left-BNSLnK9L.js";import{i as v,n as y,r as b}from"./states-CAGmlWJM.js";import{n as x}from"./dist-BWeSYI3B.js";import{t as S}from"./parcels_._parcelId-tcpcGwR0.js";import{a as C,c as w,d as T,l as E,n as D,t as O}from"./badges-BR-XpxyQ.js";import{t as k}from"./timeline-DFn3XumQ.js";var A=s(n()),j=a();function M(){let{parcelId:n}=S.useParams(),a=h({queryKey:[`parcel`,n],queryFn:()=>p(n)}),[s,M]=(0,A.useState)(``),N=g({mutationFn:({status:e})=>m(n,e),onSuccess:(e,t)=>x.success(`Parcel status updated`,{description:`${n} → ${T.parcelStatus[t.status]}`})});if(a.isLoading)return(0,j.jsx)(b,{label:`Loading parcel…`,rows:6});if(a.error||!a.data)return(0,j.jsx)(y,{title:`Parcel not found`,description:a.error?.message??`No such parcel.`,onRetry:()=>a.refetch()});let P=a.data,F=P.timeline.findIndex(e=>e.status===P.status),I=P.timeline.map((e,t)=>({label:e.label,timestamp:e.timestamp?w(e.timestamp):null,note:e.note,state:t<F?`done`:t===F?`current`:`pending`}));return(0,j.jsxs)(`div`,{className:`space-y-6`,children:[(0,j.jsx)(i,{variant:`ghost`,size:`sm`,asChild:!0,className:`-ml-2`,children:(0,j.jsxs)(f,{to:`/parcels`,children:[(0,j.jsx)(_,{className:`size-4`,"aria-hidden":!0}),` Back to parcels`]})}),(0,j.jsx)(u,{title:`Parcel ${P.id}`,subtitle:`Last updated ${w(P.updatedAt)}`,actions:(0,j.jsx)(C,{status:P.status})}),(0,j.jsxs)(`div`,{className:`grid gap-4 sm:grid-cols-2 xl:grid-cols-5`,children:[(0,j.jsxs)(e,{bodyClassName:`p-4`,children:[(0,j.jsx)(`p`,{className:`text-xs tracking-wide text-muted-foreground uppercase`,children:`Current Status`}),(0,j.jsx)(`p`,{className:`mt-2 text-lg font-semibold`,children:T.parcelStatus[P.status]})]}),(0,j.jsxs)(e,{bodyClassName:`p-4`,children:[(0,j.jsx)(`p`,{className:`text-xs tracking-wide text-muted-foreground uppercase`,children:`PIN`}),(0,j.jsx)(`p`,{className:`tabular mt-2 text-2xl font-semibold text-primary-dark`,children:P.pincode})]}),(0,j.jsxs)(e,{bodyClassName:`p-4`,children:[(0,j.jsx)(`p`,{className:`text-xs tracking-wide text-muted-foreground uppercase`,children:`Delivery Office`}),(0,j.jsx)(`p`,{className:`mt-2 text-lg font-semibold`,children:P.postOffice})]}),(0,j.jsxs)(e,{bodyClassName:`p-4`,children:[(0,j.jsx)(`p`,{className:`text-xs tracking-wide text-muted-foreground uppercase`,children:`Confidence`}),(0,j.jsx)(`p`,{className:`tabular mt-2 text-2xl font-semibold`,children:E(P.confidence)}),(0,j.jsx)(D,{value:P.confidence,className:`mt-2`})]}),(0,j.jsxs)(e,{bodyClassName:`p-4`,children:[(0,j.jsx)(`p`,{className:`text-xs tracking-wide text-muted-foreground uppercase`,children:`Assigned Operator`}),(0,j.jsx)(`p`,{className:`mt-2 text-lg font-semibold`,children:P.operator})]})]}),(0,j.jsxs)(`div`,{className:`grid gap-6 xl:grid-cols-3`,children:[(0,j.jsxs)(`div`,{className:`space-y-6 xl:col-span-2`,children:[(0,j.jsxs)(e,{title:`Address`,children:[(0,j.jsx)(l,{label:`Raw address`,value:(0,j.jsx)(`span`,{className:`font-mono text-xs`,children:P.rawAddress})}),(0,j.jsx)(l,{label:`Normalized address`,value:P.normalizedAddress})]}),(0,j.jsx)(e,{title:`Prediction`,bodyClassName:`p-0`,children:(0,j.jsxs)(`table`,{className:`w-full text-sm`,children:[(0,j.jsx)(`thead`,{children:(0,j.jsxs)(`tr`,{className:`border-b border-border bg-surface text-xs tracking-wide text-muted-foreground uppercase`,children:[(0,j.jsx)(`th`,{scope:`col`,className:`px-5 py-2.5 text-left`,children:`Rank`}),(0,j.jsx)(`th`,{scope:`col`,className:`px-5 py-2.5 text-left`,children:`Post Office`}),(0,j.jsx)(`th`,{scope:`col`,className:`px-5 py-2.5 text-left`,children:`PIN`}),(0,j.jsx)(`th`,{scope:`col`,className:`px-5 py-2.5 text-right`,children:`Confidence`})]})}),(0,j.jsx)(`tbody`,{children:P.candidates.map(e=>(0,j.jsxs)(`tr`,{className:`border-b border-border/70 last:border-0`,children:[(0,j.jsx)(`td`,{className:`tabular px-5 py-3`,children:e.rank}),(0,j.jsx)(`td`,{className:`px-5 py-3 font-medium`,children:e.postOffice}),(0,j.jsx)(`td`,{className:`tabular px-5 py-3`,children:e.pincode}),(0,j.jsx)(`td`,{className:`px-5 py-3 text-right`,children:(0,j.jsx)(O,{value:e.confidence,showLabel:!1})})]},e.rank))})]})})]}),(0,j.jsxs)(`div`,{className:`space-y-6`,children:[(0,j.jsx)(e,{title:`Routing Timeline`,accent:!0,children:(0,j.jsx)(k,{steps:I})}),(0,j.jsx)(e,{title:`Update Status`,children:(0,j.jsxs)(`div`,{className:`space-y-3`,children:[(0,j.jsxs)(d,{value:s,onValueChange:e=>M(e),children:[(0,j.jsx)(c,{"aria-label":`Select new parcel status`,children:(0,j.jsx)(o,{placeholder:`Select new status`})}),(0,j.jsx)(t,{children:Object.entries(T.parcelStatus).map(([e,t])=>(0,j.jsx)(r,{value:e,children:t},e))})]}),(0,j.jsxs)(i,{className:`w-full`,disabled:!s||N.isPending,onClick:()=>s&&N.mutate({status:s}),children:[(0,j.jsx)(v,{className:`size-4`,"aria-hidden":!0}),` Update Status`]})]})})]})]})]})}export{M as component};
+import {
+  c as e,
+  d as t,
+  dt as n,
+  f as r,
+  j as i,
+  lt as a,
+  m as o,
+  mt as s,
+  p as c,
+  r as l,
+  s as u,
+  u as d,
+} from "./primitives-BCHLNZiF.js";
+import { t as f } from "./link-BI1tahbv.js";
+import { s as p, v as m } from "./postroute-C-bfl2si.js";
+import { t as h } from "./useQuery-kLumsi1Z.js";
+import { t as g } from "./useMutation-B-ySW0uT.js";
+import { t as _ } from "./arrow-left-BNSLnK9L.js";
+import { i as v, n as y, r as b } from "./states-CAGmlWJM.js";
+import { n as x } from "./dist-BWeSYI3B.js";
+import { t as S } from "./parcels_._parcelId-tcpcGwR0.js";
+import { a as C, c as w, d as T, l as E, n as D, t as O } from "./badges-BR-XpxyQ.js";
+import { t as k } from "./timeline-DFn3XumQ.js";
+var A = s(n()),
+  j = a();
+function M() {
+  let { parcelId: n } = S.useParams(),
+    a = h({ queryKey: [`parcel`, n], queryFn: () => p(n) }),
+    [s, M] = (0, A.useState)(``),
+    N = g({
+      mutationFn: ({ status: e }) => m(n, e),
+      onSuccess: (e, t) =>
+        x.success(`Parcel status updated`, { description: `${n} → ${T.parcelStatus[t.status]}` }),
+    });
+  if (a.isLoading) return (0, j.jsx)(b, { label: `Loading parcel…`, rows: 6 });
+  if (a.error || !a.data)
+    return (0, j.jsx)(y, {
+      title: `Parcel not found`,
+      description: a.error?.message ?? `No such parcel.`,
+      onRetry: () => a.refetch(),
+    });
+  let P = a.data,
+    F = P.timeline.findIndex((e) => e.status === P.status),
+    I = P.timeline.map((e, t) => ({
+      label: e.label,
+      timestamp: e.timestamp ? w(e.timestamp) : null,
+      note: e.note,
+      state: t < F ? `done` : t === F ? `current` : `pending`,
+    }));
+  return (0, j.jsxs)(`div`, {
+    className: `space-y-6`,
+    children: [
+      (0, j.jsx)(i, {
+        variant: `ghost`,
+        size: `sm`,
+        asChild: !0,
+        className: `-ml-2`,
+        children: (0, j.jsxs)(f, {
+          to: `/parcels`,
+          children: [(0, j.jsx)(_, { className: `size-4`, "aria-hidden": !0 }), ` Back to parcels`],
+        }),
+      }),
+      (0, j.jsx)(u, {
+        title: `Parcel ${P.id}`,
+        subtitle: `Last updated ${w(P.updatedAt)}`,
+        actions: (0, j.jsx)(C, { status: P.status }),
+      }),
+      (0, j.jsxs)(`div`, {
+        className: `grid gap-4 sm:grid-cols-2 xl:grid-cols-5`,
+        children: [
+          (0, j.jsxs)(e, {
+            bodyClassName: `p-4`,
+            children: [
+              (0, j.jsx)(`p`, {
+                className: `text-xs tracking-wide text-muted-foreground uppercase`,
+                children: `Current Status`,
+              }),
+              (0, j.jsx)(`p`, {
+                className: `mt-2 text-lg font-semibold`,
+                children: T.parcelStatus[P.status],
+              }),
+            ],
+          }),
+          (0, j.jsxs)(e, {
+            bodyClassName: `p-4`,
+            children: [
+              (0, j.jsx)(`p`, {
+                className: `text-xs tracking-wide text-muted-foreground uppercase`,
+                children: `PIN`,
+              }),
+              (0, j.jsx)(`p`, {
+                className: `tabular mt-2 text-2xl font-semibold text-primary-dark`,
+                children: P.pincode,
+              }),
+            ],
+          }),
+          (0, j.jsxs)(e, {
+            bodyClassName: `p-4`,
+            children: [
+              (0, j.jsx)(`p`, {
+                className: `text-xs tracking-wide text-muted-foreground uppercase`,
+                children: `Delivery Office`,
+              }),
+              (0, j.jsx)(`p`, { className: `mt-2 text-lg font-semibold`, children: P.postOffice }),
+            ],
+          }),
+          (0, j.jsxs)(e, {
+            bodyClassName: `p-4`,
+            children: [
+              (0, j.jsx)(`p`, {
+                className: `text-xs tracking-wide text-muted-foreground uppercase`,
+                children: `Confidence`,
+              }),
+              (0, j.jsx)(`p`, {
+                className: `tabular mt-2 text-2xl font-semibold`,
+                children: E(P.confidence),
+              }),
+              (0, j.jsx)(D, { value: P.confidence, className: `mt-2` }),
+            ],
+          }),
+          (0, j.jsxs)(e, {
+            bodyClassName: `p-4`,
+            children: [
+              (0, j.jsx)(`p`, {
+                className: `text-xs tracking-wide text-muted-foreground uppercase`,
+                children: `Assigned Operator`,
+              }),
+              (0, j.jsx)(`p`, { className: `mt-2 text-lg font-semibold`, children: P.operator }),
+            ],
+          }),
+        ],
+      }),
+      (0, j.jsxs)(`div`, {
+        className: `grid gap-6 xl:grid-cols-3`,
+        children: [
+          (0, j.jsxs)(`div`, {
+            className: `space-y-6 xl:col-span-2`,
+            children: [
+              (0, j.jsxs)(e, {
+                title: `Address`,
+                children: [
+                  (0, j.jsx)(l, {
+                    label: `Raw address`,
+                    value: (0, j.jsx)(`span`, {
+                      className: `font-mono text-xs`,
+                      children: P.rawAddress,
+                    }),
+                  }),
+                  (0, j.jsx)(l, { label: `Normalized address`, value: P.normalizedAddress }),
+                ],
+              }),
+              (0, j.jsx)(e, {
+                title: `Prediction`,
+                bodyClassName: `p-0`,
+                children: (0, j.jsxs)(`table`, {
+                  className: `w-full text-sm`,
+                  children: [
+                    (0, j.jsx)(`thead`, {
+                      children: (0, j.jsxs)(`tr`, {
+                        className: `border-b border-border bg-surface text-xs tracking-wide text-muted-foreground uppercase`,
+                        children: [
+                          (0, j.jsx)(`th`, {
+                            scope: `col`,
+                            className: `px-5 py-2.5 text-left`,
+                            children: `Rank`,
+                          }),
+                          (0, j.jsx)(`th`, {
+                            scope: `col`,
+                            className: `px-5 py-2.5 text-left`,
+                            children: `Post Office`,
+                          }),
+                          (0, j.jsx)(`th`, {
+                            scope: `col`,
+                            className: `px-5 py-2.5 text-left`,
+                            children: `PIN`,
+                          }),
+                          (0, j.jsx)(`th`, {
+                            scope: `col`,
+                            className: `px-5 py-2.5 text-right`,
+                            children: `Confidence`,
+                          }),
+                        ],
+                      }),
+                    }),
+                    (0, j.jsx)(`tbody`, {
+                      children: P.candidates.map((e) =>
+                        (0, j.jsxs)(
+                          `tr`,
+                          {
+                            className: `border-b border-border/70 last:border-0`,
+                            children: [
+                              (0, j.jsx)(`td`, {
+                                className: `tabular px-5 py-3`,
+                                children: e.rank,
+                              }),
+                              (0, j.jsx)(`td`, {
+                                className: `px-5 py-3 font-medium`,
+                                children: e.postOffice,
+                              }),
+                              (0, j.jsx)(`td`, {
+                                className: `tabular px-5 py-3`,
+                                children: e.pincode,
+                              }),
+                              (0, j.jsx)(`td`, {
+                                className: `px-5 py-3 text-right`,
+                                children: (0, j.jsx)(O, { value: e.confidence, showLabel: !1 }),
+                              }),
+                            ],
+                          },
+                          e.rank,
+                        ),
+                      ),
+                    }),
+                  ],
+                }),
+              }),
+            ],
+          }),
+          (0, j.jsxs)(`div`, {
+            className: `space-y-6`,
+            children: [
+              (0, j.jsx)(e, {
+                title: `Routing Timeline`,
+                accent: !0,
+                children: (0, j.jsx)(k, { steps: I }),
+              }),
+              (0, j.jsx)(e, {
+                title: `Update Status`,
+                children: (0, j.jsxs)(`div`, {
+                  className: `space-y-3`,
+                  children: [
+                    (0, j.jsxs)(d, {
+                      value: s,
+                      onValueChange: (e) => M(e),
+                      children: [
+                        (0, j.jsx)(c, {
+                          "aria-label": `Select new parcel status`,
+                          children: (0, j.jsx)(o, { placeholder: `Select new status` }),
+                        }),
+                        (0, j.jsx)(t, {
+                          children: Object.entries(T.parcelStatus).map(([e, t]) =>
+                            (0, j.jsx)(r, { value: e, children: t }, e),
+                          ),
+                        }),
+                      ],
+                    }),
+                    (0, j.jsxs)(i, {
+                      className: `w-full`,
+                      disabled: !s || N.isPending,
+                      onClick: () => s && N.mutate({ status: s }),
+                      children: [
+                        (0, j.jsx)(v, { className: `size-4`, "aria-hidden": !0 }),
+                        ` Update Status`,
+                      ],
+                    }),
+                  ],
+                }),
+              }),
+            ],
+          }),
+        ],
+      }),
+    ],
+  });
+}
+export { M as component };

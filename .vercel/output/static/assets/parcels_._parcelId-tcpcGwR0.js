@@ -1,2 +1,44 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/parcels_._parcelId-D5pEfIjg.js","assets/primitives-BCHLNZiF.js","assets/link-BI1tahbv.js","assets/useRouter-CDYUVTqa.js","assets/postroute-C-bfl2si.js","assets/useQuery-kLumsi1Z.js","assets/useMutation-B-ySW0uT.js","assets/mutation-1MmOTjY0.js","assets/arrow-left-BNSLnK9L.js","assets/states-CAGmlWJM.js","assets/dist-BWeSYI3B.js","assets/badges-BR-XpxyQ.js","assets/timeline-DFn3XumQ.js","assets/circle-BT-iCFq7.js"])))=>i.map(i=>d[i]);
-import{n as e,r as t,t as n}from"./preload-helper-DCw9-y5V.js";var r=t(`/parcels_/$parcelId`)({head:()=>({meta:[{title:`Parcel Detail — PostRoute AI`},{name:`description`,content:`Address, prediction, confidence and full routing timeline for a single parcel.`},{property:`og:title`,content:`Parcel Detail — PostRoute AI`},{property:`og:description`,content:`Routing timeline and prediction for one parcel.`}]}),component:e(()=>n(()=>import(`./parcels_._parcelId-D5pEfIjg.js`),__vite__mapDeps([0,1,2,3,4,5,6,7,8,9,10,11,12,13])),`component`)});export{r as t};
+const __vite__mapDeps = (
+  i,
+  m = __vite__mapDeps,
+  d = m.f ||
+    (m.f = [
+      "assets/parcels_._parcelId-D5pEfIjg.js",
+      "assets/primitives-BCHLNZiF.js",
+      "assets/link-BI1tahbv.js",
+      "assets/useRouter-CDYUVTqa.js",
+      "assets/postroute-C-bfl2si.js",
+      "assets/useQuery-kLumsi1Z.js",
+      "assets/useMutation-B-ySW0uT.js",
+      "assets/mutation-1MmOTjY0.js",
+      "assets/arrow-left-BNSLnK9L.js",
+      "assets/states-CAGmlWJM.js",
+      "assets/dist-BWeSYI3B.js",
+      "assets/badges-BR-XpxyQ.js",
+      "assets/timeline-DFn3XumQ.js",
+      "assets/circle-BT-iCFq7.js",
+    ]),
+) => i.map((i) => d[i]);
+import { n as e, r as t, t as n } from "./preload-helper-DCw9-y5V.js";
+var r = t(`/parcels_/$parcelId`)({
+  head: () => ({
+    meta: [
+      { title: `Parcel Detail — PostRoute AI` },
+      {
+        name: `description`,
+        content: `Address, prediction, confidence and full routing timeline for a single parcel.`,
+      },
+      { property: `og:title`, content: `Parcel Detail — PostRoute AI` },
+      { property: `og:description`, content: `Routing timeline and prediction for one parcel.` },
+    ],
+  }),
+  component: e(
+    () =>
+      n(
+        () => import(`./parcels_._parcelId-D5pEfIjg.js`),
+        __vite__mapDeps([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]),
+      ),
+    `component`,
+  ),
+});
+export { r as t };
