@@ -90,8 +90,19 @@ export function normalizeAddress(raw: string) {
   return normalized;
 }
 
-/** Runs an address through the (mock) prediction pipeline. */
+/** Runs an address through the prediction pipeline. */
 export async function predictAddress(input: AddressInput): Promise<PredictionResult> {
+  const isMock = import.meta.env.VITE_USE_MOCK === "true";
+  if (!isMock) {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/predict`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(input)
+    });
+    if (!res.ok) throw new Error("Failed to predict address");
+    return res.json();
+  }
+
   const raw = input.rawAddress.trim();
   if (raw.length < 6) {
     await delay(null, 250);
@@ -216,6 +227,12 @@ export async function getPredictions(): Promise<PredictionResult[]> {
 }
 
 export async function getReviewQueue(): Promise<ReviewItem[]> {
+  const isMock = import.meta.env.VITE_USE_MOCK === "true";
+  if (!isMock) {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/review-queue`);
+    if (!res.ok) throw new Error("Failed to fetch review queue");
+    return res.json();
+  }
   return delay(reviewQueue);
 }
 
