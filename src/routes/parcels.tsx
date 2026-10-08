@@ -25,7 +25,10 @@ export const Route = createFileRoute("/parcels")({
           "Track parcels from receipt through address analysis, verification, sorting, dispatch and delivery.",
       },
       { property: "og:title", content: "Parcel Routing — PostRoute AI" },
-      { property: "og:description", content: "Parcel routing status across the delivery pipeline." },
+      {
+        property: "og:description",
+        content: "Parcel routing status across the delivery pipeline.",
+      },
     ],
   }),
   component: ParcelsPage,
@@ -56,18 +59,34 @@ function ParcelsPage() {
   const count = (s: Parcel["status"]) => all.filter((p) => p.status === s).length;
 
   const columns: Column<Parcel>[] = [
-    { key: "id", header: "Parcel ID", render: (p) => <span className="tabular font-medium">{p.id}</span> },
+    {
+      key: "id",
+      header: "Parcel ID",
+      render: (p) => <span className="tabular font-medium">{p.id}</span>,
+    },
     {
       key: "address",
       header: "Address",
       className: "max-w-[260px]",
       render: (p) => <span className="line-clamp-1">{p.rawAddress}</span>,
     },
-    { key: "pin", header: "Predicted PIN", render: (p) => <span className="tabular">{p.pincode}</span> },
+    {
+      key: "pin",
+      header: "Predicted PIN",
+      render: (p) => <span className="tabular">{p.pincode}</span>,
+    },
     { key: "office", header: "Delivery Office", render: (p) => p.postOffice },
-    { key: "conf", header: "Confidence", render: (p) => <ConfidenceBadge value={p.confidence} showLabel={false} /> },
+    {
+      key: "conf",
+      header: "Confidence",
+      render: (p) => <ConfidenceBadge value={p.confidence} showLabel={false} />,
+    },
     { key: "status", header: "Routing Status", render: (p) => <StatusBadge status={p.status} /> },
-    { key: "updated", header: "Last Updated", render: (p) => <span className="tabular text-xs">{formatDateTime(p.updatedAt)}</span> },
+    {
+      key: "updated",
+      header: "Last Updated",
+      render: (p) => <span className="tabular text-xs">{formatDateTime(p.updatedAt)}</span>,
+    },
     {
       key: "action",
       header: "Action",
@@ -89,15 +108,38 @@ function ParcelsPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader title="Parcel Routing" subtitle="Parcels moving through prediction, sorting and dispatch" />
+      <PageHeader
+        title="Parcel Routing"
+        subtitle="Parcels moving through prediction, sorting and dispatch"
+      />
 
       <div className="grid gap-4 sm:grid-cols-3 xl:grid-cols-6">
         <KpiCard label="Total Parcels" value={String(all.length)} support="In current view" />
         <KpiCard label="Received" value={String(count("received"))} support="Awaiting analysis" />
-        <KpiCard label="Address Verified" value={String(count("address_verified"))} support="Ready for sorting" tone="info" />
-        <KpiCard label="Sorting" value={String(count("sorting"))} support="At sorting hub" tone="warning" />
-        <KpiCard label="Dispatched" value={String(count("dispatched"))} support="Out for delivery" tone="info" />
-        <KpiCard label="Delivered" value={String(count("delivered"))} support="Completed today" tone="success" />
+        <KpiCard
+          label="Address Verified"
+          value={String(count("address_verified"))}
+          support="Ready for sorting"
+          tone="info"
+        />
+        <KpiCard
+          label="Sorting"
+          value={String(count("sorting"))}
+          support="At sorting hub"
+          tone="warning"
+        />
+        <KpiCard
+          label="Dispatched"
+          value={String(count("dispatched"))}
+          support="Out for delivery"
+          tone="info"
+        />
+        <KpiCard
+          label="Delivered"
+          value={String(count("delivered"))}
+          support="Completed today"
+          tone="success"
+        />
       </div>
 
       <FilterBar>

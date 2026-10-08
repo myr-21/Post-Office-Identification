@@ -22,7 +22,8 @@ export const Route = createFileRoute("/settings")({
       { title: "Operator Profile & Settings — PostRoute AI" },
       {
         name: "description",
-        content: "Operator profile, workstation appearance, density, notification and shortcut preferences.",
+        content:
+          "Operator profile, workstation appearance, density, notification and shortcut preferences.",
       },
       { property: "og:title", content: "Operator Profile & Settings — PostRoute AI" },
       { property: "og:description", content: "Workstation preferences for post office operators." },
@@ -125,7 +126,10 @@ function SettingsPage() {
               <Switch id="n-low" checked={lowConfidence} onCheckedChange={setLowConfidence} />
             </div>
           </div>
-          <Button className="mt-4" onClick={() => toast.success("Preferences saved for this session")}>
+          <Button
+            className="mt-4"
+            onClick={() => toast.success("Preferences saved for this session")}
+          >
             Save preferences
           </Button>
         </Panel>
@@ -141,7 +145,9 @@ function SettingsPage() {
             ].map(([keys, action]) => (
               <li key={keys} className="flex items-center justify-between gap-3">
                 <span className="text-muted-foreground">{action}</span>
-                <kbd className="rounded border border-border bg-muted px-2 py-0.5 text-xs">{keys}</kbd>
+                <kbd className="rounded border border-border bg-muted px-2 py-0.5 text-xs">
+                  {keys}
+                </kbd>
               </li>
             ))}
           </ul>

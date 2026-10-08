@@ -67,7 +67,9 @@ function AnalyticsPage() {
 
   if (query.isLoading) return <LoadingState label="Loading model metrics…" rows={6} />;
   if (query.error || !query.data)
-    return <ErrorState description={(query.error as Error).message} onRetry={() => query.refetch()} />;
+    return (
+      <ErrorState description={(query.error as Error).message} onRetry={() => query.refetch()} />
+    );
 
   const data = query.data;
 
@@ -96,11 +98,16 @@ function AnalyticsPage() {
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={data.accuracyTrend} margin={{ left: -18, right: 8, top: 8 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  stroke="var(--color-border)"
+                  vertical={false}
+                />
                 <XAxis dataKey="label" {...axisProps} />
                 <YAxis domain={[85, 100]} {...axisProps} />
                 <Tooltip {...tooltipStyle} />
-                <Line isAnimationActive={false}
+                <Line
+                  isAnimationActive={false}
                   type="monotone"
                   dataKey="value"
                   name="Top-1 accuracy"
@@ -113,15 +120,35 @@ function AnalyticsPage() {
           </div>
         </Panel>
 
-        <Panel title="Accuracy by Address Condition" description="Top-1 accuracy (%) per noise type">
+        <Panel
+          title="Accuracy by Address Condition"
+          description="Top-1 accuracy (%) per noise type"
+        >
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={data.accuracyByCondition} margin={{ left: -18, right: 8, top: 8 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
-                <XAxis dataKey="label" {...axisProps} interval={0} angle={-18} height={54} dy={10} />
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  stroke="var(--color-border)"
+                  vertical={false}
+                />
+                <XAxis
+                  dataKey="label"
+                  {...axisProps}
+                  interval={0}
+                  angle={-18}
+                  height={54}
+                  dy={10}
+                />
                 <YAxis domain={[70, 100]} {...axisProps} />
                 <Tooltip {...tooltipStyle} />
-                <Bar isAnimationActive={false} dataKey="value" name="Accuracy" fill="var(--color-chart-1)" radius={[6, 6, 0, 0]} />
+                <Bar
+                  isAnimationActive={false}
+                  dataKey="value"
+                  name="Accuracy"
+                  fill="var(--color-chart-1)"
+                  radius={[6, 6, 0, 0]}
+                />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -131,11 +158,21 @@ function AnalyticsPage() {
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={data.confidenceDistribution} margin={{ left: -18, right: 8, top: 8 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  stroke="var(--color-border)"
+                  vertical={false}
+                />
                 <XAxis dataKey="label" {...axisProps} />
                 <YAxis {...axisProps} />
                 <Tooltip {...tooltipStyle} />
-                <Bar isAnimationActive={false} dataKey="value" name="Predictions" fill="var(--color-chart-2)" radius={[6, 6, 0, 0]} />
+                <Bar
+                  isAnimationActive={false}
+                  dataKey="value"
+                  name="Predictions"
+                  fill="var(--color-chart-2)"
+                  radius={[6, 6, 0, 0]}
+                />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -145,7 +182,8 @@ function AnalyticsPage() {
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
-                <Pie isAnimationActive={false}
+                <Pie
+                  isAnimationActive={false}
                   data={data.reviewReasons}
                   dataKey="value"
                   nameKey="label"
@@ -177,8 +215,20 @@ function AnalyticsPage() {
               <YAxis domain={[75, 100]} {...axisProps} />
               <Tooltip {...tooltipStyle} />
               <Legend wrapperStyle={{ fontSize: 12 }} />
-              <Bar isAnimationActive={false} dataKey="top1" name="Top-1" fill="var(--color-chart-1)" radius={[6, 6, 0, 0]} />
-              <Bar isAnimationActive={false} dataKey="top3" name="Top-3" fill="var(--color-chart-2)" radius={[6, 6, 0, 0]} />
+              <Bar
+                isAnimationActive={false}
+                dataKey="top1"
+                name="Top-1"
+                fill="var(--color-chart-1)"
+                radius={[6, 6, 0, 0]}
+              />
+              <Bar
+                isAnimationActive={false}
+                dataKey="top3"
+                name="Top-3"
+                fill="var(--color-chart-2)"
+                radius={[6, 6, 0, 0]}
+              />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -186,10 +236,18 @@ function AnalyticsPage() {
           <caption className="sr-only">Model comparison table</caption>
           <thead>
             <tr className="border-b border-border text-xs tracking-wide text-muted-foreground uppercase">
-              <th scope="col" className="py-2 text-left">Model</th>
-              <th scope="col" className="py-2 text-right">Top-1</th>
-              <th scope="col" className="py-2 text-right">Top-3</th>
-              <th scope="col" className="py-2 text-right">F1</th>
+              <th scope="col" className="py-2 text-left">
+                Model
+              </th>
+              <th scope="col" className="py-2 text-right">
+                Top-1
+              </th>
+              <th scope="col" className="py-2 text-right">
+                Top-3
+              </th>
+              <th scope="col" className="py-2 text-right">
+                F1
+              </th>
             </tr>
           </thead>
           <tbody>

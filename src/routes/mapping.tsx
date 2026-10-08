@@ -60,10 +60,18 @@ function MappingPage() {
   }, [all, search, changeType, view]);
 
   const columns: Column<MappingChange>[] = [
-    { key: "pin", header: "PIN", render: (m) => <span className="tabular font-medium">{m.pincode}</span> },
+    {
+      key: "pin",
+      header: "PIN",
+      render: (m) => <span className="tabular font-medium">{m.pincode}</span>,
+    },
     { key: "po", header: "Post Office", render: (m) => m.postOffice },
     { key: "region", header: "Region", render: (m) => m.region },
-    { key: "version", header: "Mapping Version", render: (m) => <Pill tone="primary">{m.version}</Pill> },
+    {
+      key: "version",
+      header: "Mapping Version",
+      render: (m) => <Pill tone="primary">{m.version}</Pill>,
+    },
     { key: "from", header: "Effective From", render: (m) => formatDate(m.effectiveFrom) },
     { key: "status", header: "Status", render: (m) => <StatusBadge status={m.status} /> },
     { key: "type", header: "Change Type", render: (m) => <StatusBadge status={m.changeType} /> },
@@ -101,10 +109,24 @@ function MappingPage() {
       />
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <KpiCard label="Active PIN Codes" value={String(all.filter((m) => m.status === "active").length)} support="Currently in service" />
+        <KpiCard
+          label="Active PIN Codes"
+          value={String(all.filter((m) => m.status === "active").length)}
+          support="Currently in service"
+        />
         <KpiCard label="Recent Mapping Changes" value="3" support="Last 30 days" tone="warning" />
-        <KpiCard label="Merged Codes" value={String(all.filter((m) => m.changeType === "merged").length)} support="Beats consolidated" tone="info" />
-        <KpiCard label="Conflicts Detected" value="2" support="Requires operator review" tone="warning" />
+        <KpiCard
+          label="Merged Codes"
+          value={String(all.filter((m) => m.changeType === "merged").length)}
+          support="Beats consolidated"
+          tone="info"
+        />
+        <KpiCard
+          label="Conflicts Detected"
+          value="2"
+          support="Requires operator review"
+          tone="warning"
+        />
       </div>
 
       <div className="inline-flex rounded-lg border border-border bg-surface p-1">
@@ -152,7 +174,11 @@ function MappingPage() {
         caption="Pincode mapping table"
       />
 
-      <Panel title="Mapping History" description="How the PIN to post office mapping evolved" accent>
+      <Panel
+        title="Mapping History"
+        description="How the PIN to post office mapping evolved"
+        accent
+      >
         <ol className="grid gap-4 md:grid-cols-3">
           {versions.map((v, i) => (
             <li key={v.version} className="relative rounded-lg border border-border bg-surface p-4">
@@ -203,7 +229,9 @@ function MappingPage() {
               <FieldRow label="Effective date" value={formatDate(selected.effectiveFrom)} />
               <FieldRow label="Change type" value={<StatusBadge status={selected.changeType} />} />
               <div>
-                <p className="text-xs tracking-wide text-muted-foreground uppercase">Change reason</p>
+                <p className="text-xs tracking-wide text-muted-foreground uppercase">
+                  Change reason
+                </p>
                 <p className="mt-1 text-sm">{selected.reason}</p>
               </div>
               <div>

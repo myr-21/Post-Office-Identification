@@ -275,9 +275,9 @@ export const predictions: PredictionResult[] = [
     const office = postOffices[(index + 1) % postOffices.length]!;
     const confidence = [0.97, 0.91, 0.88, 0.74, 0.62, 0.95, 0.83, 0.68][index % 8]!;
     const status: PredictionResult["status"] =
-      confidence >= 0.9
+      confidence >= 0.85
         ? "auto_approved"
-        : confidence >= 0.7
+        : confidence >= 0.55
           ? index % 3 === 0
             ? "manually_verified"
             : "needs_review"
@@ -302,7 +302,11 @@ export const predictions: PredictionResult[] = [
         raw,
         normalized: `${raw.replace(/\b\w/g, (c) => c.toUpperCase())}`,
         components: [
-          { label: "Locality", value: office.name.replace(" S.O", "").replace(" H.O", ""), type: "locality" },
+          {
+            label: "Locality",
+            value: office.name.replace(" S.O", "").replace(" H.O", ""),
+            type: "locality",
+          },
           { label: "City", value: office.district, type: "city" },
           { label: "District", value: office.district, type: "district" },
           { label: "State", value: office.state, type: "state" },
@@ -332,9 +336,17 @@ export const predictions: PredictionResult[] = [
       explanation: [
         { label: "Locality detected", detail: office.name, matched: true },
         { label: "District detected", detail: office.district, matched: true },
-        { label: "PIN token matched", detail: confidence > 0.9 ? office.pincode : "Not present", matched: confidence > 0.9 },
+        {
+          label: "PIN token matched",
+          detail: confidence > 0.9 ? office.pincode : "Not present",
+          matched: confidence > 0.9,
+        },
         { label: "Address normalized", detail: "Tokens standardized", matched: true },
-        { label: "Mapping validated", detail: `Mapping ${office.mappingVersion}`, matched: office.mappingVersion === "V3" },
+        {
+          label: "Mapping validated",
+          detail: `Mapping ${office.mappingVersion}`,
+          matched: office.mappingVersion === "V3",
+        },
       ],
       operator: index % 2 === 0 ? "Mayur Patil" : "S. Kulkarni",
     };
@@ -382,8 +394,18 @@ export const reviewQueue: ReviewItem[] = Array.from({ length: 10 }).map((_, i) =
     operator: i % 2 === 0 ? "Mayur Patil" : "S. Kulkarni",
     candidates: [
       candidate(1, office.name, office.pincode, confidence, office.district, office.state),
-      candidate(2, postOffices[(i + 1) % postOffices.length]!.name, postOffices[(i + 1) % postOffices.length]!.pincode, Math.round((1 - confidence) * 0.6 * 1000) / 1000),
-      candidate(3, postOffices[(i + 2) % postOffices.length]!.name, postOffices[(i + 2) % postOffices.length]!.pincode, Math.round((1 - confidence) * 0.4 * 1000) / 1000),
+      candidate(
+        2,
+        postOffices[(i + 1) % postOffices.length]!.name,
+        postOffices[(i + 1) % postOffices.length]!.pincode,
+        Math.round((1 - confidence) * 0.6 * 1000) / 1000,
+      ),
+      candidate(
+        3,
+        postOffices[(i + 2) % postOffices.length]!.name,
+        postOffices[(i + 2) % postOffices.length]!.pincode,
+        Math.round((1 - confidence) * 0.4 * 1000) / 1000,
+      ),
     ],
     mapping: {
       current: `${office.pincode} → ${office.name} (V3)`,
@@ -431,15 +453,27 @@ export const parcels: Parcel[] = Array.from({ length: 15 }).map((_, i) => {
     operator: i % 2 === 0 ? "Mayur Patil" : "S. Kulkarni",
     candidates: [
       candidate(1, office.name, office.pincode, confidence, office.district, office.state),
-      candidate(2, postOffices[(i + 1) % postOffices.length]!.name, postOffices[(i + 1) % postOffices.length]!.pincode, Math.round((1 - confidence) * 0.65 * 1000) / 1000),
-      candidate(3, postOffices[(i + 2) % postOffices.length]!.name, postOffices[(i + 2) % postOffices.length]!.pincode, Math.round((1 - confidence) * 0.35 * 1000) / 1000),
+      candidate(
+        2,
+        postOffices[(i + 1) % postOffices.length]!.name,
+        postOffices[(i + 1) % postOffices.length]!.pincode,
+        Math.round((1 - confidence) * 0.65 * 1000) / 1000,
+      ),
+      candidate(
+        3,
+        postOffices[(i + 2) % postOffices.length]!.name,
+        postOffices[(i + 2) % postOffices.length]!.pincode,
+        Math.round((1 - confidence) * 0.35 * 1000) / 1000,
+      ),
     ],
     timeline: parcelStages.map((stage, si) => ({
       status: stage.status,
       label: stage.label,
       timestamp:
         si <= stageIndex
-          ? new Date(Date.parse("2026-09-16T09:00:00Z") + si * 95 * 60000 - i * 41 * 60000).toISOString()
+          ? new Date(
+              Date.parse("2026-09-16T09:00:00Z") + si * 95 * 60000 - i * 41 * 60000,
+            ).toISOString()
           : null,
       note:
         si === 1
@@ -606,13 +640,24 @@ export const mappingChanges: MappingChange[] = [
 
 export const analytics: AnalyticsData = {
   metrics: [
-    { key: "top1", label: "Top-1 Accuracy", value: "94.8%", delta: "+1.2 pts", hint: "Verified predictions" },
+    {
+      key: "top1",
+      label: "Top-1 Accuracy",
+      value: "94.8%",
+      delta: "+1.2 pts",
+      hint: "Verified predictions",
+    },
     { key: "top3", label: "Top-3 Accuracy", value: "98.1%", delta: "+0.6 pts" },
     { key: "top5", label: "Top-5 Accuracy", value: "99.2%", delta: "+0.3 pts" },
     { key: "precision", label: "Precision", value: "0.941" },
     { key: "recall", label: "Recall", value: "0.928" },
     { key: "f1", label: "F1 Score", value: "0.934" },
-    { key: "auto", label: "Auto-resolution Rate", value: "87.4%", hint: "No operator input needed" },
+    {
+      key: "auto",
+      label: "Auto-resolution Rate",
+      value: "87.4%",
+      hint: "No operator input needed",
+    },
     { key: "manual", label: "Manual Review Rate", value: "12.6%", hint: "Routed to review queue" },
   ],
   accuracyTrend: [
@@ -656,12 +701,42 @@ export const analytics: AnalyticsData = {
 
 export const activityLog: ActivityEvent[] = Array.from({ length: 24 }).map((_, i) => {
   const templates = [
-    { action: "Prediction generated", entity: `PR-${24880 - i}`, details: "Automatic mode, confidence 94.2%", status: "success" as const },
-    { action: "Prediction manually corrected", entity: `PR-${24860 - i}`, details: "PIN changed 411007 → 411045", status: "warning" as const },
-    { action: "Parcel status updated", entity: `PA-2026-00${4821 - i}`, details: "Sorting → Dispatched", status: "info" as const },
-    { action: "Mapping updated", entity: "MC-001", details: "411045 merged into Baner S.O (V3)", status: "warning" as const },
-    { action: "Review approved", entity: `RV-${5120 + (i % 10)}`, details: "Prediction confirmed by operator", status: "success" as const },
-    { action: "Prediction failed", entity: `PR-${24840 - i}`, details: "Address too short to analyze", status: "error" as const },
+    {
+      action: "Prediction generated",
+      entity: `PR-${24880 - i}`,
+      details: "Automatic mode, confidence 94.2%",
+      status: "success" as const,
+    },
+    {
+      action: "Prediction manually corrected",
+      entity: `PR-${24860 - i}`,
+      details: "PIN changed 411007 → 411045",
+      status: "warning" as const,
+    },
+    {
+      action: "Parcel status updated",
+      entity: `PA-2026-00${4821 - i}`,
+      details: "Sorting → Dispatched",
+      status: "info" as const,
+    },
+    {
+      action: "Mapping updated",
+      entity: "MC-001",
+      details: "411045 merged into Baner S.O (V3)",
+      status: "warning" as const,
+    },
+    {
+      action: "Review approved",
+      entity: `RV-${5120 + (i % 10)}`,
+      details: "Prediction confirmed by operator",
+      status: "success" as const,
+    },
+    {
+      action: "Prediction failed",
+      entity: `PR-${24840 - i}`,
+      details: "Address too short to analyze",
+      status: "error" as const,
+    },
   ];
   const t = templates[i % templates.length]!;
   return {
@@ -674,11 +749,40 @@ export const activityLog: ActivityEvent[] = Array.from({ length: 24 }).map((_, i
 
 export const dashboardKpis: DashboardKpi[] = [
   { key: "predictions", label: "Predictions Today", value: "1,248", support: "+8.4% vs yesterday" },
-  { key: "auto", label: "Auto-Routed", value: "1,091", support: "87.4% of predictions", tone: "success" },
-  { key: "manual", label: "Manual Review", value: "157", support: "12.6% of predictions", tone: "warning" },
-  { key: "accuracy", label: "Prediction Accuracy", value: "94.8%", support: "Based on verified predictions" },
-  { key: "parcels", label: "Active Parcels", value: "326", support: "In routing pipeline", tone: "info" },
-  { key: "mapping", label: "Mapping Changes", value: "3", support: "Last 30 days", tone: "warning" },
+  {
+    key: "auto",
+    label: "Auto-Routed",
+    value: "1,091",
+    support: "87.4% of predictions",
+    tone: "success",
+  },
+  {
+    key: "manual",
+    label: "Manual Review",
+    value: "157",
+    support: "12.6% of predictions",
+    tone: "warning",
+  },
+  {
+    key: "accuracy",
+    label: "Prediction Accuracy",
+    value: "94.8%",
+    support: "Based on verified predictions",
+  },
+  {
+    key: "parcels",
+    label: "Active Parcels",
+    value: "326",
+    support: "In routing pipeline",
+    tone: "info",
+  },
+  {
+    key: "mapping",
+    label: "Mapping Changes",
+    value: "3",
+    support: "Last 30 days",
+    tone: "warning",
+  },
 ];
 
 export const reviewSummary: ReviewQueueSummary[] = [
@@ -698,11 +802,46 @@ export const systemHealth: SystemHealthItem[] = [
 ];
 
 export const notifications: AppNotification[] = [
-  { id: "N1", type: "review", title: "New review required", detail: "RV-5123 — mapping conflict on PIN 411045", time: "4 min ago", unread: true },
-  { id: "N2", type: "mapping", title: "Mapping change detected", detail: "Balewadi S.O merged into Baner S.O (V3)", time: "32 min ago", unread: true },
-  { id: "N3", type: "low_confidence", title: "Low-confidence prediction", detail: "PR-24874 resolved at 45.0% confidence", time: "1 hr ago", unread: true },
-  { id: "N4", type: "system", title: "System warning", detail: "Mapping sync delayed by 6 minutes", time: "3 hr ago", unread: false },
-  { id: "N5", type: "success", title: "Successful update", detail: "Model v3.2 metrics refreshed", time: "Yesterday", unread: false },
+  {
+    id: "N1",
+    type: "review",
+    title: "New review required",
+    detail: "RV-5123 — mapping conflict on PIN 411045",
+    time: "4 min ago",
+    unread: true,
+  },
+  {
+    id: "N2",
+    type: "mapping",
+    title: "Mapping change detected",
+    detail: "Balewadi S.O merged into Baner S.O (V3)",
+    time: "32 min ago",
+    unread: true,
+  },
+  {
+    id: "N3",
+    type: "low_confidence",
+    title: "Low-confidence prediction",
+    detail: "PR-24874 resolved at 45.0% confidence",
+    time: "1 hr ago",
+    unread: true,
+  },
+  {
+    id: "N4",
+    type: "system",
+    title: "System warning",
+    detail: "Mapping sync delayed by 6 minutes",
+    time: "3 hr ago",
+    unread: false,
+  },
+  {
+    id: "N5",
+    type: "success",
+    title: "Successful update",
+    detail: "Model v3.2 metrics refreshed",
+    time: "Yesterday",
+    unread: false,
+  },
 ];
 
 export const states = ["Maharashtra", "Karnataka", "Gujarat", "Delhi", "Tamil Nadu", "Rajasthan"];

@@ -3,12 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { DataTable, type Column } from "@/components/postroute/data-table";
 import { StatusBadge } from "@/components/postroute/badges";
-import {
-  FilterBar,
-  FilterSelect,
-  PageHeader,
-  SearchBar,
-} from "@/components/postroute/primitives";
+import { FilterBar, FilterSelect, PageHeader, SearchBar } from "@/components/postroute/primitives";
 import { formatDateTime } from "@/lib/format";
 import { getActivityLog } from "@/services/postroute";
 import type { ActivityEvent } from "@/types";
@@ -19,7 +14,8 @@ export const Route = createFileRoute("/activity")({
       { title: "Activity Log — PostRoute AI" },
       {
         name: "description",
-        content: "Chronological record of operator and system actions across predictions, parcels and mappings.",
+        content:
+          "Chronological record of operator and system actions across predictions, parcels and mappings.",
       },
       { property: "og:title", content: "Activity Log — PostRoute AI" },
       { property: "og:description", content: "System and operator action history." },
@@ -51,11 +47,24 @@ function ActivityPage() {
   }, [all, search, operator, action, status]);
 
   const columns: Column<ActivityEvent>[] = [
-    { key: "time", header: "Timestamp", render: (e) => <span className="tabular text-xs">{formatDateTime(e.timestamp)}</span> },
+    {
+      key: "time",
+      header: "Timestamp",
+      render: (e) => <span className="tabular text-xs">{formatDateTime(e.timestamp)}</span>,
+    },
     { key: "operator", header: "Operator", render: (e) => e.operator },
-    { key: "action", header: "Action", render: (e) => <span className="font-medium">{e.action}</span> },
+    {
+      key: "action",
+      header: "Action",
+      render: (e) => <span className="font-medium">{e.action}</span>,
+    },
     { key: "entity", header: "Entity", render: (e) => <span className="tabular">{e.entity}</span> },
-    { key: "details", header: "Details", className: "max-w-[320px]", render: (e) => <span className="line-clamp-1 text-muted-foreground">{e.details}</span> },
+    {
+      key: "details",
+      header: "Details",
+      className: "max-w-[320px]",
+      render: (e) => <span className="line-clamp-1 text-muted-foreground">{e.details}</span>,
+    },
     { key: "status", header: "Status", render: (e) => <StatusBadge status={e.status} /> },
   ];
 

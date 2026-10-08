@@ -68,7 +68,9 @@ function ReviewDetailPage() {
     return (
       <ErrorState
         title="Review not found"
-        description={(query.error as Error | undefined)?.message ?? "This review item does not exist."}
+        description={
+          (query.error as Error | undefined)?.message ?? "This review item does not exist."
+        }
         onRetry={() => query.refetch()}
       />
     );
@@ -104,7 +106,10 @@ function ReviewDetailPage() {
       <div className="grid gap-6 xl:grid-cols-3">
         <div className="space-y-6 xl:col-span-2">
           <Panel title="Address">
-            <FieldRow label="Original address" value={<span className="font-mono text-xs">{item.rawAddress}</span>} />
+            <FieldRow
+              label="Original address"
+              value={<span className="font-mono text-xs">{item.rawAddress}</span>}
+            />
             <FieldRow label="Normalized address" value={item.normalizedAddress} />
             <FieldRow label="District / State" value={`${item.district}, ${item.state}`} />
           </Panel>
@@ -113,7 +118,9 @@ function ReviewDetailPage() {
             <div className="grid gap-4 sm:grid-cols-3">
               <div>
                 <p className="text-xs tracking-wide text-muted-foreground uppercase">PIN</p>
-                <p className="tabular mt-1 text-3xl font-semibold text-primary-dark">{item.pincode}</p>
+                <p className="tabular mt-1 text-3xl font-semibold text-primary-dark">
+                  {item.pincode}
+                </p>
               </div>
               <div>
                 <p className="text-xs tracking-wide text-muted-foreground uppercase">Post Office</p>
@@ -121,7 +128,9 @@ function ReviewDetailPage() {
               </div>
               <div>
                 <p className="text-xs tracking-wide text-muted-foreground uppercase">Confidence</p>
-                <p className="tabular mt-1 text-2xl font-semibold">{formatPercent(item.confidence)}</p>
+                <p className="tabular mt-1 text-2xl font-semibold">
+                  {formatPercent(item.confidence)}
+                </p>
                 <ConfidenceBar value={item.confidence} className="mt-2" />
               </div>
             </div>
@@ -131,10 +140,18 @@ function ReviewDetailPage() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-border bg-surface text-xs tracking-wide text-muted-foreground uppercase">
-                  <th scope="col" className="px-5 py-2.5 text-left">Rank</th>
-                  <th scope="col" className="px-5 py-2.5 text-left">Post Office</th>
-                  <th scope="col" className="px-5 py-2.5 text-left">PIN</th>
-                  <th scope="col" className="px-5 py-2.5 text-right">Confidence</th>
+                  <th scope="col" className="px-5 py-2.5 text-left">
+                    Rank
+                  </th>
+                  <th scope="col" className="px-5 py-2.5 text-left">
+                    Post Office
+                  </th>
+                  <th scope="col" className="px-5 py-2.5 text-left">
+                    PIN
+                  </th>
+                  <th scope="col" className="px-5 py-2.5 text-right">
+                    Confidence
+                  </th>
                 </tr>
               </thead>
               <tbody>

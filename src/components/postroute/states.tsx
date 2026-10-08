@@ -33,7 +33,13 @@ export function EmptyState({
   );
 }
 
-export function LoadingState({ label = "Loading data…", rows = 4 }: { label?: string; rows?: number }) {
+export function LoadingState({
+  label = "Loading data…",
+  rows = 4,
+}: {
+  label?: string;
+  rows?: number;
+}) {
   return (
     <div className="space-y-3 py-4" role="status" aria-live="polite">
       <p className="flex items-center gap-2 text-sm text-muted-foreground">

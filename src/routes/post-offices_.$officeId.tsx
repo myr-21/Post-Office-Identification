@@ -19,7 +19,10 @@ export const Route = createFileRoute("/post-offices_/$officeId")({
         content: "Location, PIN mapping history and recent predictions for a delivery post office.",
       },
       { property: "og:title", content: "Post Office Detail — PostRoute AI" },
-      { property: "og:description", content: "Mapping history and prediction activity per office." },
+      {
+        property: "og:description",
+        content: "Mapping history and prediction activity per office.",
+      },
     ],
   }),
   component: PostOfficeDetailPage,
@@ -27,7 +30,10 @@ export const Route = createFileRoute("/post-offices_/$officeId")({
 
 function PostOfficeDetailPage() {
   const { officeId } = Route.useParams();
-  const query = useQuery({ queryKey: ["post-office", officeId], queryFn: () => getPostOffice(officeId) });
+  const query = useQuery({
+    queryKey: ["post-office", officeId],
+    queryFn: () => getPostOffice(officeId),
+  });
   const mapping = useQuery({ queryKey: ["mapping"], queryFn: getMappingHistory });
   const preds = useQuery({ queryKey: ["predictions"], queryFn: getPredictions });
 
@@ -55,10 +61,22 @@ function PostOfficeDetailPage() {
   ];
 
   const predColumns: Column<PredictionResult>[] = [
-    { key: "time", header: "Time", render: (p) => <span className="tabular text-xs">{formatDateTime(p.createdAt)}</span> },
-    { key: "address", header: "Address", render: (p) => <span className="line-clamp-1">{p.rawAddress}</span> },
+    {
+      key: "time",
+      header: "Time",
+      render: (p) => <span className="tabular text-xs">{formatDateTime(p.createdAt)}</span>,
+    },
+    {
+      key: "address",
+      header: "Address",
+      render: (p) => <span className="line-clamp-1">{p.rawAddress}</span>,
+    },
     { key: "pin", header: "PIN", render: (p) => <span className="tabular">{p.pincode}</span> },
-    { key: "conf", header: "Confidence", render: (p) => <ConfidenceBadge value={p.confidence} showLabel={false} /> },
+    {
+      key: "conf",
+      header: "Confidence",
+      render: (p) => <ConfidenceBadge value={p.confidence} showLabel={false} />,
+    },
   ];
 
   return (
@@ -113,9 +131,18 @@ function PostOfficeDetailPage() {
 
       <Panel title="Mapping History" bodyClassName="p-4">
         {history.length === 0 ? (
-          <EmptyState title="No mapping changes recorded" description="This office uses the baseline mapping." />
+          <EmptyState
+            title="No mapping changes recorded"
+            description="This office uses the baseline mapping."
+          />
         ) : (
-          <DataTable columns={historyColumns} rows={history} rowKey={(m) => m.id} dense caption="Mapping history" />
+          <DataTable
+            columns={historyColumns}
+            rows={history}
+            rowKey={(m) => m.id}
+            dense
+            caption="Mapping history"
+          />
         )}
       </Panel>
 
@@ -126,7 +153,13 @@ function PostOfficeDetailPage() {
             description="No addresses have been routed to this office in the current window."
           />
         ) : (
-          <DataTable columns={predColumns} rows={recent} rowKey={(p) => p.id} dense caption="Recent predictions" />
+          <DataTable
+            columns={predColumns}
+            rows={recent}
+            rowKey={(p) => p.id}
+            dense
+            caption="Recent predictions"
+          />
         )}
       </Panel>
     </div>

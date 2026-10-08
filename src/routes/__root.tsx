@@ -88,7 +88,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "PostRoute AI" },
       {
         property: "og:description",
-        content: "AI-assisted delivery post office and PIN code identification for postal operations.",
+        content:
+          "AI-assisted delivery post office and PIN code identification for postal operations.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

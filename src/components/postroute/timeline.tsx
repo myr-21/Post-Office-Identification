@@ -51,9 +51,7 @@ export function Timeline({ steps }: { steps: TimelineStep[] }) {
                   <span className="ml-2 text-xs font-semibold text-primary-dark">In progress</span>
                 )}
               </p>
-              <p className="tabular text-xs text-muted-foreground">
-                {step.timestamp ?? "Pending"}
-              </p>
+              <p className="tabular text-xs text-muted-foreground">{step.timestamp ?? "Pending"}</p>
               {step.note && <p className="mt-0.5 text-xs text-muted-foreground">{step.note}</p>}
             </div>
           </li>

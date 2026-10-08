@@ -1,14 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import {
-  Activity as ActivityIcon,
-  Mail,
-  Menu,
-  Settings,
-  Signal,
-  UserRound,
-  X,
-} from "lucide-react";
+import { Activity as ActivityIcon, Mail, Menu, Settings, Signal, UserRound, X } from "lucide-react";
 import { navItems, sectionFor } from "./nav";
 import { NotificationPanel } from "./notifications-panel";
 import { SearchBar } from "./primitives";

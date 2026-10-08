@@ -102,8 +102,7 @@ export function ConfidenceBadge({
 
 export function ConfidenceBar({ value, className }: { value: number; className?: string }) {
   const level = confidenceLevel(value);
-  const color =
-    level === "high" ? "bg-success" : level === "medium" ? "bg-warning" : "bg-error";
+  const color = level === "high" ? "bg-success" : level === "medium" ? "bg-warning" : "bg-error";
   return (
     <div
       className={cn("h-2 w-full overflow-hidden rounded-full bg-muted", className)}

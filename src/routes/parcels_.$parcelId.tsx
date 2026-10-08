@@ -107,7 +107,10 @@ function ParcelDetailPage() {
       <div className="grid gap-6 xl:grid-cols-3">
         <div className="space-y-6 xl:col-span-2">
           <Panel title="Address">
-            <FieldRow label="Raw address" value={<span className="font-mono text-xs">{parcel.rawAddress}</span>} />
+            <FieldRow
+              label="Raw address"
+              value={<span className="font-mono text-xs">{parcel.rawAddress}</span>}
+            />
             <FieldRow label="Normalized address" value={parcel.normalizedAddress} />
           </Panel>
 
@@ -115,10 +118,18 @@ function ParcelDetailPage() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-border bg-surface text-xs tracking-wide text-muted-foreground uppercase">
-                  <th scope="col" className="px-5 py-2.5 text-left">Rank</th>
-                  <th scope="col" className="px-5 py-2.5 text-left">Post Office</th>
-                  <th scope="col" className="px-5 py-2.5 text-left">PIN</th>
-                  <th scope="col" className="px-5 py-2.5 text-right">Confidence</th>
+                  <th scope="col" className="px-5 py-2.5 text-left">
+                    Rank
+                  </th>
+                  <th scope="col" className="px-5 py-2.5 text-left">
+                    Post Office
+                  </th>
+                  <th scope="col" className="px-5 py-2.5 text-left">
+                    PIN
+                  </th>
+                  <th scope="col" className="px-5 py-2.5 text-right">
+                    Confidence
+                  </th>
                 </tr>
               </thead>
               <tbody>

@@ -61,16 +61,28 @@ function DashboardPage() {
   const health = useQuery({ queryKey: ["system-health"], queryFn: getSystemHealth });
 
   const columns: Column<PredictionResult>[] = [
-    { key: "time", header: "Time", render: (r) => <span className="tabular">{formatTime(r.createdAt)}</span> },
+    {
+      key: "time",
+      header: "Time",
+      render: (r) => <span className="tabular">{formatTime(r.createdAt)}</span>,
+    },
     {
       key: "address",
       header: "Address",
       className: "max-w-[280px]",
       render: (r) => <span className="line-clamp-1 text-foreground">{r.rawAddress}</span>,
     },
-    { key: "pin", header: "Predicted PIN", render: (r) => <span className="tabular font-medium">{r.pincode}</span> },
+    {
+      key: "pin",
+      header: "Predicted PIN",
+      render: (r) => <span className="tabular font-medium">{r.pincode}</span>,
+    },
     { key: "po", header: "Delivery Post Office", render: (r) => r.postOffice },
-    { key: "conf", header: "Confidence", render: (r) => <ConfidenceBadge value={r.confidence} showLabel={false} /> },
+    {
+      key: "conf",
+      header: "Confidence",
+      render: (r) => <ConfidenceBadge value={r.confidence} showLabel={false} />,
+    },
     { key: "status", header: "Status", render: (r) => <StatusBadge status={r.status} /> },
     {
       key: "action",
@@ -112,7 +124,10 @@ function DashboardPage() {
         ))}
         {kpis.isLoading &&
           Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="h-28 animate-pulse rounded-xl border border-border bg-muted/60" />
+            <div
+              key={i}
+              className="h-28 animate-pulse rounded-xl border border-border bg-muted/60"
+            />
           ))}
       </div>
 
@@ -203,8 +218,18 @@ function DashboardPage() {
         <Timeline
           steps={[
             { label: "Parcel received", timestamp: "Today 09:12", state: "done" },
-            { label: "Address analyzed", timestamp: "Today 09:13", note: "Model v3.2", state: "done" },
-            { label: "PIN predicted", timestamp: "Today 09:13", note: "411045 — Baner S.O", state: "done" },
+            {
+              label: "Address analyzed",
+              timestamp: "Today 09:13",
+              note: "Model v3.2",
+              state: "done",
+            },
+            {
+              label: "PIN predicted",
+              timestamp: "Today 09:13",
+              note: "411045 — Baner S.O",
+              state: "done",
+            },
             { label: "Operator verified", timestamp: "Today 10:05", state: "done" },
             { label: "Sorting", timestamp: "Today 11:40", state: "current" },
             { label: "Dispatched", timestamp: null, state: "pending" },

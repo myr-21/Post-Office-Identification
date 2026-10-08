@@ -34,6 +34,7 @@ import type {
   ReviewItem,
   ReviewQueueSummary,
   SystemHealthItem,
+  SystemConfig,
 } from "@/types";
 
 const LATENCY = 420;
@@ -142,31 +143,31 @@ export async function predictAddress(input: AddressInput): Promise<PredictionRes
     confidence:
       index === 0
         ? confidence
-        : Math.round(((1 - confidence) * (index === 1 ? 0.7 : 0.3)) * 1000) / 1000,
+        : Math.round((1 - confidence) * (index === 1 ? 0.7 : 0.3) * 1000) / 1000,
   }));
 
   const localityGuess = top.office.name.replace(/ (S\.O|H\.O|B\.O)$/, "");
   const normalized = normalizeAddress(raw);
   const components: PredictionResult["normalization"]["components"] = [
-        ...(raw.match(/\b(flat|hse|house|plot|shop|room|rm)\s*\.?\s*(no\.?)?\s*\d+/i)
-          ? [
-              {
-                label: "Flat/Unit",
-                value: titleCase(
-                  raw.match(/\b(flat|hse|house|plot|shop|room|rm)\s*\.?\s*(no\.?)?\s*\d+/i)![0],
-                ),
-                type: "unit" as const,
-              },
-            ]
-          : []),
-        { label: "Locality", value: localityGuess, type: "locality" as const },
-        ...(lower.includes("road") || lower.includes(" rd")
-          ? [{ label: "Road", value: `${localityGuess} Road`, type: "road" as const }]
-          : []),
-        { label: "City", value: top.office.district, type: "city" as const },
-        { label: "District", value: top.office.district, type: "district" as const },
-        { label: "State", value: top.office.state, type: "state" as const },
-        ...(pinToken ? [{ label: "PIN", value: pinToken, type: "pincode" as const }] : []),
+    ...(raw.match(/\b(flat|hse|house|plot|shop|room|rm)\s*\.?\s*(no\.?)?\s*\d+/i)
+      ? [
+          {
+            label: "Flat/Unit",
+            value: titleCase(
+              raw.match(/\b(flat|hse|house|plot|shop|room|rm)\s*\.?\s*(no\.?)?\s*\d+/i)![0],
+            ),
+            type: "unit" as const,
+          },
+        ]
+      : []),
+    { label: "Locality", value: localityGuess, type: "locality" as const },
+    ...(lower.includes("road") || lower.includes(" rd")
+      ? [{ label: "Road", value: `${localityGuess} Road`, type: "road" as const }]
+      : []),
+    { label: "City", value: top.office.district, type: "city" as const },
+    { label: "District", value: top.office.district, type: "district" as const },
+    { label: "State", value: top.office.state, type: "state" as const },
+    ...(pinToken ? [{ label: "PIN", value: pinToken, type: "pincode" as const }] : []),
   ];
 
   const result: PredictionResult = {
@@ -179,14 +180,25 @@ export async function predictAddress(input: AddressInput): Promise<PredictionRes
     district: top.office.district,
     state: top.office.state,
     confidence,
-    status:
-      confidence >= 0.9 ? "auto_approved" : confidence >= 0.7 ? "needs_review" : "needs_review",
+    status: confidence >= (await getConfig()).autoRouteThreshold ? "auto_approved" : "needs_review",
     candidates,
     explanation: [
       { label: "Locality detected", detail: localityGuess, matched: true },
-      { label: "District detected", detail: top.office.district, matched: Boolean(top.office.district) },
-      { label: "PIN token matched", detail: pinToken ?? "No PIN token in input", matched: Boolean(pinToken) },
-      { label: "Address normalized", detail: `${components.length} components resolved`, matched: true },
+      {
+        label: "District detected",
+        detail: top.office.district,
+        matched: Boolean(top.office.district),
+      },
+      {
+        label: "PIN token matched",
+        detail: pinToken ?? "No PIN token in input",
+        matched: Boolean(pinToken),
+      },
+      {
+        label: "Address normalized",
+        detail: `${components.length} components resolved`,
+        matched: true,
+      },
       {
         label: "Mapping validated",
         detail: `Mapping ${top.office.mappingVersion} ${top.office.status === "active" ? "active" : top.office.status}`,
@@ -278,4 +290,14 @@ export async function getNotifications(): Promise<AppNotification[]> {
 
 export async function getOperator(): Promise<Operator> {
   return delay(currentOperator, 100);
+}
+
+export async function getConfig(): Promise<SystemConfig> {
+  const isMock = import.meta.env.VITE_USE_MOCK === "true";
+  if (isMock) {
+    return delay({ autoRouteThreshold: 0.85, reviewFloor: 0.55 }, 100);
+  }
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/config`);
+  if (!res.ok) throw new Error("Failed to fetch config");
+  return res.json();
 }

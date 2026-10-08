@@ -6,11 +6,7 @@
 
 export type ConfidenceLevel = "high" | "medium" | "low";
 
-export type PredictionStatus =
-  | "auto_approved"
-  | "needs_review"
-  | "manually_verified"
-  | "corrected";
+export type PredictionStatus = "auto_approved" | "needs_review" | "manually_verified" | "corrected";
 
 export type ReviewReason =
   | "low_confidence"
@@ -24,12 +20,7 @@ export type ReviewPriority = "high" | "medium" | "low";
 export type ReviewStatus = "pending" | "in_review" | "resolved" | "escalated";
 
 export type ParcelStatus =
-  | "received"
-  | "address_analysis"
-  | "address_verified"
-  | "sorting"
-  | "dispatched"
-  | "delivered";
+  "received" | "address_analysis" | "address_verified" | "sorting" | "dispatched" | "delivered";
 
 export type PostOfficeStatus = "active" | "updated" | "historical";
 
@@ -48,15 +39,7 @@ export interface AddressInput {
 export interface AddressComponent {
   label: string;
   value: string;
-  type:
-    | "unit"
-    | "locality"
-    | "road"
-    | "city"
-    | "district"
-    | "state"
-    | "pincode"
-    | "landmark";
+  type: "unit" | "locality" | "road" | "city" | "district" | "state" | "pincode" | "landmark";
 }
 
 export interface NormalizationResult {
@@ -246,4 +229,9 @@ export interface AppNotification {
   detail: string;
   time: string;
   unread: boolean;
+}
+
+export interface SystemConfig {
+  autoRouteThreshold: number;
+  reviewFloor: number;
 }

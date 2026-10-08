@@ -1,15 +1,7 @@
 import { useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useMutation } from "@tanstack/react-query";
-import {
-  ChevronDown,
-  CircleCheck,
-  CircleX,
-  Loader2,
-  MapPin,
-  Sparkles,
-  Trash2,
-} from "lucide-react";
+import { ChevronDown, CircleCheck, CircleX, Loader2, MapPin, Sparkles, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -22,11 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { ConfidenceBadge, ConfidenceBar, Pill } from "@/components/postroute/badges";
 import { EntityChip, PageHeader, Panel } from "@/components/postroute/primitives";
 import { EmptyState, ErrorState } from "@/components/postroute/states";
@@ -267,7 +255,13 @@ function PredictionPage() {
             </Panel>
           )}
 
-          {result && !mutation.isPending && <ResultView result={result} onReset={clear} navigateToReview={() => navigate({ to: "/review" })} />}
+          {result && !mutation.isPending && (
+            <ResultView
+              result={result}
+              onReset={clear}
+              navigateToReview={() => navigate({ to: "/review" })}
+            />
+          )}
         </div>
       </div>
     </div>
@@ -285,14 +279,22 @@ function ResultView({
 }) {
   const level = confidenceLevel(result.confidence);
   const levelLabel =
-    level === "high" ? "High Confidence" : level === "medium" ? "Medium Confidence" : "Low Confidence";
+    level === "high"
+      ? "High Confidence"
+      : level === "medium"
+        ? "Medium Confidence"
+        : "Low Confidence";
 
   return (
     <div className="space-y-6">
       <Panel
         title="Prediction Result"
         accent
-        actions={<Pill tone={level === "high" ? "success" : level === "medium" ? "warning" : "error"}>{levelLabel}</Pill>}
+        actions={
+          <Pill tone={level === "high" ? "success" : level === "medium" ? "warning" : "error"}>
+            {levelLabel}
+          </Pill>
+        }
       >
         {level === "low" && (
           <p className="mb-4 rounded-md border border-warning/30 bg-warning-soft px-3 py-2 text-sm text-warning">
@@ -302,7 +304,9 @@ function ResultView({
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <div className="rounded-lg border border-border bg-surface p-4 sm:col-span-2">
             <p className="text-xs tracking-wide text-muted-foreground uppercase">Predicted PIN</p>
-            <p className="tabular mt-1 text-4xl font-semibold text-primary-dark">{result.pincode}</p>
+            <p className="tabular mt-1 text-4xl font-semibold text-primary-dark">
+              {result.pincode}
+            </p>
             <p className="mt-2 text-sm font-medium text-foreground">{result.postOffice}</p>
           </div>
           <div className="rounded-lg border border-border bg-surface p-4">
@@ -313,7 +317,9 @@ function ResultView({
           </div>
           <div className="rounded-lg border border-border bg-surface p-4">
             <p className="text-xs tracking-wide text-muted-foreground uppercase">Confidence</p>
-            <p className="tabular mt-1 text-3xl font-semibold">{formatPercent(result.confidence)}</p>
+            <p className="tabular mt-1 text-3xl font-semibold">
+              {formatPercent(result.confidence)}
+            </p>
             <ConfidenceBar value={result.confidence} className="mt-3" />
             <p className="mt-2 text-xs text-muted-foreground">{levelLabel}</p>
           </div>
@@ -342,15 +348,26 @@ function ResultView({
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-border bg-surface text-xs tracking-wide text-muted-foreground uppercase">
-              <th scope="col" className="px-5 py-2.5 text-left">Rank</th>
-              <th scope="col" className="px-5 py-2.5 text-left">Post Office</th>
-              <th scope="col" className="px-5 py-2.5 text-left">PIN</th>
-              <th scope="col" className="px-5 py-2.5 text-right">Confidence</th>
+              <th scope="col" className="px-5 py-2.5 text-left">
+                Rank
+              </th>
+              <th scope="col" className="px-5 py-2.5 text-left">
+                Post Office
+              </th>
+              <th scope="col" className="px-5 py-2.5 text-left">
+                PIN
+              </th>
+              <th scope="col" className="px-5 py-2.5 text-right">
+                Confidence
+              </th>
             </tr>
           </thead>
           <tbody>
             {result.candidates.map((c) => (
-              <tr key={`${c.rank}-${c.postOffice}`} className="border-b border-border/70 last:border-0">
+              <tr
+                key={`${c.rank}-${c.postOffice}`}
+                className="border-b border-border/70 last:border-0"
+              >
                 <td className="tabular px-5 py-3">{c.rank}</td>
                 <td className="px-5 py-3 font-medium">{c.postOffice}</td>
                 <td className="tabular px-5 py-3">{c.pincode}</td>

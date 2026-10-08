@@ -12,7 +12,7 @@ import {
   SearchBar,
 } from "@/components/postroute/primitives";
 import { formatDateTime, labels } from "@/lib/format";
-import { getReviewQueue } from "@/services/postroute";
+import { getReviewQueue, getConfig } from "@/services/postroute";
 import type { ReviewItem } from "@/types";
 
 export const Route = createFileRoute("/review")({
@@ -34,6 +34,7 @@ export const Route = createFileRoute("/review")({
 function ReviewQueuePage() {
   const navigate = useNavigate();
   const query = useQuery({ queryKey: ["review-queue"], queryFn: getReviewQueue });
+  const configQuery = useQuery({ queryKey: ["config"], queryFn: getConfig });
   const [search, setSearch] = useState("");
   const [confidence, setConfidence] = useState("all");
   const [reason, setReason] = useState("all");
@@ -43,6 +44,7 @@ function ReviewQueuePage() {
 
   const rows = useMemo(() => {
     const items = query.data ?? [];
+    const config = configQuery.data ?? { autoRouteThreshold: 0.85, reviewFloor: 0.55 };
     return items.filter((item) => {
       const term = search.trim().toLowerCase();
       const matchesSearch =
@@ -52,9 +54,11 @@ function ReviewQueuePage() {
         item.parcelId.toLowerCase().includes(term);
       const matchesConfidence =
         confidence === "all" ||
-        (confidence === "high" && item.confidence >= 0.9) ||
-        (confidence === "medium" && item.confidence >= 0.7 && item.confidence < 0.9) ||
-        (confidence === "low" && item.confidence < 0.7);
+        (confidence === "high" && item.confidence >= config.autoRouteThreshold) ||
+        (confidence === "medium" &&
+          item.confidence >= config.reviewFloor &&
+          item.confidence < config.autoRouteThreshold) ||
+        (confidence === "low" && item.confidence < config.reviewFloor);
       return (
         matchesSearch &&
         matchesConfidence &&
@@ -64,7 +68,7 @@ function ReviewQueuePage() {
         (operator === "all" || item.operator === operator)
       );
     });
-  }, [query.data, search, confidence, reason, status, region, operator]);
+  }, [query.data, configQuery.data, search, confidence, reason, status, region, operator]);
 
   const all = query.data ?? [];
   const columns: Column<ReviewItem>[] = [
@@ -80,11 +84,23 @@ function ReviewQueuePage() {
         </div>
       ),
     },
-    { key: "pin", header: "Predicted PIN", render: (r) => <span className="tabular">{r.pincode}</span> },
+    {
+      key: "pin",
+      header: "Predicted PIN",
+      render: (r) => <span className="tabular">{r.pincode}</span>,
+    },
     { key: "po", header: "Post Office", render: (r) => r.postOffice },
-    { key: "conf", header: "Confidence", render: (r) => <ConfidenceBadge value={r.confidence} showLabel={false} /> },
+    {
+      key: "conf",
+      header: "Confidence",
+      render: (r) => <ConfidenceBadge value={r.confidence} showLabel={false} />,
+    },
     { key: "reason", header: "Review Reason", render: (r) => labels.reviewReason[r.reason] },
-    { key: "created", header: "Created", render: (r) => <span className="tabular text-xs">{formatDateTime(r.createdAt)}</span> },
+    {
+      key: "created",
+      header: "Created",
+      render: (r) => <span className="tabular text-xs">{formatDateTime(r.createdAt)}</span>,
+    },
     { key: "status", header: "Status", render: (r) => <StatusBadge status={r.status} /> },
     {
       key: "action",
@@ -110,10 +126,29 @@ function ReviewQueuePage() {
       <PageHeader title="Review Queue" subtitle="Predictions requiring operator verification" />
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <KpiCard label="Total pending" value={String(all.filter((i) => i.status === "pending").length)} support="Awaiting an operator" />
-        <KpiCard label="High priority" value={String(all.filter((i) => i.priority === "high").length)} support="Confidence below 55%" tone="warning" />
-        <KpiCard label="Mapping conflicts" value={String(all.filter((i) => i.reason === "mapping_conflict").length)} support="Requires mapping check" tone="warning" />
-        <KpiCard label="Low confidence" value={String(all.filter((i) => i.confidence < 0.7).length)} support="Below auto-routing threshold" tone="info" />
+        <KpiCard
+          label="Total pending"
+          value={String(all.filter((i) => i.status === "pending").length)}
+          support="Awaiting an operator"
+        />
+        <KpiCard
+          label="High priority"
+          value={String(all.filter((i) => i.priority === "high").length)}
+          support="Confidence below 55%"
+          tone="warning"
+        />
+        <KpiCard
+          label="Mapping conflicts"
+          value={String(all.filter((i) => i.reason === "mapping_conflict").length)}
+          support="Requires mapping check"
+          tone="warning"
+        />
+        <KpiCard
+          label="Low confidence"
+          value={String(all.filter((i) => i.confidence < 0.7).length)}
+          support="Below auto-routing threshold"
+          tone="info"
+        />
       </div>
 
       <FilterBar>
