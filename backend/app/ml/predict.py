@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 from app.schemas import NormalizationResult
 from typing import List, Dict, Any
+from app.ml.features import TextPINExtractor
 
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "../../../models/postroute_v1.pkl")
 OFFICES_PATH = os.path.join(os.path.dirname(__file__), "../../../data/processed/post_offices.csv")
@@ -30,22 +31,11 @@ class Predictor:
         prob = self.model.predict_proba([text])[0]
         classes = self.model.classes_
         
-        # Boost confidence based on explicit PIN code in address
         extracted_pin = None
         for comp in norm_result.components:
             if comp.type == "pincode" and len(comp.value) == 6:
                 extracted_pin = comp.value
                 break
-                
-        if extracted_pin:
-            for i, office_id in enumerate(classes):
-                if office_id in self.offices_df.index:
-                    if str(self.offices_df.loc[office_id, 'pincode']) == str(extracted_pin):
-                        prob[i] += 20.0  # Huge boost for exact PIN match so it surpasses 0.85
-            
-            # Re-normalize to keep it a valid probability distribution
-            prob = np.clip(prob, 0, 1)
-            prob = prob / np.sum(prob)
         
         # Get top 3
         top3_idx = np.argsort(prob)[-3:][::-1]
@@ -78,6 +68,13 @@ class Predictor:
                     "state": "",
                     "confidence": confidence
                 })
+        
+        # Check for PIN mismatch on the top prediction
+        top_pred_pin = results[0]['pincode'] if len(results) > 0 else None
+        if extracted_pin and top_pred_pin and str(extracted_pin) != str(top_pred_pin):
+            results[0]['pin_locality_mismatch'] = True
+        else:
+            results[0]['pin_locality_mismatch'] = False
                 
         return results
 

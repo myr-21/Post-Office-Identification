@@ -81,6 +81,11 @@ def predict_address(input_data: AddressInput, db: Session = Depends(get_db)):
             reason = "ambiguous_locality"
             priority = "medium"
             
+    if top_pred.get('pin_locality_mismatch'):
+        status = "needs_review"
+        reason = "pin_locality_mismatch"
+        priority = "high"
+            
     if was_merged:
         status = "needs_review"
         reason = "mapping_conflict"

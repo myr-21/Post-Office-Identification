@@ -1,5 +1,52 @@
 {
-  "accuracy": 0.9,
-  "f1": 0.8973540232076191,
-  "top3_accuracy": 0.9797979797979798
+  "synthetic": {
+    "baseline_acc": 0.396969696969697,
+    "accuracy": 0.9222222222222223,
+    "macro_f1": 0.9218218451654986,
+    "weighted_f1": 0.9218218451654985,
+    "top3_accuracy": 0.98989898989899,
+    "top5_accuracy": 0.990909090909091,
+    "ece": 0.23264261013711138,
+    "latency_ms": 0.331081525243894,
+    "pin_accuracy": 0.9383838383838384,
+    "noise_accuracy": {
+      "high": 0.8697318007662835,
+      "low": 0.9399141630901288,
+      "clean": 0.9911111111111112,
+      "medium": 0.9003690036900369
+    },
+    "auto_route_stats": {
+      "0.5": {
+        "route_rate": 0.802020202020202,
+        "accuracy_on_routed": 0.9672544080604534
+      },
+      "0.6": {
+        "route_rate": 0.7242424242424242,
+        "accuracy_on_routed": 0.9790794979079498
+      },
+      "0.7": {
+        "route_rate": 0.6282828282828283,
+        "accuracy_on_routed": 0.9839228295819936
+      },
+      "0.8": {
+        "route_rate": 0.43434343434343436,
+        "accuracy_on_routed": 0.9930232558139535
+      },
+      "0.85": {
+        "route_rate": 0.23535353535353534,
+        "accuracy_on_routed": 0.9957081545064378
+      },
+      "0.9": {
+        "route_rate": 0.11313131313131314,
+        "accuracy_on_routed": 1.0
+      },
+      "0.95": {
+        "route_rate": 0.0,
+        "accuracy_on_routed": 0.0
+      }
+    }
+  },
+  "realistic": {
+    "status": "NOT YET EVALUATED - awaiting data/realistic_test.csv"
+  }
 }
