@@ -18,3 +18,8 @@ class AddressInput(BaseModel):
     pincode: Optional[str] = None
     mode: Literal["automatic", "assisted"] = "automatic"
 
+class ReviewDecision(BaseModel):
+    decision: Literal["approve", "correct", "reject", "escalate"]
+    correctedPincode: Optional[str] = None
+    correctedPostOffice: Optional[str] = None
+    reason: Optional[str] = None

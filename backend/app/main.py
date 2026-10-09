@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from app.db import models
 from app.db.database import engine, get_db
-from app.schemas import AddressInput, NormalizationResult
+from app.schemas import AddressInput, NormalizationResult, ReviewDecision
 from app.nlp.normalize import normalize_address
 from app.ml.predict import get_predictions
 from app.ml.merge import adapt_prediction
@@ -178,3 +178,27 @@ def get_review_queue(db: Session = Depends(get_db)):
             ]
         })
     return results
+
+@app.post("/api/review/{id}/resolve")
+def resolve_review(id: str, decision: ReviewDecision, db: Session = Depends(get_db)):
+    item = db.query(models.ReviewItem).filter(models.ReviewItem.id == id).first()
+    if not item:
+        return {"error": "Not found"}
+        
+    pred = item.prediction
+    if decision.decision == "approve":
+        pred.status = "manually_verified"
+        item.status = "resolved"
+    elif decision.decision == "correct":
+        pred.status = "corrected"
+        pred.pincode = decision.correctedPincode or pred.pincode
+        pred.post_office = decision.correctedPostOffice or pred.post_office
+        item.status = "resolved"
+    elif decision.decision == "reject":
+        pred.status = "rejected"
+        item.status = "resolved"
+    elif decision.decision == "escalate":
+        item.status = "escalated"
+        
+    db.commit()
+    return {"success": True, "id": id, "status": item.status}

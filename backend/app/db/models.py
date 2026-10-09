@@ -37,3 +37,17 @@ class ReviewItem(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
     
     prediction = relationship("Prediction")
+
+class PostOffice(Base):
+    __tablename__ = "post_offices"
+    id = Column(String, primary_key=True)
+    name = Column(String, index=True)
+    pincode = Column(String, index=True)
+    district = Column(String)
+    state = Column(String)
+    region = Column(String)
+    division = Column(String)
+    latitude = Column(Float, nullable=True)
+    longitude = Column(Float, nullable=True)
+    status = Column(String, default="active")
+    mappingVersion = Column(String, default="V1")
