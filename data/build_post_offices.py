@@ -64,9 +64,10 @@ def main():
     out_df['status'] = 'active'
     out_df['mappingVersion'] = 'V1'
     
-    # Mock lat/lon as we don't have it in the standard dataset reliably
-    out_df['latitude'] = 18.5204
-    out_df['longitude'] = 73.8567
+    # We don't have accurate coordinates in the standard dataset.
+    # Set to empty so the system gracefully degrades (e.g., no map markers) rather than showing fake locations.
+    out_df['latitude'] = ''
+    out_df['longitude'] = ''
     
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     out_df.to_csv(out_path, index=False)

@@ -75,12 +75,13 @@ def generate_addresses(offices_df, num_per_office=60):
     
     # We need to ensure train/val/test splits don't leak building/landmark combinations
     # We will generate a pool of buildings and landmarks, and assign them to splits.
-    buildings = [f"Alpha {random.choice(building_types)}" for _ in range(200)] + \
-                [f"Beta {random.choice(building_types)}" for _ in range(200)] + \
-                [f"Shree {random.choice(building_types)}" for _ in range(200)] + \
-                [f"Sai {random.choice(building_types)}" for _ in range(200)]
+    buildings = list(set(
+        [f"{name} {btype}" for name in ['Alpha', 'Beta', 'Shree', 'Sai', 'Om', 'Ganesh', 'Lake', 'Park', 'Royal', 'Silver', 'Golden', 'Diamond', 'Emerald', 'Ruby', 'Pearl', 'Crystal', 'Sapphire', 'Opal', 'Topaz', 'Jade'] for btype in building_types]
+    ))
     
-    landmarks = [f"Temple", "School", "Hospital", "Bank", "Park", "Metro Station", "Bus Stop"] * 100
+    landmarks = list(set(
+        [f"{ltype} {name}" for name in ['Temple', 'School', 'Hospital', 'Bank', 'Park', 'Metro Station', 'Bus Stop', 'Mall', 'Market', 'Plaza', 'Square', 'Center', 'Point', 'Gate'] for ltype in landmark_types]
+    ))
     
     # Split the pools
     train_bldgs, val_bldgs, test_bldgs = np.split(np.random.permutation(buildings), [int(len(buildings)*0.7), int(len(buildings)*0.85)])
@@ -113,6 +114,7 @@ def generate_addresses(offices_df, num_per_office=60):
                 # Determine noise profile
                 noise_level = random.choice(['clean', 'low', 'medium', 'high'])
                 is_noisy = noise_level != 'clean'
+                applied_noise_ops = []
                 
                 components = {
                     'flat': flat,
@@ -128,16 +130,25 @@ def generate_addresses(offices_df, num_per_office=60):
                 
                 # Apply drop noise
                 if is_noisy:
-                    if random.random() < 0.3: components['state'] = ''
-                    if random.random() < 0.2: components['district'] = ''
-                    if random.random() < 0.1: components['pin'] = ''
-                    if random.random() < 0.2: components['road'] = ''
+                    if random.random() < 0.3: 
+                        components['state'] = ''
+                        applied_noise_ops.append('drop_state')
+                    if random.random() < 0.2: 
+                        components['district'] = ''
+                        applied_noise_ops.append('drop_district')
+                    if random.random() < 0.1: 
+                        components['pin'] = ''
+                        applied_noise_ops.append('drop_pin')
+                    if random.random() < 0.2: 
+                        components['road'] = ''
+                        applied_noise_ops.append('drop_road')
                 
                 # Format string
                 order = ['flat', 'bldg', 'road', 'lmark', 'locality', 'city', 'district', 'state', 'pin']
                 if is_noisy and random.random() < 0.2:
                     # Reorder slightly
                     random.shuffle(order[:4]) # shuffle local parts
+                    applied_noise_ops.append('shuffle_order')
                 
                 address_parts = []
                 for k in order:
@@ -145,13 +156,22 @@ def generate_addresses(offices_df, num_per_office=60):
                     if not val: continue
                     
                     if is_noisy:
+                        old_val = val
                         val = apply_abbreviations(val)
+                        if val != old_val:
+                            applied_noise_ops.append('abbreviated')
+                        
+                        old_val2 = val
                         val = generate_noise(val, noise_level)
+                        if val != old_val2:
+                            applied_noise_ops.append('char_noise')
                         
                     address_parts.append(val)
                 
                 separator = ", " if noise_level in ['clean', 'low'] else " "
-                if noise_level == 'high': separator = random.choice([", ", " ", "-", ",, "])
+                if noise_level == 'high': 
+                    separator = random.choice([", ", " ", "-", ",, "])
+                    applied_noise_ops.append('messy_separator')
                 
                 raw_address = separator.join(address_parts)
                 
@@ -161,7 +181,10 @@ def generate_addresses(offices_df, num_per_office=60):
                     'true_post_office': office['id'],
                     'split': split_name,
                     'noise_level': noise_level,
-                    'is_noisy': is_noisy
+                    'is_noisy': is_noisy,
+                    'building': bldg,
+                    'landmark': lmark,
+                    'noise_ops': '|'.join(applied_noise_ops)
                 })
                 
     return pd.DataFrame(data)
