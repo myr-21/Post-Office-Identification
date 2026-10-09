@@ -92,7 +92,7 @@ export function normalizeAddress(raw: string) {
 
 /** Runs an address through the prediction pipeline. */
 export async function predictAddress(input: AddressInput): Promise<PredictionResult> {
-  const isMock = true; // Forced for demo
+  const isMock = import.meta.env.VITE_USE_MOCK !== "false";
   if (!isMock) {
     const res = await fetch(`${import.meta.env.VITE_API_URL}/api/predict`, {
       method: "POST",
@@ -227,7 +227,7 @@ export async function getPredictions(): Promise<PredictionResult[]> {
 }
 
 export async function getReviewQueue(): Promise<ReviewItem[]> {
-  const isMock = true; // Forced for demo
+  const isMock = import.meta.env.VITE_USE_MOCK !== "false";
   if (!isMock) {
     const res = await fetch(`${import.meta.env.VITE_API_URL}/api/review-queue`);
     if (!res.ok) throw new Error("Failed to fetch review queue");
@@ -250,6 +250,16 @@ export async function submitReviewDecision(payload: {
   reason?: string;
   notes?: string;
 }): Promise<{ ok: true; id: string }> {
+  const isMock = import.meta.env.VITE_USE_MOCK !== "false";
+  if (!isMock) {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/review/${payload.id}/resolve`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error("Failed to submit review");
+    return res.json();
+  }
   return delay({ ok: true as const, id: payload.id }, 600);
 }
 
@@ -310,7 +320,7 @@ export async function getOperator(): Promise<Operator> {
 }
 
 export async function getConfig(): Promise<SystemConfig> {
-  const isMock = true; // Forced for demo
+  const isMock = import.meta.env.VITE_USE_MOCK !== "false";
   if (isMock) {
     return delay({ autoRouteThreshold: 0.85, reviewFloor: 0.55 }, 100);
   }
