@@ -32,14 +32,14 @@ def adapt_prediction(
             if offices_df is not None and new_id in offices_df.index:
                 new_office = offices_df.loc[new_id]
                 updated_preds.append({
-                    "rank": pred['rank'],
-                    "id": new_id,
-                    "postOffice": new_office['name'],
-                    "pincode": new_office['pincode'],
-                    "district": new_office['district'],
-                    "state": new_office['state'],
-                    "confidence": pred['confidence'], # keeping original confidence
-                    "merged_from": office_id
+                    "rank": int(pred['rank']),
+                    "id": str(new_id),
+                    "postOffice": str(new_office['name']),
+                    "pincode": str(new_office['pincode']),
+                    "district": str(new_office['district']),
+                    "state": str(new_office['state']),
+                    "confidence": float(pred['confidence']),
+                    "merged_from": str(office_id)
                 })
             else:
                 # Fallback if no office lookup is provided

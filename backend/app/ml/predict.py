@@ -49,13 +49,13 @@ class Predictor:
             if office_id in self.offices_df.index:
                 office = self.offices_df.loc[office_id]
                 results.append({
-                    "rank": rank + 1,
-                    "id": office_id,
-                    "postOffice": office['name'],
-                    "pincode": office['pincode'],
-                    "district": office['district'],
-                    "state": office['state'],
-                    "confidence": confidence
+                    "rank": int(rank + 1),
+                    "id": str(office_id),
+                    "postOffice": str(office['name']),
+                    "pincode": str(office['pincode']),
+                    "district": str(office['district']),
+                    "state": str(office['state']),
+                    "confidence": float(confidence)
                 })
             else:
                 # Fallback if somehow not found

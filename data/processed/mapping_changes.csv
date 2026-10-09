@@ -1,0 +1,3 @@
+id,pincode,postOffice,region,version,effectiveFrom,status,changeType,previousMapping,newMapping,reason,affectedPostOffices,affectedPincodes
+MC-001,411067,Aundh S.O -Pune,Pune Region,V2,2023-01-01,active,merged,PO-411067-bfc198,PO-411021-b6e411,Consolidation of delivery offices,"Aundh S.O -Pune, Armament S.O","411067, 411021"
+MC-002,411038,Kothrud S.O,Pune Region,V2,2023-06-15,active,merged,PO-411038-9503e5,PO-411004-8c8a68,Realignment of Pune West delivery zones,"Kothrud S.O, A.R. Shala S.O","411038, 411004"

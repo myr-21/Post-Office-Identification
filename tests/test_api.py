@@ -60,3 +60,20 @@ def test_api_review_resolve():
     res = client.post(f"/api/review/{item_id}/resolve", json=resolve_payload)
     assert res.status_code == 200
     assert res.json()["success"] is True
+
+def test_api_mapping_conflict():
+    payload = {
+        "rawAddress": "kothrud pune 411038",
+        "mode": "automatic"
+    }
+    response = client.post("/api/predict", json=payload)
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "needs_review"
+    
+def test_api_mapping_changes():
+    response = client.get("/api/mapping-changes")
+    assert response.status_code == 200
+    data = response.json()
+    assert len(data) >= 2
+    assert "previousMapping" in data[0]

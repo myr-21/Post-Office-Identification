@@ -33,15 +33,52 @@ def get_or_create_config(db: Session):
         db.refresh(config)
     return config
 
-# Simulate a merge (for phase 5)
-SIMULATED_MERGES = {
-    # If 411038 (Kothrud) was merged into 411029 (New Office)
-    "PO-411038-kothrud": "PO-411029-new" 
-}
+import os
+import pandas as pd
+
+# Load simulated merges from CSV
+SIMULATED_MERGES = {}
+MAPPING_CHANGES = []
+
+def load_mapping_changes():
+    path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../data/processed/mapping_changes.csv"))
+    if os.path.exists(path):
+        df = pd.read_csv(path)
+        for _, row in df.iterrows():
+            SIMULATED_MERGES[row["previousMapping"]] = row["newMapping"]
+            MAPPING_CHANGES.append({
+                "id": row["id"],
+                "pincode": str(row["pincode"]),
+                "postOffice": row["postOffice"],
+                "region": row["region"],
+                "version": row["version"],
+                "effectiveFrom": row["effectiveFrom"],
+                "status": row["status"],
+                "changeType": row["changeType"],
+                "previousMapping": row["previousMapping"],
+                "newMapping": row["newMapping"],
+                "reason": row["reason"],
+                "affectedPostOffices": str(row["affectedPostOffices"]).split(", "),
+                "affectedPincodes": str(row["affectedPincodes"]).split(", ")
+            })
+
+load_mapping_changes()
 
 # Known localities for normalization
 # Ideally loaded from database/post_offices.csv, hardcoded a few for now
 KNOWN_LOCALITIES = ["Baner", "Balewadi", "Aundh", "Shivajinagar", "Kothrud", "Hadapsar", "Viman Nagar", "Pimpri", "Chinchwad", "Wakad", "Katraj"]
+
+def load_offices_df():
+    path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../data/processed/post_offices.csv"))
+    if os.path.exists(path):
+        return pd.read_csv(path, index_col='id')
+    return None
+
+OFFICES_DF = load_offices_df()
+
+@app.get("/api/mapping-changes")
+def get_mapping_changes():
+    return MAPPING_CHANGES
 
 @app.get("/api/config")
 def read_config(db: Session = Depends(get_db)):
@@ -60,7 +97,7 @@ def predict_address(input_data: AddressInput, db: Session = Depends(get_db)):
     top_3_preds = get_predictions(norm_result)
     
     # 3. Merge Adaptation
-    updated_preds, was_merged = adapt_prediction(norm_result, top_3_preds, SIMULATED_MERGES)
+    updated_preds, was_merged = adapt_prediction(norm_result, top_3_preds, SIMULATED_MERGES, OFFICES_DF)
     
     # 4. Status and reason logic
     config = get_or_create_config(db)
