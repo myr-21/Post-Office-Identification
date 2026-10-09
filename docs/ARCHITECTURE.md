@@ -1,89 +1,20 @@
-# PostRoute AI Architecture
+# Architecture Document
 
-## Overview
+## Modules and Interfaces
+- **Frontend (React/TanStack)**: Provides the user interface for operators to submit addresses and review flagged items. Interfaces with the backend via REST API.
+- **Backend (FastAPI)**: Exposes endpoints for prediction, config, and review management.
+- **NLP Normalization**: Cleanses raw text, extracts structural features (PIN, Locality, City).
+- **ML Predictor**: Uses TF-IDF and Logistic Regression to predict the post office ID based on textual features.
+- **Merge Handler**: Intercepts historical PIN/Locality changes and rewrites outdated predictions to their new authoritative mappings.
+- **Database (SQLite)**: Persists `PostOffice` directories, `Prediction` histories, and `ReviewItem` queues.
 
-PostRoute AI is an AI-powered Delivery Post Office Identification System. It predicts the correct PIN code and delivery post office from incomplete or noisy Indian address text. It features a React-based frontend and a Python/FastAPI backend with a machine learning model.
+## Design Decisions
+1. **TF-IDF + Logistic Regression (LinearSVC)**: Chosen over deep learning because it handles character-level phonetic misspellings (e.g. `Bnaer` vs `Baner`) efficiently, computes in milliseconds, and fits hardware constraints without GPUs.
+2. **SQLite Default**: Simplifies deployment and initialization for a final year project demo without requiring a heavy Postgres docker setup.
+3. **Merge Layer Separation**: The merge layer is separated from the ML model so that the model doesn't need constant retraining every time a post office closes or merges. Historical weights remain valid, and the merge layer acts as an authoritative proxy.
 
----
-
-## 1. System Architecture
-
-```mermaid
-graph TD
-    UI[Frontend: React + Tailwind v4 + TanStack]
-    API[Backend: FastAPI]
-    DB[(SQLite/PostgreSQL)]
-    NLP[NLP Module]
-    ML[ML Pipeline: TF-IDF + Logistic Regression]
-
-    UI -->|HTTP POST /api/predict| API
-    API --> NLP
-    NLP -->|NormalizationResult| ML
-    ML -->|Top 3 Predictions| API
-    API --> DB
-    API -->|Prediction JSON| UI
-```
-
----
-
-## 2. API Flow
-
-```mermaid
-sequenceDiagram
-    participant Operator
-    participant UI as Frontend
-    participant API as FastAPI Backend
-    participant NLP as Preprocessing
-    participant ML as ML Model
-    participant DB as Database
-
-    Operator->>UI: Enters raw address
-    UI->>API: POST /api/predict {rawAddress}
-    API->>NLP: normalize_address(rawAddress)
-    NLP-->>API: NormalizationResult
-    API->>ML: predict(NormalizationResult)
-    ML-->>API: Top 3 Candidates
-    API->>API: Adapt for Merges & Calculate Status
-    API->>DB: Insert Prediction & ReviewItem (if needed)
-    DB-->>API: Saved Models
-    API-->>UI: Prediction JSON
-    UI-->>Operator: Display Result & Badges
-```
-
----
-
-## 3. Entity Relationship Diagram (ERD)
-
-```mermaid
-erDiagram
-    CONFIG {
-        int id PK
-        float auto_route_threshold
-        float review_floor
-    }
-
-    PREDICTIONS {
-        string id PK
-        datetime created_at
-        string raw_address
-        string normalized_address
-        string pincode
-        string post_office
-        string district
-        string state
-        float confidence
-        string status
-        string operator
-    }
-
-    REVIEW_ITEMS {
-        string id PK
-        string prediction_id FK
-        string priority
-        string reason
-        string status
-        datetime created_at
-    }
-
-    PREDICTIONS ||--o| REVIEW_ITEMS : "has"
-```
+## Requirement-to-Module Traceability
+- **Address Submission**: Frontend `predictAddress` -> Backend `POST /api/predict`.
+- **Prediction Accuracy**: NLP Normalization + ML Predictor.
+- **Historical PIN Updates**: Merge Handler + `mapping_changes.csv`.
+- **Manual Review**: Frontend Review Queue -> Backend `GET /api/review-queue` and `POST /api/review/{id}/resolve`.
